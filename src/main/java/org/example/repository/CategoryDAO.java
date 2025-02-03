@@ -1,4 +1,7 @@
 package org.example.repository;
 
-public class CategoryDAO {
+import org.example.domain.model.CategoryModel;
+
+public class CategoryDAO extends BaseDAO<CategoryModel> {
+
 }
