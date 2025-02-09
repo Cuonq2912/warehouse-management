@@ -11,23 +11,19 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>com.mycompany.swing.Swing</exec.mainClass>
     </properties>
-    
+
     <dependencies>
-        
-        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.31</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.30</version>
             <scope>provided</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -39,5 +35,4 @@
             <version>RELEASE220</version>
         </dependency>
     </dependencies>
-    
 </project>
