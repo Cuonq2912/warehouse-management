@@ -1,4 +1,4 @@
 package org.example.service.common;
 
-public class CustomerManagerService {
+public interface CustomerManagerService {
 }

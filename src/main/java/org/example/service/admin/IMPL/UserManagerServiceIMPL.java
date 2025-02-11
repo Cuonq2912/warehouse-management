@@ -1,4 +1,4 @@
 package org.example.service.admin.IMPL;
 
-public interface UserManagerServiceIMPL {
+public class UserManagerServiceIMPL {
 }

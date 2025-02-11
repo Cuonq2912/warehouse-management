@@ -1,4 +1,4 @@
 package org.example.service.admin.IMPL;
 
-public interface SupplierServiceIMPL {
+public class SupplierServiceIMPL {
 }

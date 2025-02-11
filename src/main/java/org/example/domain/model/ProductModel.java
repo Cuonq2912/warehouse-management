@@ -23,7 +23,7 @@ public class ProductModel {
     String name;
 
     @Column(nullable = false)
-    String description;
+    Long stockQuantity;
 
     @Column(nullable = false)
     double price;
@@ -31,7 +31,4 @@ public class ProductModel {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     CategoryModel categoryModel;
-
-    @ManyToMany(mappedBy = "productModels")
-    List<OrderModel> orderModels;
 }

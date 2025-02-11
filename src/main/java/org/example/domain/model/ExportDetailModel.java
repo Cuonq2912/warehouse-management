@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,4 +31,11 @@ public class ExportDetailModel {
     @Column(nullable = false)
     LocalDateTime exportDate;
 
+    @ManyToOne
+    @JoinColumn(name = "export_product_id", nullable = false, referencedColumnName = "id", updatable = false, unique = true)
+    ExportProductModel exportProductModel;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", updatable = false, unique = true)
+    ProductModel productModel;
 }

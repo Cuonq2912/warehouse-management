@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,4 +30,7 @@ public class CategoryModel {
 
     @Column(nullable = false)
     LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "categoryModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<ProductModel> productModels;
 }

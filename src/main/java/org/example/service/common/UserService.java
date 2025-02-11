@@ -1,4 +1,8 @@
 package org.example.service.common;
 
-public class UserService {
+import org.example.domain.DTO.Request.LoginRequest;
+import org.example.domain.DTO.Response.LoginResponse;
+
+public interface UserService {
+//    LoginResponse login(LoginRequest request);
 }
