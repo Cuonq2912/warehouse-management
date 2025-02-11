@@ -4,13 +4,15 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "import")
+@Table(name = "import_products")
 public class ImportProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +28,13 @@ public class ImportProductModel {
     double totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "supplier_id", nullable = false)
-    SupplierModel supplierModel;
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", updatable = false, unique = true)
+    UserModel userModel;
 
     @ManyToOne
-    @JoinColumn(name = "import_detail_id", nullable = false)
-    ImportDetailModel importDetailModel;
+    @JoinColumn(name = "supplier_id", nullable = false, referencedColumnName = "id", updatable = false, unique = true)
+    SupplierModel supplierModel;
+
+    @OneToMany(mappedBy = "importProductModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<ImportDetailModel> importDetails;
 }

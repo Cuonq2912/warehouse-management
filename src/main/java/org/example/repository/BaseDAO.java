@@ -1,8 +1,11 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import org.example.exception.NotFoundException;
 import org.example.utils.HibernateUtils;
+
+import java.util.List;
 
 public abstract class BaseDAO<T> {
 
@@ -71,8 +74,24 @@ public abstract class BaseDAO<T> {
             if(em.getTransaction().isActive()){
                 em.getTransaction().rollback();
             }
-                    throw new RuntimeException("Error deleting entity ", e);
+            throw new RuntimeException("Error deleting entity ", e);
         } finally {
+            em.close();
+        }
+    }
+
+    public List<T> findAll(Class<T> entityClass){
+        EntityManager em = getEntityManager();
+        try{
+            TypedQuery<T> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass);
+            return query.getResultList();
+        } catch (RuntimeException e){
+            if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException("Error finding all entities ", e);
+        }
+        finally {
             em.close();
         }
     }

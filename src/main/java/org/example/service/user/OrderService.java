@@ -1,4 +1,4 @@
 package org.example.service.user;
 
-public class OrderService {
+public interface OrderService {
 }

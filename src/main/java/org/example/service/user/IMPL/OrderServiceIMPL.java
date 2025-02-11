@@ -1,4 +1,4 @@
 package org.example.service.user.IMPL;
 
-public interface OrderServiceIMPL {
+public class OrderServiceIMPL {
 }

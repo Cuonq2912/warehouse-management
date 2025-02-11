@@ -1,4 +1,4 @@
 package org.example.service.admin;
 
-public class StatisticsService {
+public interface StatisticsService {
 }

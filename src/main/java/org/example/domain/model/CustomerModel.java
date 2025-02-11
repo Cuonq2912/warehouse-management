@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.Date;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -30,17 +33,8 @@ public class CustomerModel {
     String phoneNumber;
 
     @Column(nullable = false)
-    String username;
-
-    @Column(nullable = false)
-    String password;
-
-    @Column(nullable = false)
     Long points;
 
-    @Column(nullable = false)
-    Role role;
-
-    @OneToOne(mappedBy = "customerModel", cascade = CascadeType.ALL)
-    CartModel cartModel;
+    @OneToMany(mappedBy = "customerModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<ExportProductModel> exportProductModels;
 }

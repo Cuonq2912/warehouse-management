@@ -1,4 +1,4 @@
 package org.example.service.common;
 
-public class EmailService {
+public interface EmailService {
 }
