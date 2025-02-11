@@ -4,6 +4,10 @@
  */
 package org.example.View;
 
+import javax.swing.JOptionPane;
+import org.example.utils.HibernateUtils;
+import org.hibernate.Hibernate;
+
 /**
  *
  * @author ADMIN
@@ -66,6 +70,11 @@ public class UESR extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 534, -1, -1));
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -127,6 +136,14 @@ public class UESR extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+     
+        var db = HibernateUtils.getEntityManager();
+       db.getTransaction().begin();
+       db.getTransaction().commit();
+        JOptionPane.showMessageDialog(this," thoát thành công");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
