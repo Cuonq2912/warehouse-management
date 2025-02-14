@@ -6,4 +6,5 @@ public class AuthUtils {
     public boolean verifyPassword(String plainPassword, String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
+
 }
