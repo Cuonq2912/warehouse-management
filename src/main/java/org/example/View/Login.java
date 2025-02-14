@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import org.example.domain.DTO.Request.LoginRequest;
 import org.example.domain.DTO.Response.LoginResponse;
 import org.example.domain.model.CustomerModel;
+import org.example.domain.model.Status;
 import org.example.domain.model.UserModel;
 import org.example.exception.NotFoundUserException;
 import org.example.repository.CustomerDAO;
@@ -151,7 +152,21 @@ public class Login extends javax.swing.JFrame implements ActionListener{
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+      // import javax.swing.*;
+
+   //public class ForgotPasswordDialog {
+  //  public static void main(String[] args) {
+        String email = JOptionPane.showInputDialog(null, "Enter your email to reset password:", 
+                "Forgot Password", JOptionPane.QUESTION_MESSAGE);
+        
+        if (email != null && !email.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "A reset link has been sent to: " + email);
+        } else {
+            JOptionPane.showMessageDialog(null, "Email cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -175,6 +190,8 @@ public class Login extends javax.swing.JFrame implements ActionListener{
            String email = txtEmail.getText().trim();
            
             UserModel user = UserModel.builder()
+                    .id(Long.MIN_VALUE)
+                    .status(Status.ACTIVE)
                    .name(name)
                    .password(password)
                    .email(email)

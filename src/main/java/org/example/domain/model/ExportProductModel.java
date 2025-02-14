@@ -24,6 +24,10 @@ public class ExportProductModel {
 
     @Column(nullable = false)
     double totalPrice;
+    
+//     @Column(nullable = false)
+//    @Enumerated(EnumType.STRING)
+//    Status status;
 
     @ManyToOne
     @JoinColumn(name = "export_detail_id", nullable = false)

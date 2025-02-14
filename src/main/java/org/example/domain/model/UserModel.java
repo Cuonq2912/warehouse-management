@@ -1,6 +1,7 @@
 package org.example.domain.model;
 
 import jakarta.persistence.*;
+import jdk.jshell.Snippet;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -34,4 +35,5 @@ public class UserModel {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     Status status;
+
 }

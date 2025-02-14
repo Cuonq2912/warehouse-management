@@ -47,7 +47,6 @@ public class ADMIN1 extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
@@ -95,6 +94,11 @@ public class ADMIN1 extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(204, 255, 255));
         jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jButton3.setText("ExportManager");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 150, -1));
 
         jButton4.setBackground(new java.awt.Color(204, 255, 255));
@@ -135,14 +139,6 @@ public class ADMIN1 extends javax.swing.JFrame {
         jButton10.setText("Supplier Mgr ");
         getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 150, 30));
 
-        jTextField1.setText("Search ");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 160, 20));
-
         jLabel9.setBackground(new java.awt.Color(102, 0, 0));
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 51, 0));
@@ -151,7 +147,12 @@ public class ADMIN1 extends javax.swing.JFrame {
 
         jButton11.setBackground(new java.awt.Color(204, 255, 255));
         jButton11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton11.setText("Export To Excel");
+        jButton11.setText("Send email");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 150, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh làm mờ.jpg"))); // NOI18N
@@ -163,10 +164,6 @@ public class ADMIN1 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
          this.setVisible(false);
@@ -192,6 +189,16 @@ public class ADMIN1 extends javax.swing.JFrame {
        this.setVisible(false);
        new Login().setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       this.setVisible(false);
+       new ExportManager().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+       this.setVisible(false);
+       new SendMail().setVisible(true);
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,6 +256,5 @@ public class ADMIN1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
