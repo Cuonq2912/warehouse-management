@@ -9,6 +9,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -28,11 +29,11 @@ public class ExportProductModel {
     double totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", updatable = false, unique = true)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", updatable = false)
     UserModel userModel;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id", updatable = false, unique = true)
+    @JoinColumn(name = "customer_id", nullable = false, referencedColumnName = "id", updatable = false)
     CustomerModel customerModel;
 
     @OneToMany(mappedBy = "exportProductModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

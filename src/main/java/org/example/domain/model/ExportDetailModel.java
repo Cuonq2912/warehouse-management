@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -32,10 +33,10 @@ public class ExportDetailModel {
     LocalDateTime exportDate;
 
     @ManyToOne
-    @JoinColumn(name = "export_product_id", nullable = false, referencedColumnName = "id", updatable = false, unique = true)
+    @JoinColumn(name = "export_product_id", nullable = false, referencedColumnName = "id", updatable = false)
     ExportProductModel exportProductModel;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", updatable = false, unique = true)
+    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", updatable = false)
     ProductModel productModel;
 }

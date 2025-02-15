@@ -4,6 +4,7 @@
  */
 package org.example.view;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import org.example.view.UserView.CustomerManagerView;
@@ -18,9 +19,7 @@ public class DashboardUser extends javax.swing.JFrame {
      * Creates new form UESR
      */
     public DashboardUser() {
-        JPanel mainPanel = new JPanel();
-        this.setContentPane(mainPanel);
-        mainPanel.setLayout(null);
+        initComponents();
     }
 
     /**
@@ -30,7 +29,7 @@ public class DashboardUser extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
@@ -46,14 +45,10 @@ public class DashboardUser extends javax.swing.JFrame {
         myProfileButton = new javax.swing.JButton();
         updateAccountButton = new javax.swing.JButton();
         exportManagerButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0),
-                new java.awt.Dimension(10, 32767));
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
-                new java.awt.Dimension(0, 32767));
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
-                new java.awt.Dimension(0, 0));
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh mờ 2.jpg"))); // NOI18N
 
@@ -98,6 +93,11 @@ public class DashboardUser extends javax.swing.JFrame {
         importManagerButton.setBackground(new java.awt.Color(49, 196, 196));
         importManagerButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         importManagerButton.setText("Import Manager");
+        importManagerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                importManagerButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(importManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 150, 40));
 
         myProfileButton.setBackground(new java.awt.Color(49, 196, 196));
@@ -115,16 +115,7 @@ public class DashboardUser extends javax.swing.JFrame {
         exportManagerButton.setText("Export Manager");
         getContentPane().add(exportManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 150, 40));
 
-        jTextField1.setText("Search");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 170, -1));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(
-                getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 570));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 10, 350));
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 150, 350));
@@ -133,9 +124,10 @@ public class DashboardUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
+    private void importManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importManagerButtonActionPerformed
         // TODO add your handling code here:
-    }// GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_importManagerButtonActionPerformed
+
 
     private void customerManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
@@ -215,7 +207,6 @@ public class DashboardUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton myProfileButton;
     private javax.swing.JButton updateAccountButton;
