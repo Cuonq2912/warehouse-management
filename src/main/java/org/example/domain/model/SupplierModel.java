@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -32,4 +34,7 @@ public class SupplierModel {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     Status status;
+
+    @OneToMany(mappedBy = "supplierModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    List<ImportProductModel> importProduct;
 }

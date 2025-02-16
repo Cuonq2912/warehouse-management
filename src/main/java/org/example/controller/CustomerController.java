@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.example.controller;
 
 import org.example.domain.model.CustomerModel;
@@ -32,7 +28,7 @@ public class CustomerController {
         }
     }
 
-    public void delete(String id) {
+    public void delete(Long id) {
         try {
             customerDAO.delete(CustomerModel.class, id);
         } catch (Exception e) {
@@ -59,7 +55,7 @@ public class CustomerController {
         }
     }
 
-    public CustomerModel findById(String id) {
+    public CustomerModel findById(Long id) {
         try {
             return customerDAO.findById(CustomerModel.class, id);
         } catch (Exception e) {

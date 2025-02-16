@@ -29,14 +29,14 @@ public class Login extends javax.swing.JFrame implements ActionListener{
     private Object user;
 
     
-    public LoginResponse Login(LoginRequest request){
-        CustomerModel customer =customerRepository.findByEmail(request.getEmail());
-         if(user != null && BCrypt.checkpw (request.getPassword(), customer.getPassword())){
-             return convertToResponse(customer);
-         }
-         throw new NotFoundUserException(" user name password");
-        
-    }
+//    public LoginResponse Login(LoginRequest request){
+//        CustomerModel customer =customerRepository.findByEmail(request.getEmail());
+//         if(user != null && BCrypt.checkpw (request.getPassword(), customer.)){
+//             return convertToResponse(customer);
+//         }
+//         throw new NotFoundUserException(" user name password");
+//        
+//    }
     /**
      * Creates new form Login
      */
@@ -193,7 +193,7 @@ public class Login extends javax.swing.JFrame implements ActionListener{
             UserModel user = UserModel.builder()
 //                    .id(Long.MIN_VALUE)
 //                    .status(Status.ACTIVE)
-                   .name(name)
+                   .username(name)
                    .password(password)
                    .email(email)
                    .build();

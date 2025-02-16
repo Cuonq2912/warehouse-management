@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -30,6 +31,7 @@ public class CategoryModel {
 
     @Column(nullable = false)
     LocalDateTime updatedAt;
-      @OneToMany(mappedBy = "categoryModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "categoryModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     List<ProductModel> productModels;
 }
