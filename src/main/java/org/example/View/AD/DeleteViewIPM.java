@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package org.example.View;
+package org.example.View.AD;
 
 /**
  *
@@ -41,7 +41,7 @@ public class DeleteViewIPM extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Quantity", "Price", "Status"
+                "ID", "Name", "Quantity", "Price", "Date "
             }
         ));
         jScrollPane1.setViewportView(jTable1);

@@ -1,18 +1,17 @@
 package org.example.utils;
 
-import com.mysql.cj.protocol.Message;
-import com.sun.jdi.connect.Transport;
-import jakarta.mail.MessagingException;
-import java.net.Authenticator;
-import java.net.PasswordAuthentication;
-import java.util.Properties;
-
-import jakarta.mail.internet.MimeMessage;
-import org.hibernate.Session;
-   import java.util.Properties;
-import java.util.Properties;
+//import com.mysql.cj.protocol.Message;
+//import com.sun.jdi.connect.Transport;
+//import jakarta.mail.MessagingException;
+//import java.net.Authenticator;
+//import java.net.PasswordAuthentication;
+//import java.util.Properties;
+//
+//import jakarta.mail.internet.MimeMessage;
+//import org.hibernate.Session;
+//   import java.util.Properties;
+//import java.util.Properties;
 import javax.swing.JOptionPane;
-import org.example.View.InternetAddress;
 public class SendMailUtils {
 
     public static void sendEmail(String recipient, String subject, String message) {

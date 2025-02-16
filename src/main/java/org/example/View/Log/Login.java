@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package org.example.View;
+package org.example.View.Log;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +13,7 @@ import org.example.domain.model.CustomerModel;
 import org.example.domain.model.Status;
 import org.example.domain.model.UserModel;
 import org.example.exception.NotFoundUserException;
+import org.example.repository.BaseDAO;
 import org.example.repository.CustomerDAO;
 import org.example.service.common.IMPL.CustomerManagerServiceIMPL;
 import org.example.utils.HibernateUtils;
@@ -26,6 +27,7 @@ import org.hibernate.internal.util.LockModeConverter;
 public class Login extends javax.swing.JFrame implements ActionListener{
 
     private Object user;
+
     
     public LoginResponse Login(LoginRequest request){
         CustomerModel customer =customerRepository.findByEmail(request.getEmail());
@@ -166,7 +168,6 @@ public class Login extends javax.swing.JFrame implements ActionListener{
         }
     
 
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -190,8 +191,8 @@ public class Login extends javax.swing.JFrame implements ActionListener{
            String email = txtEmail.getText().trim();
            
             UserModel user = UserModel.builder()
-                    .id(Long.MIN_VALUE)
-                    .status(Status.ACTIVE)
+//                    .id(Long.MIN_VALUE)
+//                    .status(Status.ACTIVE)
                    .name(name)
                    .password(password)
                    .email(email)

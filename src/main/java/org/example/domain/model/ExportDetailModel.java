@@ -29,5 +29,13 @@ public class ExportDetailModel {
 
     @Column(nullable = false)
     LocalDateTime exportDate;
+    
+     @ManyToOne
+    @JoinColumn(name = "export_product_id", nullable = false, referencedColumnName = "id", updatable = false)
+    ExportProductModel exportProductModel;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", updatable = false)
+    ProductModel productModel;
 
 }

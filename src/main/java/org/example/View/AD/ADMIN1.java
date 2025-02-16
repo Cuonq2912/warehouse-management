@@ -2,9 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package org.example.View;
+package org.example.View.AD;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import org.example.View.Log.Login;
+import org.example.View.Log.UpdateAccount;
 import org.example.utils.HibernateUtils;
 import org.hibernate.Hibernate;
 
@@ -14,13 +18,22 @@ import org.hibernate.Hibernate;
  */
 public class ADMIN1 extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form ADMIN1
      */
     public ADMIN1() {
         initComponents();
+//        scaleImage();
+//    }
+//    void scaleImage(){
+//        ImageIcon icon = new ImageIcon(getClass().getResource("E:\\project CLBHIT\\warehouse-management\\src\\main\\resources\\RES1\\ảnh làm mờ.jpg"));
+//        Image img = icon.getImage();
+//        Image imgScale = img.getScaledInstance(jLabel11.getWidth(), jLabel11.getHeight(), Image.SCALE_SMOOTH);
+//        ImageIcon acalledIcon = new ImageIcon(imgScale );
+//        jLabel11.setIcon(acalledIcon);
+//    }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +51,7 @@ public class ADMIN1 extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
@@ -49,7 +63,7 @@ public class ADMIN1 extends javax.swing.JFrame {
         jButton10 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jButton11 = new javax.swing.JButton();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/thiet-ke-cua-hang-tap-hoa-2.jpg"))); // NOI18N
 
@@ -66,6 +80,8 @@ public class ADMIN1 extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh mờ 2.jpg"))); // NOI18N
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -123,7 +139,7 @@ public class ADMIN1 extends javax.swing.JFrame {
                 jButton8ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 590, -1, -1));
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 590, -1, -1));
 
         jButton9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton9.setText("Cancel");
@@ -132,7 +148,7 @@ public class ADMIN1 extends javax.swing.JFrame {
                 jButton9ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 590, -1, -1));
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 590, -1, -1));
 
         jButton10.setBackground(new java.awt.Color(204, 255, 255));
         jButton10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -155,8 +171,8 @@ public class ADMIN1 extends javax.swing.JFrame {
         });
         getContentPane().add(jButton11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 150, -1));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh làm mờ.jpg"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 640));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh làm mờ.jpg"))); // NOI18N
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 660));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -166,8 +182,8 @@ public class ADMIN1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         this.setVisible(false);
-     new ImportManager().setVisible(true);
+    this.setVisible(false);
+    new ImportManagerView().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -248,6 +264,7 @@ public class ADMIN1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

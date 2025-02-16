@@ -14,7 +14,7 @@ import lombok.experimental.FieldDefaults;
 public class ExportProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    String id;
 
     @Column(nullable = false)
     String productName;
