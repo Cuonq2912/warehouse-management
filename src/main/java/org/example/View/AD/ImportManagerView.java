@@ -60,18 +60,20 @@ public class ImportManagerView extends JFrame {
         txtPrice = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtQuantity = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtDate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name ", "Quantity", "Price"
+                "ID", "Name ", "Quantity", "Price", "Date "
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -115,6 +117,9 @@ public class ImportManagerView extends JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Quantity :");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setText("Date :");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,9 +152,13 @@ public class ImportManagerView extends JFrame {
                                         .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                                         .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addGap(184, 184, 184)
-                                .addComponent(jLabel4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(47, 47, 47)
-                                .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(txtDate))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -165,7 +174,9 @@ public class ImportManagerView extends JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -188,7 +199,7 @@ public class ImportManagerView extends JFrame {
         private void validateInput() throws IllegalAccessException{
         if(txtId.getText().trim().isEmpty() || txtName.getText().trim().isEmpty() ||
                 txtPrice.getText().trim().isBlank() ||
-//                txtDate.getText().trim().isBlank() ||
+               txtDate.getText().trim().isBlank() ||
                 txtQuantity.getText().trim().isBlank()){
             throw new IllegalAccessException(" All fields are required ");
         }  
@@ -214,13 +225,13 @@ public class ImportManagerView extends JFrame {
 
                try {
                    validateInput();
-            ImportProductModel importmodel;
-            importmodel = ImportProductModel.builder()
+           ImportDetailModel importmodel;
+            importmodel = ImportDetailModel.builder()
                     .id(txtId.getText().trim())
                     .name(txtName.getText().trim())
                     .quantity(txtQuantity.getText().trim())
                     .price(Double.parseDouble(txtPrice.getText().trim()))
-//                     .date(txtDate.getText().trim())
+                     .date(txtDate.getText().trim())
                     .build();
             
             importdetailmodelController.insert(importmodel);
@@ -240,22 +251,22 @@ public class ImportManagerView extends JFrame {
         txtName.setText(" ");
         txtQuantity.setText(" ");
         txtPrice.setText(" ");
-//        txtDate.setText("");
+         txtDate.setText("");
     }
     private void refreshTable() {
          try {
-    List<ImportProductModel> customers = importdetailmodelController.getAll();
+    List<ImportDetailModel> customers = importdetailmodelController.getAll();
         JTable customerTable = new JTable();
         DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
     model.setRowCount(0);
 
-    for (ImportProductModel customer : customers) {
+    for (ImportDetailModel customer : customers) {
         model.addRow(new Object[] {
             customer.getId(),
             customer.getProductName(),
             customer.getQuantity(),
             customer.getTotalPrice(),
-//            customer.getImportDate(),
+            customer.getImportDate(),
             
         });
     }
@@ -312,8 +323,10 @@ public class ImportManagerView extends JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;

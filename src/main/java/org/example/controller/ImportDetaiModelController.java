@@ -21,7 +21,7 @@ public ImportDetaiModelController(){
     this.importproductDAO=  new ImportProductDAO();
 }
 
- public void insert(ImportProductModel importproduct) {
+ public void insert(ImportDetailModel importproduct) {
         try {
              importproductDAO.create(importproduct);
         } catch (Exception e) {
@@ -29,7 +29,7 @@ public ImportDetaiModelController(){
         }
     }
  
-  public void update(ImportProductModel importproduct) {
+  public void update(ImportDetailModel importproduct) {
         try {
             importproductDAO.update(importproduct);
         } catch (Exception e) {
@@ -39,21 +39,21 @@ public ImportDetaiModelController(){
   
      public void delete(String id) {
         try {
-            importproductDAO.delete(ImportProductModel.class, id);
+            importproductDAO.delete(ImportDetailModel.class, id);
         } catch (Exception e) {
             throw new RuntimeException("Error deleting customer: " + e.getMessage());
         }
     }
      
-        public List<ImportProductModel> getAll() {
+        public List<ImportDetailModel> getAll() {
         try {
-            return importproductDAO.findAll(ImportProductModel.class);
+            return importproductDAO.findAll(ImportDetailModel.class);
         } catch (Exception e) {
             throw new RuntimeException("Error getting all customers: " + e.getMessage());
         }
     }
         
-            public List<ImportProductModel> search(String searchTerm) {
+            public List<ImportDetailModel> search(String searchTerm) {
         try {
             if (searchTerm == null || searchTerm.trim().isEmpty()) {
                 return getAll();
@@ -64,9 +64,9 @@ public ImportDetaiModelController(){
         }
     }
 
-    public ImportProductModel findById(String id) {
+    public ImportDetailModel findById(String id) {
         try {
-            return importproductDAO.findById(ImportProductModel.class, id);
+            return importproductDAO.findById(ImportDetailModel.class, id);
         } catch (Exception e) {
             throw new RuntimeException("Error finding customer: " + e.getMessage());
         }
@@ -74,17 +74,17 @@ public ImportDetaiModelController(){
     
      public void exportToExcel(String filePath) {
         try {
-            List<ImportProductModel> customers = getAll();
+            List<ImportDetailModel> customers = getAll();
             List<String> headers = Arrays.asList("Id", "Name", "Quantity", "Price", "Date");
             List<Map<String, Object>> data = new ArrayList<>();
 
-            for (ImportProductModel customer : customers) {
+            for (ImportDetailModel customer : customers) {
                 Map<String, Object> row = new HashMap<>();
                 row.put("Id", customer.getId());
                 row.put("Name", customer.getProductName());
                 row.put("Quantity", customer.getQuantity());
                 row.put(" Price", customer.getTotalPrice());
-//                row.put("Date", customer.getImportDate());
+                row.put("Date", customer.getImportDate());
                 data.add(row);
             }
 

@@ -7,6 +7,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.Hibernate;
 import java.time.LocalDateTime;
+import org.hibernate.Session;
 
 @Entity
 @Getter
@@ -34,6 +35,10 @@ public class ImportDetailModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    String id;
+
+    public Session openSession() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 public static class Builder {
     private String date;
     private String id;
@@ -73,7 +78,6 @@ public static class Builder {
     }
 
     }
-
 
     @Column(nullable = false)
     String productName;
