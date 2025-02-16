@@ -4,16 +4,23 @@
  */
 package org.example.view.UserView;
 
-import java.awt.event.ActionEvent;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.example.utils.ExcelUtils;
+
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
+
+import java.util.stream.Collectors;
 
 import org.example.controller.CustomerController;
 import org.example.domain.model.CustomerModel;
-import org.example.repository.CustomerDAO;
 import org.example.view.DashboardUser;
 
 /**
@@ -284,7 +291,7 @@ public class CustomerManagerView extends javax.swing.JFrame {
 
             customerController.insert(customer);
             JOptionPane.showMessageDialog(this, "Customer inserted successfully!");
-            clearFields(); 
+            clearFields();
             refreshTable();
 
         } catch (Exception e) {
@@ -316,7 +323,7 @@ public class CustomerManagerView extends javax.swing.JFrame {
             }
 
             CustomerModel customer = CustomerModel.builder()
-                    .id(customerId) // Important: Set the ID for update
+                    .id(customerId)
                     .name(txtName.getText().trim())
                     .email(txtEmail.getText().trim())
                     .address(txtAddress.getText().trim())
@@ -360,23 +367,105 @@ public class CustomerManagerView extends javax.swing.JFrame {
 
     }// GEN-LAST:event_deleteButtonActionPerformed
 
-    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_searchButtonActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            String searchTerm = txtName.getText();
+            String searchName = txtName.getText().trim();
+            String searchEmail = txtEmail.getText().trim();
+            String phoneString = txtPhoneNumber.getText().trim();
+            String addString = txtAddress.getText().trim();
+
             List<CustomerModel> customers = customerController.getAll();
+
+            customers = customers.stream()
+                    .filter(c -> {
+                        boolean matchesName = searchName.isEmpty() ||
+                                (c.getName() != null && c.getName().toLowerCase().contains(searchName.toLowerCase()));
+
+                        boolean matchesEmail = searchEmail.isEmpty() ||
+                                (c.getEmail() != null
+                                        && c.getEmail().toLowerCase().contains(searchEmail.toLowerCase()));
+
+                        boolean matchesPhone = phoneString.isEmpty() ||
+                                (c.getPhoneNumber() != null && c.getPhoneNumber().contains(phoneString));
+
+                        boolean matchesAddress = addString.isEmpty() ||
+                                (c.getAddress() != null
+                                        && c.getAddress().toLowerCase().contains(addString.toLowerCase()));
+
+                        return matchesName && matchesEmail && matchesPhone && matchesAddress;
+                    })
+                    .collect(Collectors.toList());
+
             updateTableData(customers);
+            if (customers.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "No customers found matching the search criteria",
+                        "Information",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+            clearFields();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
-                    "Error searching customers: " + e.getMessage(),
+                    "Error searching customer: " + e.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
-    }// GEN-LAST:event_searchButtonActionPerformed
+    }
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         clearFields();
     }// GEN-LAST:event_cancelButtonActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new DashboardUser().setVisible(true);
+        // DashboardUser dashboardUser = new DashboardUser().setVisible(true);
+    }// GEN-LAST:event_backButtonActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+            int rowCount = model.getRowCount();
+
+            List<String> headers = Arrays.asList("ID", "Name", "Email", "Address", "Phone Number", "Points");
+            List<Map<String, Object>> data = new ArrayList<>();
+
+            for (int i = 0; i < rowCount; i++) {
+                Map<String, Object> rowData = new HashMap<>();
+                rowData.put("ID", model.getValueAt(i, 0));
+                rowData.put("Name", model.getValueAt(i, 1));
+                rowData.put("Email", model.getValueAt(i, 2));
+                rowData.put("Address", model.getValueAt(i, 3));
+                rowData.put("Phone Number", model.getValueAt(i, 4));
+                rowData.put("Points", model.getValueAt(i, 5));
+                data.add(rowData);
+            }
+
+            JFileChooser fileChooser = new JFileChooser("D:\\Java\\prj-hit"); // Nơi lưu file
+            fileChooser.setDialogTitle("Save Excel File");
+            fileChooser.setFileFilter(new FileNameExtensionFilter("Excel Files", "xlsx"));
+
+            if (fileChooser.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+                if (!filePath.endsWith(".xlsx")) {
+                    filePath += ".xlsx";
+                }
+
+                ExcelUtils.exportToExcel(filePath, "Customers", headers, data);
+                JOptionPane.showMessageDialog(this,
+                        "Data exported successfully to " + filePath,
+                        "Export Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error exporting data: " + e.getMessage(),
+                    "Export Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
@@ -397,16 +486,6 @@ public class CustomerManagerView extends javax.swing.JFrame {
     private void txtPointsActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtPointsActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_txtPointsActionPerformed
-
-    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        // DashboardUser dashboardUser = new DashboardUser().setVisible(true);
-    }// GEN-LAST:event_backButtonActionPerformed
-
-    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exportButtonActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_exportButtonActionPerformed
 
     private void clearFields() {
         txtName.setText("");
@@ -473,7 +552,7 @@ public class CustomerManagerView extends javax.swing.JFrame {
         // for (javax.swing.UIManager.LookAndFeelInfo info :
         // javax.swing.UIManager.getInstalledLookAndFeels()) {
         // if ("Nimbus".equals(info.getName())) {
-        // javax.swing.LookAndFeel.setLookAndFeel(info.getClassName());
+        // javax.swing.UIManager.setLookAndFeel(info.getClassName());
         // break;
         // }
         // }

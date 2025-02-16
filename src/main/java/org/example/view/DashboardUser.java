@@ -4,9 +4,6 @@
  */
 package org.example.view;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import org.example.view.UserView.CustomerManagerView;
 
 /**
@@ -29,7 +26,8 @@ public class DashboardUser extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
@@ -46,9 +44,12 @@ public class DashboardUser extends javax.swing.JFrame {
         updateAccountButton = new javax.swing.JButton();
         exportManagerButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0),
+                new java.awt.Dimension(10, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
+                new java.awt.Dimension(0, 32767));
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
+                new java.awt.Dimension(0, 0));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh mờ 2.jpg"))); // NOI18N
 
@@ -78,6 +79,11 @@ public class DashboardUser extends javax.swing.JFrame {
         logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(255, 255, 255));
         logoutButton.setText("Logout");
+        logoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 530, -1, -1));
 
         customerManagerButton.setBackground(new java.awt.Color(49, 196, 196));
@@ -103,19 +109,35 @@ public class DashboardUser extends javax.swing.JFrame {
         myProfileButton.setBackground(new java.awt.Color(49, 196, 196));
         myProfileButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         myProfileButton.setText("MyProfile");
+        myProfileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                myProfileButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(myProfileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 150, 40));
 
         updateAccountButton.setBackground(new java.awt.Color(49, 196, 196));
         updateAccountButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         updateAccountButton.setText("Update Account");
+        updateAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateAccountButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(updateAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 150, 40));
 
         exportManagerButton.setBackground(new java.awt.Color(49, 196, 196));
         exportManagerButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         exportManagerButton.setText("Export Manager");
+        exportManagerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportManagerButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(exportManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 150, 40));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(
+                getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 570));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 10, 350));
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 150, 350));
@@ -124,18 +146,11 @@ public class DashboardUser extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void importManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importManagerButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_importManagerButtonActionPerformed
-
-
     private void customerManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            CustomerManagerView customerView = new CustomerManagerView();
-            this.setVisible(false);
             javax.swing.JOptionPane.showMessageDialog(this, "Opening Customer Manager...");
-            customerView.setVisible(true);
-
+            new CustomerManagerView().setVisible(true);
+            this.setVisible(false);
         } catch (Exception e) {
             e.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(this,
@@ -144,6 +159,26 @@ public class DashboardUser extends javax.swing.JFrame {
                     javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_customerManagerButtonActionPerformed
+
+    private void importManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_importManagerButtonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_importManagerButtonActionPerformed
+
+    private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoutButtonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_logoutButtonActionPerformed
+
+    private void updateAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateAccountButtonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_updateAccountButtonActionPerformed
+
+    private void myProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myProfileButtonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_myProfileButtonActionPerformed
+
+    private void exportManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exportManagerButtonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_exportManagerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,31 +193,36 @@ public class DashboardUser extends javax.swing.JFrame {
          * For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DashboardUser.class.getName()).log(java.util.logging.Level.SEVERE, null,
-                    ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DashboardUser.class.getName()).log(java.util.logging.Level.SEVERE, null,
-                    ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DashboardUser.class.getName()).log(java.util.logging.Level.SEVERE, null,
-                    ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DashboardUser.class.getName()).log(java.util.logging.Level.SEVERE, null,
-                    ex);
-        }
+        // try {
+        // for (javax.swing.UIManager.LookAndFeelInfo info :
+        // javax.swing.UIManager.getInstalledLookAndFeels()) {
+        // if ("Nimbus".equals(info.getName())) {
+        // javax.swing.UIManager.setLookAndFeel(info.getClassName());
+        // break;
+        // }
+        // }
+        // } catch (ClassNotFoundException ex) {
+        // java.util.logging.Logger.getLogger(DashboardUser.class.getName()).log(java.util.logging.Level.SEVERE,
+        // null,
+        // ex);
+        // } catch (InstantiationException ex) {
+        // java.util.logging.Logger.getLogger(DashboardUser.class.getName()).log(java.util.logging.Level.SEVERE,
+        // null,
+        // ex);
+        // } catch (IllegalAccessException ex) {
+        // java.util.logging.Logger.getLogger(DashboardUser.class.getName()).log(java.util.logging.Level.SEVERE,
+        // null,
+        // ex);
+        // } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        // java.util.logging.Logger.getLogger(DashboardUser.class.getName()).log(java.util.logging.Level.SEVERE,
+        // null,
+        // ex);
+        // }
         // </editor-fold>
         // </editor-fold>
         // </editor-fold>
         // </editor-fold>
-//        new DashboardUser();
+        // new DashboardUser();
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

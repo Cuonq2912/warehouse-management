@@ -1,6 +1,7 @@
 package org.example.utils;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Sheet;
@@ -21,6 +22,7 @@ public class ExcelUtils {
         try (Workbook workbook = new XSSFWorkbook()) {
             Sheet sheet = workbook.createSheet(sheetName);
 
+            validateInput(filePath, sheetName, headers, data);
             CellStyle headerStyle = workbook.createCellStyle();
             Font headerFont = workbook.createFont();
             headerFont.setBold(true);
@@ -44,8 +46,14 @@ public class ExcelUtils {
                 }
             }
 
+            for (int i = 0; i < headers.size(); i++) {
+                sheet.autoSizeColumn(i);
+            }
+
             try (FileOutputStream fileOutput = new FileOutputStream(filePath)) {
                 workbook.write(fileOutput);
+            } catch (IOException e) {
+                throw new IOException("Failed to write Excel file: " + e.getMessage(), e);
             }
         }
     }
@@ -53,6 +61,8 @@ public class ExcelUtils {
     private static void setCellValue(Cell cell, Object value) {
         if (value == null) {
             cell.setCellValue("");
+        } else if (value instanceof Date) {
+            cell.setCellValue((Date) value);
         } else if (value instanceof String) {
             cell.setCellValue((String) value);
         } else if (value instanceof Integer) {
@@ -63,6 +73,22 @@ public class ExcelUtils {
             cell.setCellValue((Boolean) value);
         } else {
             cell.setCellValue(value.toString());
+        }
+    }
+
+    private static void validateInput(String filePath, String sheetName, List<String> headers,
+            List<Map<String, Object>> data) {
+        if (filePath == null || filePath.trim().isEmpty()) {
+            throw new IllegalArgumentException("File path cannot be null or empty");
+        }
+        if (sheetName == null || sheetName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Sheet name cannot be null or empty");
+        }
+        if (headers == null || headers.isEmpty()) {
+            throw new IllegalArgumentException("Headers cannot be null or empty");
+        }
+        if (data == null) {
+            throw new IllegalArgumentException("Data cannot be null");
         }
     }
 }
