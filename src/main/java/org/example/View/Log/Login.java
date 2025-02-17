@@ -108,7 +108,7 @@ public class Login extends javax.swing.JFrame implements ActionListener{
         getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 272, -1));
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("You forgot your pasword ?");
+        jButton1.setText("You forgot your password ?");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

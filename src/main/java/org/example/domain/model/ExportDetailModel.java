@@ -33,10 +33,10 @@ public class ExportDetailModel {
     LocalDateTime exportDate;
 
     @ManyToOne
-    @JoinColumn(name = "export_product_id", nullable = false, referencedColumnName = "id", updatable = false)
+    @JoinColumn(name = "export_product_id", nullable = false, referencedColumnName = "id", updatable = true)
     ExportProductModel exportProductModel;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", updatable = false)
+    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", updatable = true)
     ProductModel productModel;
 }

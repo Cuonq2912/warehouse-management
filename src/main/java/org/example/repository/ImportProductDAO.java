@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ImportProductDAO extends BaseDAO<ImportProductModel> {
 
-    public List<ImportProductModel> findByProductName(String productName) {
+    public List<ImportProductModel> findByName(String productName) {
         EntityManager em = getEntityManager();
         try{
             List<ImportProductModel> products = em.createQuery("SELECT i FROM ImportProductModel i WHERE i.productName LIKE :productName", ImportProductModel.class)

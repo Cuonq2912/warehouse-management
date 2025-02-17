@@ -4,9 +4,18 @@ package org.example;
 import org.example.utils.HibernateUtils;
 import jakarta.persistence.EntityManager;
 
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
-        // Connection and create table
+        // Set Look and Feel to system default
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // Initialize database connection
         try {
             EntityManager em = HibernateUtils.getEntityManager();
             System.out.println("Database connected successfully!");
@@ -21,5 +30,7 @@ public class Main {
         } finally {
             HibernateUtils.shutdown();
         }
+
+
     }
 }

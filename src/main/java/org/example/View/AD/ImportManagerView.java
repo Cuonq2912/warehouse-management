@@ -15,6 +15,7 @@ import org.example.View.AD.DeleteViewIPM;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import org.example.controller.ImportDetaiModelController;
 import org.example.utils.HibernateUtils;
 import org.hibernate.Hibernate;
 //import org.example.controller.ImportDetaiModelController;
@@ -27,13 +28,13 @@ import org.example.domain.model.ImportProductModel;
  */
 public class ImportManagerView extends JFrame {
 
-//      private ImportDetaiModelController importdetailmodelController;
+      private ImportDetaiModelController importdetailmodelController;
 //    
     /**
      * Creates new form ImportManagerView
      */
     public ImportManagerView() {
-//          importdetailmodelController = new ImportDetaiModelController();
+          importdetailmodelController = new ImportDetaiModelController();
         initComponents();
     }
 
@@ -121,14 +122,15 @@ public class ImportManagerView extends JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 903, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 921, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
-                        .addGap(12, 12, 12)
-                        .addComponent(jButton2))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -138,18 +140,19 @@ public class ImportManagerView extends JFrame {
                                 .addGap(15, 15, 15)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2))
                                 .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                                        .addComponent(txtName, javax.swing.GroupLayout.Alignment.LEADING)))
+                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(184, 184, 184)
-                                .addComponent(jLabel4)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(47, 47, 47)
-                                .addComponent(txtQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtQuantity, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                    .addComponent(txtPrice))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -165,16 +168,14 @@ public class ImportManagerView extends JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(31, 31, 31)
                 .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -202,7 +203,8 @@ public class ImportManagerView extends JFrame {
         db.getTransaction().commit();
         
         JOptionPane.showMessageDialog(this," thoát thành công");
-        System.exit(0);
+        this.setVisible(false);
+        new ADMIN1().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -212,27 +214,27 @@ public class ImportManagerView extends JFrame {
 
     private void jButton5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-//               try {
-//                   validateInput();
-//           ImportDetailModel importmodel;
-//            importmodel = ImportDetailModel.builder()
-////                    .id(txtId.getText().trim())
-//                    .productName(txtName.getText().trim())
-//                    .quantity(Long.parseLong(txtQuantity.getText().trim()))
-//                    .totalPrice(Double.parseDouble(txtPrice.getText().trim()))
-////                     .date(txtDate.getText().trim())
-//                    .build();
-//            
-//            importdetailmodelController.insert(importmodel);
-//            JOptionPane.showMessageDialog(this," inserted successfully!");
-//            clearFields();
-//              refreshTable();
-//              } catch (Exception e) {
-//            JOptionPane.showMessageDialog(this,
-//                    "Error updating customer: " + e.getMessage(),
-//                    "Error",
-//                    JOptionPane.ERROR_MESSAGE);
-//        }
+              try {
+                   validateInput();
+           ImportProductModel importmodel;
+            importmodel = ImportProductModel.builder()
+                    .id(Long.parseLong(txtId.getText().trim()))
+                    .productName(txtName.getText().trim())
+                   .quantity(Long.parseLong(txtQuantity.getText().trim()))
+                    .totalPrice(Double.parseDouble(txtPrice.getText().trim()))
+//                    .date(txtDate.getText().trim())
+                    .build();
+            
+            importdetailmodelController.insert(importmodel);
+            JOptionPane.showMessageDialog(this," inserted successfully!");
+           clearFields();
+             refreshTable();
+             } catch (Exception e) {
+           JOptionPane.showMessageDialog(this,
+                   "Error updating customer: " + e.getMessage(),
+                   "Error",
+                 JOptionPane.ERROR_MESSAGE);
+      }
     }//GEN-LAST:event_jButton5ActionPerformed
 
         private void clearFields(){
@@ -242,31 +244,30 @@ public class ImportManagerView extends JFrame {
         txtPrice.setText(" ");
 //         txtDate.setText("");
     }
-//    private void refreshTable() {
-//         try {
-//    List<ImportDetailModel> customers = importdetailmodelController.getAll();
-//        JTable customerTable = new JTable();
-//        DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
-//    model.setRowCount(0);
-//
-//    for (ImportDetailModel customer : customers) {
-//        model.addRow(new Object[] {
-//            customer.getId(),
-//            customer.getProductName(),
-//            customer.getQuantity(),
-//            customer.getTotalPrice(),
+    private void refreshTable() {
+         try {
+    List<ImportProductModel> customers = importdetailmodelController.getAll();
+        JTable customerTable = new JTable();
+        DefaultTableModel model = (DefaultTableModel) customerTable.getModel();
+       model.setRowCount(0);
+
+    for (ImportProductModel customer : customers) {
+        model.addRow(new Object[] {
+            customer.getId(),
+            customer.getProductName(),
+            customer.getQuantity(),
+            customer.getTotalPrice(),
 //            customer.getImportDate(),
-//            
-//        });
-//    }
-//    
-//} catch (Exception e) {
-//    JOptionPane.showMessageDialog(null, 
-//        "Error refreshing table: " + e.getMessage(),
-//        "Error",
-//        JOptionPane.ERROR_MESSAGE);
-//}
-//    }
+        });
+    }
+    
+} catch (Exception e) {
+    JOptionPane.showMessageDialog(null, 
+        "Error refreshing table: " + e.getMessage(),
+        "Error",
+        JOptionPane.ERROR_MESSAGE);
+}
+    }
 
     /**
      * @param args the command line arguments

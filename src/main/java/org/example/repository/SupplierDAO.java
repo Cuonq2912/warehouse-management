@@ -107,4 +107,24 @@ public class SupplierDAO extends BaseDAO<SupplierModel> {
             em.close();
         }
     }
+    
+        public List<SupplierModel> findById(Long id){
+        EntityManager em = getEntityManager();
+        try{
+            TypedQuery<SupplierModel> query = em.createQuery("SELECT s FROM SupplierModel s WHERE s.id LIKE :id", SupplierModel.class);
+            query.setParameter("phone", "%" + id + "%");
+            List<SupplierModel> suppliers = query.getResultList();
+            if(suppliers.isEmpty()){
+                throw new RuntimeException("Supplier not found with id: " +id);
+            }
+            return suppliers;
+        } catch (RuntimeException e) {
+            if(em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException("Error finding supplier by id ", e);
+        } finally {
+            em.close();
+        }
+    }
 }

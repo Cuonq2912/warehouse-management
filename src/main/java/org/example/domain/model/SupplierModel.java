@@ -15,6 +15,7 @@ import java.util.List;
 @Builder
 @Table(name = "suppliers")
 public class SupplierModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;

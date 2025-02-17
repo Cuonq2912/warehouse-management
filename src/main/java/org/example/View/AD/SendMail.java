@@ -15,7 +15,9 @@ import java.util.Properties;
 import org.hibernate.Session;
 import java.util.Properties;
 import javax.swing.JOptionPane;
+import org.example.utils.HibernateUtils;
 import org.example.utils.SendMailUtils;
+import org.hibernate.Hibernate;
 
 
 /**
@@ -191,7 +193,10 @@ public class SendMail extends javax.swing.JFrame {
     String message = txtMessage.getText();
 
         SendMailUtils.sendEmail(recipient, subject, message);
-        
+        var db = HibernateUtils.getEntityManager();
+        db.getTransaction().begin();
+        db.getTransaction().commit();
+        JOptionPane.showMessageDialog(this," sent successfully");
     }//GEN-LAST:event_txtRecipientActionPerformed
 
     /**

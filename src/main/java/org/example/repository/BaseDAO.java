@@ -23,6 +23,7 @@ public abstract class BaseDAO<T> {
             if(em.getTransaction().isActive()){
                 em.getTransaction().rollback();
             }
+           
             throw new RuntimeException("Error creating entity ", e);
         } finally {
             em.close();

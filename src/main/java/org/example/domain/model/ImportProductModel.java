@@ -29,11 +29,11 @@ public class ImportProductModel {
     double totalPrice;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", updatable = false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", updatable = true)
     UserModel userModel;
 
     @ManyToOne
-    @JoinColumn(name = "supplier_id", nullable = false, referencedColumnName = "id", updatable = false)
+    @JoinColumn(name = "supplier_id", nullable = false, referencedColumnName = "id", updatable = true)
     SupplierModel supplierModel;
 
     @OneToMany(mappedBy = "importProductModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
