@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
@@ -26,9 +24,9 @@ public class ProductModel {
     Long stockQuantity;
 
     @Column(nullable = false)
-    double price;
+    Double price;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "category_name", nullable = true)
     CategoryModel categoryModel;
 }

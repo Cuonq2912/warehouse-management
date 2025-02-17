@@ -13,14 +13,14 @@ public abstract class BaseDAO<T> {
         return HibernateUtils.getEntityManager();
     }
 
-    public void create(T entity){
+    public void create(T entity) {
         EntityManager em = getEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
         } catch (RuntimeException e) {
-            if(em.getTransaction().isActive()){
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error creating entity ", e);
@@ -29,12 +29,12 @@ public abstract class BaseDAO<T> {
         }
     }
 
-    public T findById(Class<T> entityClass, Long id){
+    public T findById(Class<T> entityClass, Long id) {
         EntityManager em = getEntityManager();
         T entity;
-        try{
+        try {
             entity = em.find(entityClass, id);
-            if(entity == null){
+            if (entity == null) {
                 throw new NotFoundException("Entity not found with ID: " + id);
             }
         } finally {
@@ -43,14 +43,14 @@ public abstract class BaseDAO<T> {
         return entity;
     }
 
-    public void update(T entity){
+    public void update(T entity) {
         EntityManager em = getEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
             em.merge(entity);
             em.getTransaction().commit();
-        } catch (RuntimeException e){
-            if(em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error updating entity ", e);
@@ -59,19 +59,19 @@ public abstract class BaseDAO<T> {
         }
     }
 
-    public void delete(Class<T> entityClass, Long id){
+    public void delete(Class<T> entityClass, Long id) {
         EntityManager em = getEntityManager();
         T entity;
-        try{
+        try {
             entity = em.find(entityClass, id);
             em.getTransaction().begin();
-            if(entity == null){
+            if (entity == null) {
                 throw new NotFoundException("Entity not found with ID: " + id);
             }
             em.remove(entity);
             em.getTransaction().commit();
-        } catch(RuntimeException e){
-            if(em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error deleting entity ", e);
@@ -80,18 +80,17 @@ public abstract class BaseDAO<T> {
         }
     }
 
-    public List<T> findAll(Class<T> entityClass){
+    public List<T> findAll(Class<T> entityClass) {
         EntityManager em = getEntityManager();
-        try{
+        try {
             TypedQuery<T> query = em.createQuery("SELECT e FROM " + entityClass.getSimpleName() + " e", entityClass);
             return query.getResultList();
-        } catch (RuntimeException e){
-            if(em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding all entities ", e);
-        }
-        finally {
+        } finally {
             em.close();
         }
     }
