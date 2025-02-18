@@ -6,6 +6,12 @@ package org.example.view;
 
 import org.example.view.CommonView.LoginView;
 import org.example.view.UserView.CustomerManagerView;
+<<<<<<< Updated upstream
+=======
+import org.example.utils.HibernateUtils;
+import javax.swing.JOptionPane;
+import jakarta.persistence.EntityManager;
+>>>>>>> Stashed changes
 
 /**
  *
@@ -29,7 +35,12 @@ public class UserDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+<<<<<<< Updated upstream
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+=======
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
+>>>>>>> Stashed changes
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
@@ -45,10 +56,21 @@ public class UserDashboard extends javax.swing.JFrame {
         updateAccountButton = new javax.swing.JButton();
         exportManagerButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+<<<<<<< Updated upstream
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10), new java.awt.Dimension(32767, 10));
+=======
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0),
+                new java.awt.Dimension(10, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
+                new java.awt.Dimension(0, 32767));
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
+                new java.awt.Dimension(0, 0));
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 10), new java.awt.Dimension(0, 10),
+                new java.awt.Dimension(32767, 10));
+>>>>>>> Stashed changes
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh mờ 2.jpg"))); // NOI18N
 
@@ -67,13 +89,22 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 51));
         jLabel1.setText("DASHBOARD USER");
+<<<<<<< Updated upstream
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 280, -1));
+=======
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 176, -1));
+>>>>>>> Stashed changes
 
         logoutButton.setBackground(new java.awt.Color(0, 204, 204));
         logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(255, 255, 255));
         logoutButton.setText("Logout");
+<<<<<<< Updated upstream
         logoutButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 0)));
+=======
+        logoutButton
+                .setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 0)));
+>>>>>>> Stashed changes
         logoutButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +124,12 @@ public class UserDashboard extends javax.swing.JFrame {
                 customerManagerButtonActionPerformed(evt);
             }
         });
+<<<<<<< Updated upstream
         getContentPane().add(customerManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 200, 40));
+=======
+        getContentPane().add(customerManagerButton,
+                new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 200, 40));
+>>>>>>> Stashed changes
 
         importManagerButton.setBackground(new java.awt.Color(49, 196, 196));
         importManagerButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -143,7 +179,12 @@ public class UserDashboard extends javax.swing.JFrame {
         getContentPane().add(exportManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 200, 40));
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+<<<<<<< Updated upstream
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
+=======
+        jLabel7.setIcon(new javax.swing.ImageIcon(
+                getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
+>>>>>>> Stashed changes
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 920, 570));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 10, 350));
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 150, 350));
@@ -153,6 +194,18 @@ public class UserDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< Updated upstream
+=======
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_cancelButtonActionPerformed
+        var db = HibernateUtils.getEntityManager();
+        db.getTransaction().begin();
+        db.getTransaction().commit();
+
+        JOptionPane.showMessageDialog(this, " you successfully escape!!");
+        System.exit(0);
+    }// GEN-LAST:event_cancelButtonActionPerformed
+
+>>>>>>> Stashed changes
     private void customerManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             javax.swing.JOptionPane.showMessageDialog(this, "Opening Customer Manager...");
