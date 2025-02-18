@@ -64,10 +64,10 @@ public class UserDashboard extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(51, 255, 51));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 51));
         jLabel1.setText("DASHBOARD USER");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 176, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 280, -1));
 
         logoutButton.setBackground(new java.awt.Color(0, 204, 204));
         logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
