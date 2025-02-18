@@ -5,7 +5,7 @@ import jakarta.persistence.TypedQuery;
 import org.example.domain.model.UserModel;
 
 import java.util.List;
-
+import java.util.Date;
 public class UserDAO extends BaseDAO<UserModel> {
 
     public List<UserModel> findByUsername(String username){
@@ -103,6 +103,46 @@ public class UserDAO extends BaseDAO<UserModel> {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding users by status ", e);
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<UserModel> findByCreateAt(Date createAt){
+        EntityManager em = getEntityManager();
+        try{
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.createAt = :createAt", UserModel.class);
+            query.setParameter("createAt",createAt);
+            List<UserModel> users = query.getResultList();
+            if (users.isEmpty()){
+                throw new RuntimeException("User not found with createAt: " + createAt);
+            }
+            return users;
+        } catch (RuntimeException e){
+            if (em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException("Error finding users by createAt ", e);
+        } finally {
+            em.close();
+        }
+    }
+
+        public List<UserModel> findByUpdateAt (Date updateAt){
+                  EntityManager em = getEntityManager();
+        try{
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.updateAt = :createAt", UserModel.class);
+            query.setParameter("updateAt", updateAt);
+            List<UserModel> users = query.getResultList();
+            if (users.isEmpty()){
+                throw new RuntimeException("User not found with updateAt: " + updateAt);
+            }
+            return users;
+        } catch (RuntimeException e){
+            if (em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException("Error finding users by updateAt ", e);
         } finally {
             em.close();
         }
