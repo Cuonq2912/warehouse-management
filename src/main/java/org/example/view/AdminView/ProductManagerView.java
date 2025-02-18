@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import org.example.controller.CategoryController;
 import org.example.controller.ProductController;
 import org.example.domain.model.CategoryModel;
 import org.example.domain.model.ProductModel;
@@ -257,10 +256,6 @@ public class ProductManagerView extends javax.swing.JFrame {
 
     private long getCategoryIdFromComboBox() {
         Object selectedItem = ComboBoxCategories.getSelectedItem();
-        if (selectedItem == null) {
-            throw new IllegalArgumentException("Please select a category");
-        }
-
         try {
             return Long.parseLong(selectedItem.toString());
         } catch (NumberFormatException e) {
@@ -271,8 +266,6 @@ public class ProductManagerView extends javax.swing.JFrame {
     private void buttonAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_buttonAddActionPerformed
         try {
             validateInput();
-            // long category_id2 = getCategoryIdFromComboBox();
-
             double price;
             try {
                 price = Double.parseDouble(txtPrice.getText().trim());
@@ -292,15 +285,17 @@ public class ProductManagerView extends javax.swing.JFrame {
                 throw new IllegalArgumentException("Quantity must be a valid number");
             }
 
-            // CategoryModel categoryModel = CategoryModel.builder()
-            // .id(category_id2)
-            // .build();
+            long category_id = getCategoryIdFromComboBox();
+
+            CategoryModel categoryModel = CategoryModel.builder()
+                    .id(category_id)
+                    .build();
 
             ProductModel productModel = ProductModel.builder()
                     .name(txtName.getText().trim())
                     .price(price)
                     .stockQuantity(stockQuantity)
-                    // .categoryModel(categoryModel)
+                    .categoryModel(categoryModel) // Error
                     .build();
             productController.insert(productModel);
             JOptionPane.showMessageDialog(this, "Product inserted successfully!");
@@ -334,6 +329,15 @@ public class ProductManagerView extends javax.swing.JFrame {
         }
     }
 
+    private void showComboData() {
+        List<String> dataCategory;
+        CategoryList categoryList = new CategoryList();
+        dataCategory = categoryList.getCategories();
+        for (String category : dataCategory) {
+            ComboBoxCategories.addItem(category);
+        }
+    }
+
     private void clearFields() {
         txtName.setText("");
         txtQuantity.setText("");
@@ -352,7 +356,7 @@ public class ProductManagerView extends javax.swing.JFrame {
                         product.getName(),
                         product.getPrice(),
                         product.getStockQuantity(),
-                        // product.getCategoryModel()
+                        product.getCategoryModel().getId()
                 });
             }
         } catch (Exception e) {
@@ -427,12 +431,4 @@ public class ProductManagerView extends javax.swing.JFrame {
     private javax.swing.JTextField txtQuantity;
     // End of variables declaration
 
-    private void showComboData() {
-        List<String> dataCategory;
-        CategoryList categoryList = new CategoryList();
-        dataCategory = categoryList.getCategories();
-        for (String category : dataCategory) {
-            ComboBoxCategories.addItem(category);
-        }
-    }
 }

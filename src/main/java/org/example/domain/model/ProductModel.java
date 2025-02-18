@@ -27,6 +27,6 @@ public class ProductModel {
     Double price;
 
     @ManyToOne
-    @JoinColumn(name = "category_name", nullable = true)
+    @JoinColumn(name = "category_id", nullable = true)
     CategoryModel categoryModel;
 }

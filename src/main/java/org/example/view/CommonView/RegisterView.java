@@ -4,6 +4,9 @@
  */
 package org.example.view.CommonView;
 
+import java.util.Arrays;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author admin
@@ -15,6 +18,16 @@ public class RegisterView extends javax.swing.JFrame {
      */
     public RegisterView() {
         initComponents();
+    }
+    
+    private void validateInput(){
+        if(txtFullnameSignup.getText().isEmpty() ||
+                Arrays.toString(txtPasswordSignup.getPassword()).isEmpty()|| 
+                txtEmailSignup.getText().isEmpty()||
+                txtPhoneSignup.getText().isEmpty() ||
+               txtUsernameSignup.getText().isEmpty()){
+            throw new IllegalArgumentException("All field are required!");
+        }
     }
 
     /**
@@ -40,7 +53,7 @@ public class RegisterView extends javax.swing.JFrame {
         showPasswordCheckbox = new javax.swing.JCheckBox();
         txtFullnameSignup = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtEmailLogin2 = new javax.swing.JTextField();
+        txtEmailSignup = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtPhoneSignup = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -49,6 +62,7 @@ public class RegisterView extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 500));
         setPreferredSize(new java.awt.Dimension(800, 500));
 
         Right.setBackground(new java.awt.Color(102, 0, 102));
@@ -157,11 +171,11 @@ public class RegisterView extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(102, 0, 102));
         jLabel8.setText("Fullname");
 
-        txtEmailLogin2.setBackground(new java.awt.Color(153, 0, 153));
-        txtEmailLogin2.setForeground(new java.awt.Color(255, 255, 255));
-        txtEmailLogin2.addActionListener(new java.awt.event.ActionListener() {
+        txtEmailSignup.setBackground(new java.awt.Color(153, 0, 153));
+        txtEmailSignup.setForeground(new java.awt.Color(255, 255, 255));
+        txtEmailSignup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailLogin2ActionPerformed(evt);
+                txtEmailSignupActionPerformed(evt);
             }
         });
 
@@ -210,7 +224,7 @@ public class RegisterView extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(16, 16, 16)
                         .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(txtEmailLogin2, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmailSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtFullnameSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, LeftLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
@@ -255,7 +269,7 @@ public class RegisterView extends javax.swing.JFrame {
                     .addComponent(txtFullnameSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtEmailLogin2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmailSignup, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(LeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -284,7 +298,7 @@ public class RegisterView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Left, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1176, 1176, 1176))
+                        .addGap(149, 149, 149))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(111, 111, 111)
                         .addComponent(jLabel5)
@@ -293,7 +307,7 @@ public class RegisterView extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(0, 15, Short.MAX_VALUE)
+                .addGap(0, 13, Short.MAX_VALUE)
                 .addComponent(Right, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -310,7 +324,12 @@ public class RegisterView extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsernameSignupActionPerformed
 
     private void buttonSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSignupActionPerformed
-        // TODO add your handling code here:
+        validateInput();
+        try{
+            
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(this, "Register failed: " + e.getMessage(), "Error: ", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_buttonSignupActionPerformed
 
     private void txtPasswordSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordSignupActionPerformed
@@ -319,15 +338,20 @@ public class RegisterView extends javax.swing.JFrame {
 
     private void showPasswordCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showPasswordCheckboxActionPerformed
         // TODO add your handling code here:
+        if(showPasswordCheckbox.isSelected()){
+            txtPasswordSignup.setEchoChar((char) 0);
+        } else{
+            txtPasswordSignup.setEchoChar('*');
+        }
     }//GEN-LAST:event_showPasswordCheckboxActionPerformed
 
     private void txtFullnameSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFullnameSignupActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFullnameSignupActionPerformed
 
-    private void txtEmailLogin2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailLogin2ActionPerformed
+    private void txtEmailSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailSignupActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailLogin2ActionPerformed
+    }//GEN-LAST:event_txtEmailSignupActionPerformed
 
     private void txtPhoneSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPhoneSignupActionPerformed
         // TODO add your handling code here:
@@ -390,7 +414,7 @@ public class RegisterView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JCheckBox showPasswordCheckbox;
     private javax.swing.JTextField txtAddressSignup;
-    private javax.swing.JTextField txtEmailLogin2;
+    private javax.swing.JTextField txtEmailSignup;
     private javax.swing.JTextField txtFullnameSignup;
     private javax.swing.JPasswordField txtPasswordSignup;
     private javax.swing.JTextField txtPhoneSignup;

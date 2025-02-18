@@ -1,22 +1,12 @@
 package org.example.domain.DTO.Response;
 
 public class LoginResponse {
-    private String token;
     private String username;
     private String role;
 
     public LoginResponse() {
     }
-
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
+    
     public String getUsername() {
         return username;
     }

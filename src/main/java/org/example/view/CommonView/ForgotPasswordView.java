@@ -31,10 +31,9 @@ public class ForgotPasswordView extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         resetButton = new javax.swing.JButton();
-        txrEmailReset = new javax.swing.JTextField();
+        txtEmailReset = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         Right.setBackground(new java.awt.Color(102, 0, 102));
         Right.setForeground(new java.awt.Color(255, 153, 0));
@@ -58,9 +57,9 @@ public class ForgotPasswordView extends javax.swing.JFrame {
             }
         });
 
-        txrEmailReset.addActionListener(new java.awt.event.ActionListener() {
+        txtEmailReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txrEmailResetActionPerformed(evt);
+                txtEmailResetActionPerformed(evt);
             }
         });
 
@@ -73,13 +72,13 @@ public class ForgotPasswordView extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(RightLayout.createSequentialGroup()
                 .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(RightLayout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txrEmailReset, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(RightLayout.createSequentialGroup()
-                            .addGap(208, 208, 208)
+                    .addGroup(RightLayout.createSequentialGroup()
+                        .addGap(157, 157, 157)
+                        .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(RightLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtEmailReset, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel4)))
                     .addGroup(RightLayout.createSequentialGroup()
                         .addGap(290, 290, 290)
@@ -93,7 +92,7 @@ public class ForgotPasswordView extends javax.swing.JFrame {
                 .addGap(86, 86, 86)
                 .addGroup(RightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txrEmailReset, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEmailReset, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(resetButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 141, Short.MAX_VALUE)
@@ -115,9 +114,9 @@ public class ForgotPasswordView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txrEmailResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txrEmailResetActionPerformed
+    private void txtEmailResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailResetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txrEmailResetActionPerformed
+    }//GEN-LAST:event_txtEmailResetActionPerformed
 
     private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
         // TODO add your handling code here:
@@ -164,6 +163,6 @@ public class ForgotPasswordView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton resetButton;
-    private javax.swing.JTextField txrEmailReset;
+    private javax.swing.JTextField txtEmailReset;
     // End of variables declaration//GEN-END:variables
 }
