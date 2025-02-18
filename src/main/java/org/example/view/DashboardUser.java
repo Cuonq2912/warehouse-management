@@ -4,7 +4,10 @@
  */
 package org.example.view;
 
+import javax.swing.JOptionPane;
+import org.example.utils.HibernateUtils;
 import org.example.view.UserView.CustomerManagerView;
+import org.hibernate.Hibernate;
 
 /**
  *
@@ -27,7 +30,7 @@ public class DashboardUser extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
@@ -44,12 +47,9 @@ public class DashboardUser extends javax.swing.JFrame {
         updateAccountButton = new javax.swing.JButton();
         exportManagerButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0),
-                new java.awt.Dimension(10, 32767));
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
-                new java.awt.Dimension(0, 32767));
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
-                new java.awt.Dimension(0, 0));
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh mờ 2.jpg"))); // NOI18N
 
@@ -73,6 +73,11 @@ public class DashboardUser extends javax.swing.JFrame {
         cancelButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(0, 204, 204));
         cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
         getContentPane().add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 530, -1, -1));
 
         logoutButton.setBackground(new java.awt.Color(0, 204, 204));
@@ -136,8 +141,7 @@ public class DashboardUser extends javax.swing.JFrame {
         });
         getContentPane().add(exportManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 150, 40));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(
-                getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 570));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 10, 350));
         getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 150, 350));
@@ -145,6 +149,15 @@ public class DashboardUser extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+       var db = HibernateUtils.getEntityManager();
+       db.getTransaction().begin();
+       db.getTransaction().commit();
+       
+        JOptionPane.showMessageDialog(this," you successfully escape!!");
+        System.exit(0);
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void customerManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
