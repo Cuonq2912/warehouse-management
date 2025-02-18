@@ -92,4 +92,24 @@ public class ProductDAO extends BaseDAO<ProductModel> {
             em.close();
         }
     }
+    public List<ProductModel> findByCategoryid(String categoryid) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<ProductModel> query = em.createQuery(("SELECT c FROM CustomerModel c WHERE c.email LIKE :email"),
+                    ProductModel.class);
+            query.setParameter("email", "%" + categoryid + "%");
+            List<ProductModel> users = query.getResultList();
+            if (users.isEmpty()) {
+                throw new RuntimeException("User not found with email: " + categoryid);
+            }
+            return users;
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException("Error finding user by email ", e);
+        } finally {
+            em.close();
+        }
+    }
 }
