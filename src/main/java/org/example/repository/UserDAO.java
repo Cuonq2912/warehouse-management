@@ -156,6 +156,7 @@ public class UserDAO extends BaseDAO<UserModel> {
         }
     }
 
+
     public UserModel findToAuthController(String username) {
         EntityManager em = getEntityManager();
         try {
@@ -172,3 +173,4 @@ public class UserDAO extends BaseDAO<UserModel> {
         }
     }
 }
+

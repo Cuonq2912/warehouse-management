@@ -196,10 +196,10 @@ public class ImportManagerView extends JFrame {
         var db = HibernateUtils.getEntityManager();
         db.getTransaction().begin();
         db.getTransaction().commit();
-        
+
         JOptionPane.showMessageDialog(this," thoát thành công");
-        this.setVisible(false);
-        new ADMIN1().setVisible(true);
+         this.setVisible(false);
+         new ADMIN1().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

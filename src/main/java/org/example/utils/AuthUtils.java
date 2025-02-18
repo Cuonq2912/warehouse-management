@@ -19,7 +19,7 @@ public class AuthUtils {
         }
         return username.matches("^[a-zA-Z0-9_]+$");
     }
-
+    
     public String getErrorMessage(String username) {
         if (username == null || username.trim().isEmpty()) {
             return "Username cannot be empty";
@@ -52,7 +52,7 @@ public class AuthUtils {
             throw new IllegalArgumentException("Password verification failed: " + e.getMessage());
         }
     }
-//    Phương thức chuyển đổi mật khẩu đã lưu trữ từ DB sang bcrypt
+
     public void updateExistingPasswords() {
         EntityManager em = getEntityManager();
         try {
