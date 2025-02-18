@@ -6,19 +6,13 @@ package org.example.view.AD;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.example.view.ADMIN1;
-import org.example.view.AD.DeleteViewIPM;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import org.example.utils.HibernateUtils;
-import org.hibernate.Hibernate;
-//import org.example.controller.ImportDetaiModelController;
-import org.example.domain.model.ImportDetailModel;
 import org.example.domain.model.ImportProductModel;
 import org.example.controller.ImportDetaiModelController;
 

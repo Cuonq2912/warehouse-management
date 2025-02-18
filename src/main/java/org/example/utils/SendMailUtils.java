@@ -11,10 +11,12 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
+
 public class SendMailUtils {
 
     public void sendMail(String recipient, String subject, String message) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public class MailService {
@@ -28,25 +30,7 @@ public class SendMailUtils {
             props.put("mail.smtp.port", "587");
             props.put("mail.smtp.auth", "true");
             props.put("mail.smtp.starttls.enable", "true");
-
-            // Xác thực email
-//        Session session = Session.getInstance(props, new Authenticator() {
-//            protected PasswordAuthentication getPasswordAuthentication() {
-//                return new PasswordAuthentication(FROM_EMAIL, PASSWORD);
-//            }
-//        });
-
-            // Tạo email
-//        Message message = new MimeMessage(session);
-//        message.setFrom(new InternetAddress(FROM_EMAIL));
-//        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-//        message.setSubject(subject);
-//        message.setText(messageText);
-
-//        // Gửi email
-//        Transport.send(message);
         }
     }
 
 }
-
