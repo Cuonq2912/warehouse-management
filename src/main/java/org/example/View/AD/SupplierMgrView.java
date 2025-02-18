@@ -51,6 +51,7 @@ public class SupplierMgrView extends javax.swing.JFrame {
         txtPhone = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txtStatus = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh mờ 1.jpg"))); // NOI18N
 
@@ -132,6 +133,15 @@ public class SupplierMgrView extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(854, 9, 47, -1));
         getContentPane().add(txtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(919, 6, 170, -1));
 
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 590, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -202,6 +212,27 @@ public class SupplierMgrView extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+      
+//        try{
+//            String searchName = txtName.getText().trim();
+//            String searchEmail = txtEmail.getText().trim();
+//            String searchAddress = txtAddress.getText().trim();
+//            String serachPhone = txtPhone.getText().trim();
+//            
+//            List<SupplierModel> supplier = supplierController.getAll();
+//            
+////            supplier = supplier.stream()
+////                    .filter(c ->){
+////                          boolean matchesName  = searchName.isEmpty() ||
+////                                  (c.getName() !=null && c.getName )
+//        }
+//                    
+//        }catch(Exception e){
+//            
+//        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
    private void clearFields() {
 //        txtId.setText("");
         txtName.setText("");
@@ -217,14 +248,14 @@ public class SupplierMgrView extends javax.swing.JFrame {
             DefaultTableModel model = (DefaultTableModel) supplierTable.getModel();
             model.setRowCount(0);
 
-            for (SupplierModel customer :supplier) {
+            for (SupplierModel suppliers :supplier) {
                 model.addRow(new Object[] {
-                        customer.getId(),
-                        customer.getName(),
-                        customer.getEmail(),
-                        customer.getAddress(),
-                        customer.getPhone(),
-                        customer.getStatus()
+                       suppliers.getId(),
+                       suppliers.getName(),
+                       suppliers.getEmail(),
+                        suppliers.getAddress(),
+                        suppliers.getPhone(),
+                       suppliers.getStatus()
                 });
             }
         } catch (Exception e) {
@@ -272,6 +303,7 @@ public class SupplierMgrView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

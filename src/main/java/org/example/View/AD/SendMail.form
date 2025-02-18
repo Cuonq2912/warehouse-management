@@ -33,7 +33,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtRecipient" min="-2" max="-2" attributes="0"/>
+                          <Component id="tbtnSend" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
@@ -103,7 +103,7 @@
                   <Component id="txtMessage" alignment="3" min="-2" pref="79" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-              <Component id="txtRecipient" min="-2" max="-2" attributes="0"/>
+              <Component id="tbtnSend" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton2" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="16" max="32767" attributes="0"/>
@@ -131,8 +131,11 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTextField1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="ktpm834@gmail.com"/>
+        <Property name="text" type="java.lang.String" value="ktpm88907@gmail.com"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -186,7 +189,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtMessage">
     </Component>
-    <Component class="javax.swing.JButton" name="txtRecipient">
+    <Component class="javax.swing.JButton" name="tbtnSend">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
@@ -194,7 +197,7 @@
         <Property name="text" type="java.lang.String" value="Send"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtRecipientActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tbtnSendActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">
@@ -210,7 +213,7 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="jPasswordField1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="gnci kmsh lktc kdf"/>
+        <Property name="text" type="java.lang.String" value="ulsd wxxm ccdd rzeo"/>
       </Properties>
     </Component>
   </SubComponents>

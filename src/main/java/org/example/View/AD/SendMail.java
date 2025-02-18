@@ -55,7 +55,7 @@ public class SendMail extends javax.swing.JFrame {
         txtSubject = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
-        txtRecipient = new javax.swing.JButton();
+        tbtnSend = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
 
@@ -68,7 +68,12 @@ public class SendMail extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Maill :");
 
-        jTextField1.setText("ktpm834@gmail.com");
+        jTextField1.setText("ktpm88907@gmail.com");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Password :");
@@ -89,11 +94,11 @@ public class SendMail extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Message :");
 
-        txtRecipient.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtRecipient.setText("Send");
-        txtRecipient.addActionListener(new java.awt.event.ActionListener() {
+        tbtnSend.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        tbtnSend.setText("Send");
+        tbtnSend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRecipientActionPerformed(evt);
+                tbtnSendActionPerformed(evt);
             }
         });
 
@@ -105,7 +110,7 @@ public class SendMail extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setText("gnci kmsh lktc kdf");
+        jPasswordField1.setText("ulsd wxxm ccdd rzeo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,7 +125,7 @@ public class SendMail extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2)
-                            .addComponent(txtRecipient))
+                            .addComponent(tbtnSend))
                         .addGap(36, 36, 36))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,7 +178,7 @@ public class SendMail extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
-                .addComponent(txtRecipient)
+                .addComponent(tbtnSend)
                 .addGap(18, 18, 18)
                 .addComponent(jButton2)
                 .addContainerGap(16, Short.MAX_VALUE))
@@ -187,17 +192,23 @@ public class SendMail extends javax.swing.JFrame {
        new ADMIN1().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void txtRecipientActionPerformed(ActionEvent evt) {//GEN-FIRST:event_txtRecipientActionPerformed
-         String recipient = txtRecipient.getText(); // Lấy email người nhận từ ô nhập
-    String subject = txtSubject.getText();
-    String message = txtMessage.getText();
+    private void tbtnSendActionPerformed(ActionEvent evt) {//GEN-FIRST:event_tbtnSendActionPerformed
+//       String recipient = txtTo.getText(); // Lấy email người nhận từ ô nhập
+//    String subject = txtSubject.getText();
+//    String message = txtMessage.getText();
+//      SendMailUtils a = new SendMailUtils();
+//       a.sendMail(recipient, subject, message  );
 
-        SendMailUtils.sendEmail(recipient, subject, message);
-        var db = HibernateUtils.getEntityManager();
-        db.getTransaction().begin();
-        db.getTransaction().commit();
-        JOptionPane.showMessageDialog(this," sent successfully");
-    }//GEN-LAST:event_txtRecipientActionPerformed
+    var db = HibernateUtils.getEntityManager();
+    db.getTransaction().begin();    
+    db.getTransaction().commit();
+
+    JOptionPane.showMessageDialog(this, "Sent successfully!");
+    }//GEN-LAST:event_tbtnSendActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,8 +256,8 @@ public class SendMail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton tbtnSend;
     private javax.swing.JTextField txtMessage;
-    private javax.swing.JButton txtRecipient;
     private javax.swing.JTextField txtSubject;
     private javax.swing.JTextField txtTo;
     // End of variables declaration//GEN-END:variables

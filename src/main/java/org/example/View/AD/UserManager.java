@@ -352,19 +352,19 @@ public class UserManager extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) userTable.getModel();
         model.setRowCount(0);
 
-        for (UserModel customer : customers) {
+        for (UserModel user : customers) {
             model.addRow(new Object[] {
-                customer.getId(),
-                customer.getUsername(),
-                customer.getPassword(),
-                customer.getFullname(),
-                customer.getEmail(),
-                customer.getPhoneNumber(),
-                customer.getAddress(),
-                customer.getRole(),
-                customer.getStatus(),
-                customer.getCreatedAt(),
-                customer.getUpdatedAt(),
+                user .getId(),
+                user .getUsername(),
+                user .getPassword(),
+                user .getFullname(),
+                user .getEmail(),
+                user .getPhoneNumber(),
+                user .getAddress(),
+                user .getRole(),
+                user .getStatus(),
+                user .getCreatedAt(),
+                user .getUpdatedAt(),
 
             });
         }
