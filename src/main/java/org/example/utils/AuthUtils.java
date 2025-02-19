@@ -52,7 +52,7 @@ public class AuthUtils {
             throw new IllegalArgumentException("Password verification failed: " + e.getMessage());
         }
     }
-
+//    Phương thức chuyển đổi mật khẩu đã lưu trữ từ DB sang bcrypt
     public void updateExistingPasswords() {
         EntityManager em = getEntityManager();
         try {

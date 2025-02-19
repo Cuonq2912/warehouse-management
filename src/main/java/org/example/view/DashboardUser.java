@@ -4,9 +4,18 @@
  */
 package org.example.view;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import org.example.domain.model.UserModel;
+import org.example.repository.UserDAO;
+import org.example.service.user.UserService;
+import org.example.service.user.IMPL.UserServiceImpl;
 import org.example.utils.HibernateUtils;
+import org.example.utils.SessionManager;
+import org.example.view.CommonView.LoginView;
 import org.example.view.UserView.CustomerManagerView;
+import org.example.view.UserView.ProfileView;
 import org.hibernate.Hibernate;
 
 /**
@@ -14,12 +23,18 @@ import org.hibernate.Hibernate;
  * @author ADMIN
  */
 public class DashboardUser extends javax.swing.JFrame {
+    private UserModel currentUser;
+    private UserService userService;
 
     /**
      * Creates new form UESR
      */
     public DashboardUser() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        currentUser = SessionManager.getCurrentUser();
+        userService = new UserServiceImpl(new UserDAO());
     }
 
     /**
@@ -30,7 +45,10 @@ public class DashboardUser extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
@@ -39,17 +57,22 @@ public class DashboardUser extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        cancelButton = new javax.swing.JButton();
         logoutButton = new javax.swing.JButton();
         customerManagerButton = new javax.swing.JButton();
         importManagerButton = new javax.swing.JButton();
         myProfileButton = new javax.swing.JButton();
         updateAccountButton = new javax.swing.JButton();
         exportManagerButton = new javax.swing.JButton();
+        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
+                new java.awt.Dimension(0, 0));
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0),
+                new java.awt.Dimension(10, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
+                new java.awt.Dimension(0, 32767));
+        supplierButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
+        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0),
+                new java.awt.Dimension(0, 32767));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/ảnh mờ 2.jpg"))); // NOI18N
 
@@ -70,94 +93,98 @@ public class DashboardUser extends javax.swing.JFrame {
         jLabel1.setText("DASHBOARD USER");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 176, -1));
 
-        cancelButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        cancelButton.setForeground(new java.awt.Color(0, 204, 204));
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cancelButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 530, -1, -1));
-
         logoutButton.setBackground(new java.awt.Color(0, 204, 204));
-        logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        logoutButton.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         logoutButton.setForeground(new java.awt.Color(255, 255, 255));
         logoutButton.setText("Logout");
+        logoutButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
         logoutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logoutButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 530, -1, -1));
+        getContentPane().add(logoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(792, 503, 90, 40));
 
         customerManagerButton.setBackground(new java.awt.Color(49, 196, 196));
-        customerManagerButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        customerManagerButton.setText("Customer Manager");
+        customerManagerButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        customerManagerButton.setText("Customer Managerment");
+        customerManagerButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
         customerManagerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 customerManagerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(customerManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, -1, 40));
+        getContentPane().add(customerManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 190, 40));
 
         importManagerButton.setBackground(new java.awt.Color(49, 196, 196));
-        importManagerButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        importManagerButton.setText("Import Manager");
+        importManagerButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        importManagerButton.setText("Import Managerment");
+        importManagerButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
         importManagerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importManagerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(importManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 150, 40));
+        getContentPane().add(importManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 190, 40));
 
         myProfileButton.setBackground(new java.awt.Color(49, 196, 196));
-        myProfileButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        myProfileButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         myProfileButton.setText("MyProfile");
+        myProfileButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
         myProfileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 myProfileButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(myProfileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 150, 40));
+        getContentPane().add(myProfileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 400, 190, 40));
 
         updateAccountButton.setBackground(new java.awt.Color(49, 196, 196));
-        updateAccountButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        updateAccountButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         updateAccountButton.setText("Update Account");
+        updateAccountButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
         updateAccountButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateAccountButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(updateAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, 150, 40));
+        getContentPane().add(updateAccountButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 190, 40));
 
         exportManagerButton.setBackground(new java.awt.Color(49, 196, 196));
-        exportManagerButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        exportManagerButton.setText("Export Manager");
+        exportManagerButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        exportManagerButton.setText("Export Managerment");
+        exportManagerButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
         exportManagerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportManagerButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(exportManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, 150, 40));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 570));
+        getContentPane().add(exportManagerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, 190, 40));
+        getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 190, 440));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 10, 350));
-        getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 150, 350));
-        getContentPane().add(filler3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 110, 150, 360));
+        getContentPane().add(filler2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 150, 350));
+
+        supplierButton.setBackground(new java.awt.Color(49, 196, 196));
+        supplierButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        supplierButton.setText("Supplier Managerment");
+        supplierButton.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 0)));
+        supplierButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(supplierButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 190, 40));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(
+                getClass().getResource("/RES1/pngtree-fresh-foods-aisle-at-a-grocery-store-image_13155072.jpg"))); // NOI18N
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 920, 570));
+        getContentPane().add(filler4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 0, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-       var db = HibernateUtils.getEntityManager();
-       db.getTransaction().begin();
-       db.getTransaction().commit();
-       
-        JOptionPane.showMessageDialog(this," you successfully escape!!");
-        System.exit(0);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    private void supplierButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_supplierButtonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_supplierButtonActionPerformed
 
     private void customerManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
@@ -179,14 +206,20 @@ public class DashboardUser extends javax.swing.JFrame {
 
     private void logoutButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_logoutButtonActionPerformed
         // TODO add your handling code here:
+        new LoginView().setVisible(true);
+        this.dispose();
     }// GEN-LAST:event_logoutButtonActionPerformed
 
     private void updateAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateAccountButtonActionPerformed
         // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Feature will be available in upcoming updates", "Messenger",
+                JOptionPane.OK_OPTION);
     }// GEN-LAST:event_updateAccountButtonActionPerformed
 
     private void myProfileButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myProfileButtonActionPerformed
         // TODO add your handling code here:
+        new ProfileView(userService, currentUser).setVisible(true);
+        this.dispose();
     }// GEN-LAST:event_myProfileButtonActionPerformed
 
     private void exportManagerButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exportManagerButtonActionPerformed
@@ -246,12 +279,12 @@ public class DashboardUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
     private javax.swing.JButton customerManagerButton;
     private javax.swing.JButton exportManagerButton;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
+    private javax.swing.Box.Filler filler4;
     private javax.swing.JButton importManagerButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -262,6 +295,7 @@ public class DashboardUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JButton logoutButton;
     private javax.swing.JButton myProfileButton;
+    private javax.swing.JButton supplierButton;
     private javax.swing.JButton updateAccountButton;
     // End of variables declaration//GEN-END:variables
 }
