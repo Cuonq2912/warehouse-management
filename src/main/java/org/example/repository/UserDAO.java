@@ -6,20 +6,22 @@ import org.example.domain.model.UserModel;
 
 import java.util.List;
 import java.util.Date;
+
 public class UserDAO extends BaseDAO<UserModel> {
 
-    public List<UserModel> findByUsername(String username){
+    public List<UserModel> findByUsername(String username) {
         EntityManager em = getEntityManager();
-        try{
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.username LIKE :username", UserModel.class);
+        try {
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.username LIKE :username",
+                    UserModel.class);
             query.setParameter("username", "%" + username + "%");
             List<UserModel> users = query.getResultList();
-            if(users.isEmpty()){
+            if (users.isEmpty()) {
                 throw new RuntimeException("User not found with username: " + username);
             }
             return users;
         } catch (RuntimeException e) {
-            if(em.getTransaction().isActive()){
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding user by username ", e);
@@ -28,18 +30,19 @@ public class UserDAO extends BaseDAO<UserModel> {
         }
     }
 
-    public List<UserModel> findByEmail(String email){
+    public List<UserModel> findByEmail(String email) {
         EntityManager em = getEntityManager();
-        try{
-            TypedQuery<UserModel> query = em.createQuery(("SELECT u FROM UserModel u WHERE u.email LIKE :email"), UserModel.class);
-            query.setParameter("email","%" + email + "%");
+        try {
+            TypedQuery<UserModel> query = em.createQuery(("SELECT u FROM UserModel u WHERE u.email LIKE :email"),
+                    UserModel.class);
+            query.setParameter("email", "%" + email + "%");
             List<UserModel> users = query.getResultList();
-            if(users.isEmpty()){
+            if (users.isEmpty()) {
                 throw new RuntimeException("User not found with email: " + email);
             }
             return users;
-        } catch (RuntimeException e){
-            if(em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding user by email ", e);
@@ -48,18 +51,19 @@ public class UserDAO extends BaseDAO<UserModel> {
         }
     }
 
-    public List<UserModel> findByPhone(String phone){
+    public List<UserModel> findByPhone(String phone) {
         EntityManager em = getEntityManager();
-        try{
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.phoneNumber LIKE :phone", UserModel.class);
+        try {
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.phoneNumber LIKE :phone",
+                    UserModel.class);
             query.setParameter("phone", "%" + phone + "%");
             List<UserModel> users = query.getResultList();
-            if(users.isEmpty()){
+            if (users.isEmpty()) {
                 throw new RuntimeException("User not found with phone: " + phone);
             }
             return users;
-        } catch (RuntimeException e){
-            if(em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding user by phone ", e);
@@ -68,18 +72,19 @@ public class UserDAO extends BaseDAO<UserModel> {
         }
     }
 
-    public List<UserModel> findByRole(String role){
+    public List<UserModel> findByRole(String role) {
         EntityManager em = getEntityManager();
-        try{
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.role = :role", UserModel.class);
+        try {
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.role = :role",
+                    UserModel.class);
             query.setParameter("role", role);
-            List<UserModel> users =  query.getResultList();
-            if(users.isEmpty()){
+            List<UserModel> users = query.getResultList();
+            if (users.isEmpty()) {
                 throw new RuntimeException("User not found with role: " + role);
             }
             return users;
-        } catch (RuntimeException e){
-            if (em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding users by role ", e);
@@ -88,18 +93,19 @@ public class UserDAO extends BaseDAO<UserModel> {
         }
     }
 
-    public List<UserModel> findByStatus(String status){
+    public List<UserModel> findByStatus(String status) {
         EntityManager em = getEntityManager();
-        try{
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.status = :status", UserModel.class);
-            query.setParameter("status",status);
+        try {
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.status = :status",
+                    UserModel.class);
+            query.setParameter("status", status);
             List<UserModel> users = query.getResultList();
-            if (users.isEmpty()){
+            if (users.isEmpty()) {
                 throw new RuntimeException("User not found with status: " + status);
             }
             return users;
-        } catch (RuntimeException e){
-            if (em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding users by status ", e);
@@ -108,18 +114,19 @@ public class UserDAO extends BaseDAO<UserModel> {
         }
     }
 
-    public List<UserModel> findByCreateAt(Date createAt){
+    public List<UserModel> findByCreateAt(Date createAt) {
         EntityManager em = getEntityManager();
-        try{
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.createAt = :createAt", UserModel.class);
-            query.setParameter("createAt",createAt);
+        try {
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.createAt = :createAt",
+                    UserModel.class);
+            query.setParameter("createAt", createAt);
             List<UserModel> users = query.getResultList();
-            if (users.isEmpty()){
+            if (users.isEmpty()) {
                 throw new RuntimeException("User not found with createAt: " + createAt);
             }
             return users;
-        } catch (RuntimeException e){
-            if (em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding users by createAt ", e);
@@ -128,23 +135,40 @@ public class UserDAO extends BaseDAO<UserModel> {
         }
     }
 
-        public List<UserModel> findByUpdateAt (Date updateAt){
-                  EntityManager em = getEntityManager();
-        try{
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.updateAt = :createAt", UserModel.class);
+    public List<UserModel> findByUpdateAt(Date updateAt) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.updateAt = :createAt",
+                    UserModel.class);
             query.setParameter("updateAt", updateAt);
             List<UserModel> users = query.getResultList();
-            if (users.isEmpty()){
+            if (users.isEmpty()) {
                 throw new RuntimeException("User not found with updateAt: " + updateAt);
             }
             return users;
-        } catch (RuntimeException e){
-            if (em.getTransaction().isActive()){
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
             throw new RuntimeException("Error finding users by updateAt ", e);
         } finally {
             em.close();
+        }
+    }
+
+    public UserModel findToAuthController(String username) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.username = : username",
+                    UserModel.class);
+            query.setParameter("username", username);
+            UserModel user = query.getSingleResult();
+            return user;
+        } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            throw new RuntimeException("Erroe finding user to login ", e);
         }
     }
 }

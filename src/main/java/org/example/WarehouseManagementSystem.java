@@ -11,6 +11,9 @@ import org.example.view.CommonView.LoginView;
 public class WarehouseManagementSystem {
     public static void main(String[] args) {
 
+        AuthUtils authUtils = new AuthUtils();
+        authUtils.updateExistingPasswords();
+
         if (DatabaseConfig.initializeDatabase()) {
             SwingUtilities.invokeLater(() -> { // Đảm bảo an toàn luồng khi làm việc với GUI
                 LoginView loginView = new LoginView();
@@ -25,7 +28,5 @@ public class WarehouseManagementSystem {
         }
         // alpha -> hashcode for password
 
-        AuthUtils authUtils = new AuthUtils();
-        authUtils.updateExistingPasswords();
     }
 }
