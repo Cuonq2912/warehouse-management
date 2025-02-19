@@ -6,9 +6,7 @@ package org.example.controller;
 
 import java.util.List;
 import org.example.domain.model.SupplierModel;
-import org.example.domain.model.UserModel;
 import org.example.repository.SupplierDAO;
-import org.example.repository.UserDAO;
 
 /**
  *
@@ -18,8 +16,8 @@ public class SupplierController {
 
     private final SupplierDAO supplierDAO;
 
-    public SupplierController(){
-        this.supplierDAO=  new SupplierDAO();
+    public SupplierController() {
+        this.supplierDAO = new SupplierDAO();
     }
 
     public void insert(SupplierModel a) {

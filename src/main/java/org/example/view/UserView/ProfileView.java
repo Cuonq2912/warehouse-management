@@ -12,7 +12,6 @@ import org.example.repository.UserDAO;
 import org.example.service.user.UserService;
 import org.example.service.user.IMPL.UserServiceImpl;
 import org.example.utils.SessionManager;
-import org.example.view.DashboardUser;
 
 /**
  *
@@ -241,7 +240,7 @@ public class ProfileView extends javax.swing.JFrame {
                         "Session Error",
                         JOptionPane.WARNING_MESSAGE);
                 this.dispose();
-                new DashboardUser().setVisible(true);
+                new UserDashboard().setVisible(true);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
@@ -249,7 +248,7 @@ public class ProfileView extends javax.swing.JFrame {
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             this.dispose();
-            new DashboardUser().setVisible(true);
+            new UserDashboard().setVisible(true);
         }
     }
 
@@ -271,7 +270,7 @@ public class ProfileView extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_updateButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new DashboardUser().setVisible(true);
+        new UserDashboard().setVisible(true);
     }// GEN-LAST:event_updateButtonActionPerformed
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_txtUsernameActionPerformed

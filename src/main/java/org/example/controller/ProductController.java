@@ -5,9 +5,7 @@
 package org.example.controller;
 
 import java.util.List;
-import org.example.domain.model.ImportDetailModel;
 import org.example.domain.model.ProductModel;
-import org.example.repository.ImportProductDAO;
 import org.example.repository.ProductDAO;
 
 /**
@@ -16,21 +14,21 @@ import org.example.repository.ProductDAO;
  */
 public class ProductController {
 
-      private final ProductDAO productDAO;
+    private final ProductDAO productDAO;
 
-public ProductController(){
-    this.productDAO=  new ProductDAO();
-}
+    public ProductController() {
+        this.productDAO = new ProductDAO();
+    }
 
- public void insert(ProductModel product) {
+    public void insert(ProductModel product) {
         try {
-             productDAO.create(product);
+            productDAO.create(product);
         } catch (Exception e) {
             throw new RuntimeException("Error saving  importproduct: " + e.getMessage());
         }
     }
 
-  public void update(ProductModel product) {
+    public void update(ProductModel product) {
         try {
             productDAO.update(product);
         } catch (Exception e) {
@@ -38,7 +36,7 @@ public ProductController(){
         }
     }
 
-     public void delete(Long id) {
+    public void delete(Long id) {
         try {
             productDAO.delete(ProductModel.class, id);
         } catch (Exception e) {
@@ -46,14 +44,14 @@ public ProductController(){
         }
     }
 
-        public List<ProductModel> getAll() {
+    public List<ProductModel> getAll() {
         try {
             return productDAO.findAll(ProductModel.class);
         } catch (Exception e) {
             throw new RuntimeException("Error getting all customers: " + e.getMessage());
         }
     }
-        
+
     public ProductModel findById(Long id) {
         try {
             return productDAO.findById(ProductModel.class, id);

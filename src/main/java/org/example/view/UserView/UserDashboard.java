@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package org.example.view;
+package org.example.view.UserView;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -14,22 +14,20 @@ import org.example.service.user.IMPL.UserServiceImpl;
 import org.example.utils.HibernateUtils;
 import org.example.utils.SessionManager;
 import org.example.view.CommonView.LoginView;
-import org.example.view.UserView.CustomerManagerView;
-import org.example.view.UserView.ProfileView;
 import org.hibernate.Hibernate;
 
 /**
  *
  * @author ADMIN
  */
-public class DashboardUser extends javax.swing.JFrame {
+public class UserDashboard extends javax.swing.JFrame {
     private UserModel currentUser;
     private UserService userService;
 
     /**
      * Creates new form UESR
      */
-    public DashboardUser() {
+    public UserDashboard() {
         this.setLocationRelativeTo(null);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -274,7 +272,7 @@ public class DashboardUser extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new DashboardUser().setVisible(true);
+                new UserDashboard().setVisible(true);
             }
         });
     }

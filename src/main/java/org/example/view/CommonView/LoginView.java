@@ -15,9 +15,8 @@ import org.example.repository.UserDAO;
 import org.example.service.user.UserService;
 import org.example.service.user.IMPL.UserServiceImpl;
 import org.example.utils.SessionManager;
-import org.example.view.AD.ADMIN1;
-import org.example.view.UserView.ProfileView;
-import org.example.view.DashboardUser;
+import org.example.view.AdminView.AdminDashboardView;
+import org.example.view.UserView.UserDashboard;
 
 /**
  *
@@ -337,7 +336,7 @@ public class LoginView extends javax.swing.JFrame {
             switch (response.getRole().toUpperCase()) {
                 case "ADMIN":
                     JOptionPane.showMessageDialog(this, "Login successful - Welcome Admin");
-                    ADMIN1 adminView = new ADMIN1();
+                    AdminDashboardView adminView = new AdminDashboardView();
                     adminView.setVisible(true);
                     this.dispose();
                     break;
@@ -345,7 +344,7 @@ public class LoginView extends javax.swing.JFrame {
                 case "USER":
 
                     JOptionPane.showMessageDialog(this, "Login successful - Welcome User");
-                    DashboardUser userView = new DashboardUser();
+                    UserDashboard userView = new UserDashboard();
                     userView.setVisible(true);
                     this.dispose();
                     break;

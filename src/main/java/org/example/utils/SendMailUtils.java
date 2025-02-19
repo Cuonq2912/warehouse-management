@@ -1,16 +1,8 @@
 package org.example.utils;
 //
 
-import java.net.PasswordAuthentication;
 import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.swing.JOptionPane;
 
 public class SendMailUtils {
 
