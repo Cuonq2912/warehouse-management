@@ -12,6 +12,7 @@ import java.net.PasswordAuthentication;
 import java.util.Properties;
 import org.hibernate.Session;
 import java.util.Properties;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.example.utils.HibernateUtils;
 import org.example.utils.SendMailUtils;
@@ -30,6 +31,8 @@ public class SendMail extends javax.swing.JFrame {
      * Creates new form SendMail
      */
     public SendMail() {
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
     }
 

@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.example.utils.AuthUtils;
-import org.example.view.CommonView.LoginView;
+//import org.example.view.CommonView.LoginView;
 
 public class WarehouseManagementSystem {
     public static void main(String[] args) {
@@ -16,8 +16,8 @@ public class WarehouseManagementSystem {
 
         if (DatabaseConfig.initializeDatabase()) {
             SwingUtilities.invokeLater(() -> { // Đảm bảo an toàn luồng khi làm việc với GUI
-                LoginView loginView = new LoginView();
-                loginView.setVisible(true);
+//                LoginView loginView = new LoginView();
+//                loginView.setVisible(true);
             });
         } else {
             JOptionPane.showMessageDialog(null,

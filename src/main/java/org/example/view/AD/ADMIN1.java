@@ -5,8 +5,10 @@ package org.example.view.AD;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
 import javax.swing.JOptionPane;
 import org.example.utils.HibernateUtils;
+import org.example.view.UserView.ProfileView;
 
 /**
  *
@@ -20,6 +22,7 @@ public class ADMIN1 extends javax.swing.JFrame {
      */
     public ADMIN1() {
         initComponents();
+        this.setLocationRelativeTo(null);
 //        scaleImage();
 //    }
 //    void scaleImage(){
@@ -204,8 +207,8 @@ public class ADMIN1 extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        this.setVisible(false);
-//        new UpdateAccount().setVisible(true);
+     JOptionPane.showMessageDialog(this, "Feature will be available in upcoming updates", "Messenger",
+                JOptionPane.OK_OPTION);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed

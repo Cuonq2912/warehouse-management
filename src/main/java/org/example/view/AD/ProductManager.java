@@ -5,8 +5,10 @@
 package org.example.view.AD;
 
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 import org.example.controller.ProductController;
 import org.example.domain.model.ProductModel;
 
@@ -23,6 +25,8 @@ public class ProductManager extends javax.swing.JFrame {
      */
     public ProductManager() {
         productController = new ProductController();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
     }
 
@@ -242,24 +246,23 @@ public class ProductManager extends javax.swing.JFrame {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Price must be a valid number");
             }
-            long description;
+            long stockQuantity;
             try {
-                description = Long.parseLong(txtStockQuantity.getText().trim());
-                if (description < 0) {
+             stockQuantity = Long.parseLong(txtStockQuantity.getText().trim());
+                if (stockQuantity < 0) {
                     throw new IllegalArgumentException("Points cannot be negative");
                 }
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Points must be a valid number");
             }
 
-            ProductModel productmodel = ProductModel.builder()
-                    // .id Long.parseLong(txtId.getText().trim())
-                    .name("Laptop")
-                    .stockQuantity(10L)
-                    .price(1000.0)
-                    // .categoryId(txtCategotyid.getText().trim().isEmpty() ? null :
-                    // Long.parseLong(txtCategotyid.getText().trim()))// Đảm bảo không null
-                    .build();
+           
+      ProductModel productmodel = ProductModel.builder()
+        .name(txtName.getText().trim()) // Đảm bảo lấy tên từ text field
+        .stockQuantity(stockQuantity)
+        .price(price)
+        .id(txtCategotyid.getText().trim().isEmpty() ? null : Long.parseLong(txtCategotyid.getText().trim()))
+        .build();
 
             productController.insert(productmodel);
             JOptionPane.showMessageDialog(this, " inserted successfully!");
@@ -267,7 +270,7 @@ public class ProductManager extends javax.swing.JFrame {
             refreshTable();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
-                    "Error updating customer: " + e.getMessage(),
+                    "Error updating : " + e.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
