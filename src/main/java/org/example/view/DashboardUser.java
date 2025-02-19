@@ -30,6 +30,7 @@ public class DashboardUser extends javax.swing.JFrame {
      * Creates new form UESR
      */
     public DashboardUser() {
+        this.setLocationRelativeTo(null);
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

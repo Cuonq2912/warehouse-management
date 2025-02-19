@@ -22,6 +22,7 @@ public class ADMIN1 extends javax.swing.JFrame {
      */
     public ADMIN1() {
         initComponents();
+        this.setLocationRelativeTo(null);
 //        scaleImage();
 //    }
 //    void scaleImage(){

@@ -6,6 +6,7 @@ package org.example.view.AD;
 
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +28,8 @@ public class UserManager extends javax.swing.JFrame {
     public UserManager() {
         initComponents();
         userController = new UserController();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**

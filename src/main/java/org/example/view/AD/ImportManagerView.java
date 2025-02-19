@@ -30,6 +30,8 @@ public class ImportManagerView extends JFrame {
      */
     public ImportManagerView() {
           importdetailmodelController = new ImportDetaiModelController();
+          this.setLocationRelativeTo(null);
+          this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
     }
 

@@ -5,6 +5,7 @@
 package org.example.view.AD;
 
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.example.controller.SupplierController;
@@ -21,7 +22,9 @@ public class SupplierMgrView extends javax.swing.JFrame {
      * Creates new form SupplierMgrView
      */
     public SupplierMgrView() {
+        this.setLocationRelativeTo(null);
         supplierController = new SupplierController();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         initComponents();
     }
 
