@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @Setter
@@ -14,8 +11,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "import_details")
-public class ImportDetailModel {
+@Table(name = "order_details")
+public class OrderDetailModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,10 +22,11 @@ public class ImportDetailModel {
     Long quantity;
 
     @ManyToOne
-    @JoinColumn()
-    ImportProductModel importProductModel;
+    @JoinColumn
+    OrderModel orderModel;
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn
     ProductModel productModel;
+
 }

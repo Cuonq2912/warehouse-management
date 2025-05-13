@@ -309,7 +309,6 @@ public class CustomerManagerView extends javax.swing.JFrame {
                     .email(txtEmail.getText().trim())
                     .address(txtAddress.getText().trim())
                     .phoneNumber(txtPhoneNumber.getText().trim())
-                    .points(points)
                     .build();
 
             customerController.insert(customer);
@@ -351,7 +350,6 @@ public class CustomerManagerView extends javax.swing.JFrame {
                     .email(txtEmail.getText().trim())
                     .address(txtAddress.getText().trim())
                     .phoneNumber(txtPhoneNumber.getText().trim())
-                    .points(points)
                     .build();
 
             customerController.update(customer);
@@ -538,7 +536,6 @@ public class CustomerManagerView extends javax.swing.JFrame {
                         customer.getEmail(),
                         customer.getAddress(),
                         customer.getPhoneNumber(),
-                        customer.getPoints()
                 });
             }
         } catch (Exception e) {
@@ -560,7 +557,6 @@ public class CustomerManagerView extends javax.swing.JFrame {
                     customer.getEmail(),
                     customer.getAddress(),
                     customer.getPhoneNumber(),
-                    customer.getPoints()
             });
         }
     }

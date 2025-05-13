@@ -1,45 +1,23 @@
 package org.example.domain.DTO.Response;
 
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import org.example.domain.model.UserModel;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class LoginResponse {
-    private String token;
-    private String username;
-    private String role;
-    private UserModel user;
 
-    public LoginResponse() {
-    }
+    String username;
+    String role;
+    UserModel user;
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+    public LoginResponse(String username, String role) {
         this.username = username;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
         this.role = role;
     }
 
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
 }

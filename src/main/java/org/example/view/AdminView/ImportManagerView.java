@@ -246,9 +246,7 @@ public class ImportManagerView extends JFrame {
             ImportProductModel importmodel;
             importmodel = ImportProductModel.builder()
                     .id(Long.parseLong(txtId.getText().trim()))
-                    .productName(txtName.getText().trim())
-                    .quantity(Long.parseLong(txtQuantity.getText().trim()))
-                    .totalPrice(Double.parseDouble(txtPrice.getText().trim()))
+//                    .productName(txtName.getText().trim())
                     // .date(txtDate.getText().trim())
                     .build();
 
@@ -282,9 +280,7 @@ public class ImportManagerView extends JFrame {
             for (ImportProductModel customer : customers) {
                 model.addRow(new Object[] {
                         customer.getId(),
-                        customer.getProductName(),
-                        customer.getQuantity(),
-                        customer.getTotalPrice(),
+//                        customer.getProductName(),
                         // customer.getImportDate(),
                 });
             }

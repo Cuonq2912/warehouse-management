@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,27 +17,22 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "import_products")
 public class ImportProductModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
-    String productName;
-
-    @Column(nullable = false)
-    Long quantity;
-
-    @Column(nullable = false)
-    double totalPrice;
+    @Column(name = "import_date", nullable = false)
+    LocalDate importDate;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id", updatable = false)
+    @JoinColumn()
     UserModel userModel;
 
     @ManyToOne
-    @JoinColumn(name = "supplier_id", nullable = false, referencedColumnName = "id", updatable = false)
+    @JoinColumn()
     SupplierModel supplierModel;
 
-    @OneToMany(mappedBy = "importProductModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<ImportDetailModel> importDetails;
+    @OneToMany(mappedBy = "importProductModel", cascade = CascadeType.ALL)
+    List<ImportDetailModel> importDetails = new ArrayList<>();
 }

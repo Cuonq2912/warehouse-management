@@ -464,7 +464,7 @@ public class RegisterView extends javax.swing.JFrame {
                         UserModel user = UserModel.builder()
                                         .username(txtUsernameSignup.getText().trim())
                                         .password(txtPasswordSignup.getPassword().toString().trim())
-                                        .fullname(txtFullnameSignup.getText().trim())
+                                        .fullName(txtFullnameSignup.getText().trim())
                                         .email(txtEmailSignup.getText().trim())
                                         .phoneNumber(txtPhoneSignup.getText().trim())
                                         .address(txtAddressSignup.getText().trim())

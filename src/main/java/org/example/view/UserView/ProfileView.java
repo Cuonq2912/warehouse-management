@@ -229,7 +229,7 @@ public class ProfileView extends javax.swing.JFrame {
             UserModel user = SessionManager.getCurrentUser();
             if (user != null) {
                 txtUsername.setText(user.getUsername());
-                txtFullname.setText(user.getFullname());
+                txtFullname.setText(user.getFullName());
                 txtEmail.setText(user.getEmail());
                 txtPhoneNumber.setText(user.getPhoneNumber());
                 txtAddress.setText(user.getAddress());

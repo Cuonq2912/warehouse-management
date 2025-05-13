@@ -303,7 +303,6 @@ public class ProductManagerView extends javax.swing.JFrame {
             ProductModel productModel = ProductModel.builder()
                     .name(txtName.getText().trim())
                     .price(price)
-                    .stockQuantity(stockQuantity)
                     .categoryModel(categoryModel)
                     .build();
             productController.insert(productModel);
@@ -365,7 +364,6 @@ public class ProductManagerView extends javax.swing.JFrame {
                         product.getId(),
                         product.getName(),
                         product.getPrice(),
-                        product.getStockQuantity(),
                         product.getCategoryModel().getName()
                 });
             }

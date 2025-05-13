@@ -416,14 +416,11 @@ public class UserManagerView extends javax.swing.JFrame {
                         productmodel = UserModel.builder()
                                         .username(txtName.getText().trim())
                                         .password(Arrays.toString(txtPassword.getPassword()))
-                                        .fullname(txtFullname.getText().trim())
                                         .email(txtEmail.getText().trim())
                                         .phoneNumber(txtPhoneNumber.getText().trim())
                                         .address(txtAddress.getText().trim())
                                         .role(Role.valueOf(txtRole.getText().trim()))
                                         .status(Status.valueOf(txtStatus.getText().trim()))
-                                        .createdAt(java.sql.Timestamp.valueOf(txtCreateat.getText().trim()))
-                                        .updatedAt(java.sql.Timestamp.valueOf(txtUpdateat.getText().trim()))
                                         .build();
 
                         userController.insert(productmodel);
@@ -488,7 +485,6 @@ public class UserManagerView extends javax.swing.JFrame {
                                                 user.getId(),
                                                 user.getUsername(),
                                                 user.getPassword(),
-                                                user.getFullname(),
                                                 user.getEmail(),
                                                 user.getPhoneNumber(),
                                                 user.getAddress(),

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,24 +16,28 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "categories")
-public class CategoryModel {
+@Table(name = "orders")
+public class OrderModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Column(nullable = false, updatable = false, unique = true)
-    String name;
-
-    @Column(name = "create_at", nullable = false, updatable = false)
     @CreationTimestamp
-    LocalDate createdAt;
+    LocalDate orderAt;
 
-    @Column(name = "update_at", nullable = false, updatable = false)
-    @UpdateTimestamp
-    LocalDate updatedAt;
+    @ManyToOne
+    @JoinColumn
+    UserModel userModel;
 
-    @OneToMany(mappedBy = "categoryModel", cascade = CascadeType.REMOVE)
-    List<ProductModel> productModels = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn
+    ShipmentModel shipmentModel;
+
+    @OneToMany(mappedBy = "orderModel", cascade = CascadeType.REMOVE)
+    List<OrderDetailModel> orderDetailModelList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "orderModel", cascade = CascadeType.REMOVE)
+    List<PaymentModel> paymentModelList = new ArrayList<>();
 }

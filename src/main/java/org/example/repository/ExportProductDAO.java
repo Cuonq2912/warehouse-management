@@ -28,48 +28,6 @@ public class ExportProductDAO extends BaseDAO<ExportProductModel> {
         }
     }
 
-    public List<ExportProductModel> findByQuantity(Long minQuantity, Long maxQuantity){
-        EntityManager em = getEntityManager();
-        try{
-            TypedQuery<ExportProductModel> query = em.createQuery("SELECT e FROM ExportProductModel e WHERE e.quantity BETWEEN :minQuantity AND :maxQuantity", ExportProductModel.class);
-            List<ExportProductModel> products = query.setParameter("minQuantity", minQuantity)
-                    .setParameter("maxQuantity", maxQuantity)
-                    .getResultList();
-            if(products.isEmpty()){
-                throw new RuntimeException("Product not found with quantity: " + minQuantity + " - " + maxQuantity);
-            }
-            return products;
-        } catch (RuntimeException e) {
-            if(em.getTransaction().isActive()){
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Error finding product by quantity ", e);
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<ExportProductModel> findByPrice(double minPrice, double maxPrice){
-        EntityManager em = getEntityManager();
-        try{
-            TypedQuery<ExportProductModel> query = em.createQuery("SELECT e FROM ExportProductModel e WHERE e.totalPrice BETWEEN :minPrice AND :maxPrice", ExportProductModel.class);
-            List<ExportProductModel> products = query.setParameter("minPrice", minPrice)
-                    .setParameter("maxPrice", maxPrice)
-                    .getResultList();
-            if(products.isEmpty()){
-                throw new RuntimeException("Product not found with price: " + minPrice + " - " + maxPrice);
-            }
-            return products;
-        } catch (RuntimeException e) {
-            if(em.getTransaction().isActive()){
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Error finding product by price ", e);
-        } finally {
-            em.close();
-        }
-    }
-
     public List<ExportProductModel> findByCustomer(String customer){
         EntityManager em = getEntityManager();
         try{

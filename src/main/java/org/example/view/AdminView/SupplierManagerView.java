@@ -174,8 +174,7 @@ public class SupplierManagerView extends javax.swing.JFrame {
                     .name(txtName.getText().trim())
                     .email(txtEmail.getText().trim())
                     .address(txtAddress.getText().trim())
-                    .phone(txtPhone.getText().trim())
-                    .status(Status.valueOf(txtStatus.getText().trim()))
+                    .phoneNumber(txtPhone.getText().trim())
                     .build();
 
             supplierController.insert(supplier);
@@ -259,8 +258,6 @@ public class SupplierManagerView extends javax.swing.JFrame {
                         suppliers.getName(),
                         suppliers.getEmail(),
                         suppliers.getAddress(),
-                        suppliers.getPhone(),
-                        suppliers.getStatus()
                 });
             }
         } catch (Exception e) {

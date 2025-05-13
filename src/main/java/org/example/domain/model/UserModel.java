@@ -3,12 +3,15 @@ package org.example.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
-@Data
 @Entity
 @Getter
 @Setter
@@ -18,6 +21,7 @@ import java.util.List;
 @Builder
 @Table(name = "users")
 public class UserModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
@@ -29,12 +33,12 @@ public class UserModel {
     String password;
 
     @Column(nullable = false)
-    String fullname;
+    String fullName;
 
     @Column(nullable = false, unique = true)
     String email;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     String phoneNumber;
 
     @Column(nullable = false)
@@ -48,22 +52,20 @@ public class UserModel {
     @Enumerated(EnumType.STRING)
     Status status;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(updatable = false)
-    private Date createdAt;
+    @Column(name = "create_at", nullable = false, updatable = false)
+    @CreationTimestamp
+    LocalDate createdAt;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    @Column(name = "update_at", nullable = false, updatable = false)
+    @UpdateTimestamp
+    LocalDate updatedAt;
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = new Date();
-        updatedAt = new Date();
-    }
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL)
+    List<ImportProductModel> importProductModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<ImportProductModel> importProductModels;
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL)
+    List<ExportProductModel> exportProductModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<ExportProductModel> exportProductModels;
+    @OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL)
+    List<OrderModel> orderModels = new ArrayList<>();
 }

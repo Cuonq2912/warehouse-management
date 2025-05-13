@@ -76,7 +76,6 @@ public class CustomerController {
                 row.put("Email", customer.getEmail());
                 row.put("Address", customer.getAddress());
                 row.put("Phone Number", customer.getPhoneNumber());
-                row.put("Points", customer.getPoints());
                 data.add(row);
             }
 

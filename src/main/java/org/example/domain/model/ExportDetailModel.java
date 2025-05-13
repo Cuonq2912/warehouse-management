@@ -3,7 +3,10 @@ package org.example.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,27 +18,20 @@ import java.time.LocalDateTime;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "export_details")
 public class ExportDetailModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
-    String productName;
 
     @Column(nullable = false)
     Long quantity;
 
-    @Column(nullable = false)
-    double totalPrice;
-
-    @Column(nullable = false)
-    LocalDateTime exportDate;
-
     @ManyToOne
-    @JoinColumn(name = "export_product_id", nullable = false, referencedColumnName = "id", updatable = false)
+    @JoinColumn
     ExportProductModel exportProductModel;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", nullable = false, referencedColumnName = "id", updatable = false)
+    @JoinColumn
     ProductModel productModel;
 }

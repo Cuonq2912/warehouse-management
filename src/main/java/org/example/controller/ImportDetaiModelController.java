@@ -81,9 +81,7 @@ public class ImportDetaiModelController {
             for (ImportProductModel customer : customers) {
                 Map<String, Object> row = new HashMap<>();
                 row.put("Id", customer.getId());
-                row.put("Name", customer.getProductName());
-                row.put("Quantity", customer.getQuantity());
-                row.put(" Price", customer.getTotalPrice());
+//                row.put("Name", customer.getProductName());
                 // row.put("Date", customer.getImportDate());
                 data.add(row);
             }

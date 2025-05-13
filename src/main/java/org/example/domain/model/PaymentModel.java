@@ -3,9 +3,9 @@ package org.example.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -14,21 +14,23 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "import_details")
-public class ImportDetailModel {
+@Table(name = "payments")
+public class PaymentModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     @Column(nullable = false)
-    Long quantity;
+    String paymentMethod;
+
+    @Column(name = "payment_date", nullable = false, updatable = false)
+    @CreationTimestamp
+    LocalDate paymentDate;
 
     @ManyToOne
-    @JoinColumn()
-    ImportProductModel importProductModel;
+    @JoinColumn
+    OrderModel orderModel;
 
-    @ManyToOne
-    @JoinColumn()
-    ProductModel productModel;
+
 }

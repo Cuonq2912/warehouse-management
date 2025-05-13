@@ -3,6 +3,13 @@ package org.example.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -17,16 +24,27 @@ public class ProductModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false, unique = true)
     String name;
 
     @Column(nullable = false)
-    Long stockQuantity;
+    Double price;
 
     @Column(nullable = false)
-    double price;
+    Long remainingQuantity;
+
+    @Column(nullable = false)
+    Long soldQuantity;
+
+    @Column(name = "create_at", nullable = false)
+    @CreationTimestamp
+    LocalDate createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = true)
+    @JoinColumn
     CategoryModel categoryModel;
+
+    @OneToMany(mappedBy = "productModel", cascade = CascadeType.REMOVE)
+    List<OrderDetailModel> orderDetailModels  = new ArrayList<>();
+
 }

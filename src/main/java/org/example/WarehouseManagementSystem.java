@@ -6,18 +6,20 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import org.example.utils.AuthUtils;
-//import org.example.view.CommonView.LoginView;
+import org.example.view.CommonView.LoginView;
 
 public class WarehouseManagementSystem {
     public static void main(String[] args) {
+        DatabaseConfig dbConfig = new DatabaseConfig();
+        Runtime.getRuntime().addShutdownHook(new Thread(dbConfig::closeDatabase));
 
-        AuthUtils authUtils = new AuthUtils();
-        authUtils.updateExistingPasswords();
+//        AuthUtils authUtils = new AuthUtils();
+//        authUtils.updateExistingPasswords();
 
         if (DatabaseConfig.initializeDatabase()) {
-            SwingUtilities.invokeLater(() -> { // Đảm bảo an toàn luồng khi làm việc với GUI
-//                LoginView loginView = new LoginView();
-//                loginView.setVisible(true);
+            SwingUtilities.invokeLater(() -> {
+                LoginView loginView = new LoginView();
+                loginView.setVisible(true);
             });
         } else {
             JOptionPane.showMessageDialog(null,
@@ -26,7 +28,5 @@ public class WarehouseManagementSystem {
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
-        // alpha -> hashcode for password
-
     }
 }
