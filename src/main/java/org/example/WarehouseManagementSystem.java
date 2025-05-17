@@ -1,32 +1,24 @@
 package org.example;
 
-import org.example.config.DatabaseConfig;
+import org.example.view.MainDashboard;
 
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-
-import org.example.utils.AuthUtils;
-import org.example.view.CommonView.LoginView;
+import javax.swing.*;
 
 public class WarehouseManagementSystem {
     public static void main(String[] args) {
-        DatabaseConfig dbConfig = new DatabaseConfig();
-        Runtime.getRuntime().addShutdownHook(new Thread(dbConfig::closeDatabase));
-
-//        AuthUtils authUtils = new AuthUtils();
-//        authUtils.updateExistingPasswords();
-
-        if (DatabaseConfig.initializeDatabase()) {
-            SwingUtilities.invokeLater(() -> {
-                LoginView loginView = new LoginView();
-                loginView.setVisible(true);
-            });
-        } else {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null,
-                    "Cannot connect to database!",
+                    "Error initializing application look and feel: " + e.getMessage(),
                     "Error",
                     JOptionPane.ERROR_MESSAGE);
             System.exit(1);
         }
+
+        SwingUtilities.invokeLater(() -> {
+            new MainDashboard().setVisible(true);
+        });
     }
 }
