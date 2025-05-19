@@ -1,5 +1,6 @@
-package org.example.view.component;
+package org.example.view.component.CategoryComponent;
 
+import lombok.Getter;
 import org.example.controller.CategoryController;
 import org.example.domain.model.CategoryModel;
 
@@ -12,9 +13,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class CategoryPanel extends JPanel {
-    private CategoryController controller;
-    private JFrame parentFrame;
 
+    private final CategoryController controller;
+    private final JFrame parentFrame;
+
+    @Getter
     private JTable tblCategories;
     private JTextField txtSearch;
     private JButton btnAdd;
@@ -30,17 +33,18 @@ public class CategoryPanel extends JPanel {
         setBackground(new Color(245, 245, 247));
 
         initComponents();
+        controller.setCategoryTable(tblCategories);
+        controller.setView(this);
         initListeners();
         controller.loadCategories(tblCategories);
     }
 
     private void initComponents() {
+
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
-
         JPanel tablePanel = createTablePanel();
         add(tablePanel, BorderLayout.CENTER);
-
         JPanel buttonPanel = createButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -61,11 +65,13 @@ public class CategoryPanel extends JPanel {
         txtSearch = new JTextField(15);
         txtSearch.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
-                BorderFactory.createEmptyBorder(5, 10, 5, 10)
-        ));
+                BorderFactory.createEmptyBorder(7, 10, 7, 10)));
 
         btnSearch = new JButton("Search");
         styleButton(btnSearch, new Color(92, 184, 92));
+        btnSearch.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(92, 184, 92).darker(), 1),
+                BorderFactory.createEmptyBorder(3, 10, 3, 10)));
 
         searchPanel.add(txtSearch);
         searchPanel.add(btnSearch);
@@ -80,15 +86,9 @@ public class CategoryPanel extends JPanel {
         tablePanel.setBackground(Color.WHITE);
         tablePanel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
-                BorderFactory.createEmptyBorder(15, 15, 15, 15)
-        ));
+                BorderFactory.createEmptyBorder(15, 15, 15, 15)));
 
-        JLabel tableTitle = new JLabel("Categories List");
-        tableTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        tableTitle.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
-        tablePanel.add(tableTitle, BorderLayout.NORTH);
-
-        String[] columns = {"ID", "Name", "Created At", "Updated At"};
+        String[] columns = { "ID", "Name", "Created At", "Updated At" };
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -99,7 +99,7 @@ public class CategoryPanel extends JPanel {
         tblCategories = new JTable(model);
         tblCategories.setRowHeight(30);
         tblCategories.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        tblCategories.setSelectionBackground(new Color(230, 244, 255));
+        tblCategories.setSelectionBackground(new Color(44, 62, 80));
         tblCategories.setGridColor(new Color(240, 240, 240));
         tblCategories.setShowVerticalLines(false);
 
@@ -112,7 +112,6 @@ public class CategoryPanel extends JPanel {
 
         DefaultTableCellRenderer headerRenderer = (DefaultTableCellRenderer) header.getDefaultRenderer();
         headerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 
@@ -131,13 +130,13 @@ public class CategoryPanel extends JPanel {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
         buttonPanel.setBackground(new Color(245, 245, 247));
 
-        btnAdd = new JButton("Add Category");
+        btnAdd = new JButton("Add");
         styleButton(btnAdd, new Color(66, 139, 202));
 
-        btnUpdate = new JButton("Update Category");
+        btnUpdate = new JButton("Update");
         styleButton(btnUpdate, new Color(91, 192, 222));
 
-        btnDelete = new JButton("Delete Category");
+        btnDelete = new JButton("Delete");
         styleButton(btnDelete, new Color(217, 83, 79));
 
         buttonPanel.add(btnAdd);
@@ -178,6 +177,7 @@ public class CategoryPanel extends JPanel {
             if (category != null) {
                 CategoryFormDialog dialog = new CategoryFormDialog(parentFrame, controller, tblCategories, category);
                 dialog.setVisible(true);
+                controller.loadCategories(tblCategories);
             }
         });
 
@@ -190,7 +190,6 @@ public class CategoryPanel extends JPanel {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
             Long id = Long.valueOf(tblCategories.getValueAt(row, 0).toString());
             controller.deleteCategory(id);
         });
@@ -219,7 +218,4 @@ public class CategoryPanel extends JPanel {
         });
     }
 
-    public JTable getTblCategories() {
-        return tblCategories;
-    }
 }

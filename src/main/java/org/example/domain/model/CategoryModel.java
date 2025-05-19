@@ -24,14 +24,14 @@ public class CategoryModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false, updatable = false, unique = true)
+    @Column(nullable = false, unique = true)
     String name;
 
     @Column(name = "create_at", nullable = false, updatable = false)
     @CreationTimestamp
     LocalDate createdAt;
-
-    @Column(name = "update_at", nullable = false, updatable = false)
+    
+    @Column(name = "update_at", nullable = false)
     @UpdateTimestamp
     LocalDate updatedAt;
 

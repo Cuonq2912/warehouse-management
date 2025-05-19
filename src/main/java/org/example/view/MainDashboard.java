@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class MainDashboard extends JFrame {
+
     private JPanel contentPanel;
     private JLabel welcomeLabel;
 

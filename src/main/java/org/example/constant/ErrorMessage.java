@@ -9,4 +9,11 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND = "Lỗi lấy danh mục";
     }
 
+    public class Product{
+        public static final String ERR_CREATE_PRODUCT = "Lỗi thêm sản phẩm";
+        public static final String ERR_UPDATE_PRODUCT = "Lỗi cập nhật sản phẩm";
+        public static final String ERR_GET_BY_ID_PRODUCT = "Lỗi lấy sản phẩm theo id = %d";
+        public static final String ERR_NOT_FOUND = "Lỗi lấy sản phẩm";
+    }
+
 }

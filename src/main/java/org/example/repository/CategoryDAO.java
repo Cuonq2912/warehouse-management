@@ -1,6 +1,5 @@
 package org.example.repository;
 
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.EntityManager;
 import org.example.constant.ErrorMessage;
 import org.example.domain.model.CategoryModel;
@@ -9,19 +8,17 @@ import org.example.utils.HibernateUtils;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class CategoryDAO {
 
-    private EntityManager getEntityManager(){
+    private EntityManager getEntityManager() {
         return HibernateUtils.getEntityManager();
     }
 
-    public void create(CategoryModel categoryModel){
+    public void create(CategoryModel categoryModel) {
 
         EntityManager em = getEntityManager();
-
-        try{
+        try {
             em.getTransaction().begin();
             em.persist(categoryModel);
             em.getTransaction().commit();
@@ -33,11 +30,10 @@ public class CategoryDAO {
 
     }
 
-    public void update(Long id, CategoryModel categoryModel){
-
+    public void update(Long id, CategoryModel categoryModel) {
         EntityManager em = getEntityManager();
 
-        try{
+        try {
             em.getTransaction().begin();
             CategoryModel existingCategory = em.find(CategoryModel.class, id);
             if (existingCategory == null) {
@@ -48,6 +44,10 @@ public class CategoryDAO {
             em.merge(existingCategory);
             em.getTransaction().commit();
         } catch (RuntimeException e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
             throw new RuntimeException(String.format(ErrorMessage.Category.ERR_UPDATE_CATEGORY, id));
         } finally {
             em.close();
@@ -71,10 +71,10 @@ public class CategoryDAO {
         }
     }
 
-    public List<CategoryModel> getAllCategories(){
+    public List<CategoryModel> getAllCategories() {
         EntityManager em = getEntityManager();
         List<CategoryModel> categories = new ArrayList<>();
-        try{
+        try {
             em.getTransaction().begin();
             categories = em.createQuery("SELECT c FROM CategoryModel c", CategoryModel.class)
                     .getResultList();
@@ -85,9 +85,9 @@ public class CategoryDAO {
         return categories;
     }
 
-    public void delete(Long id){
+    public void delete(Long id) {
         EntityManager em = getEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
             CategoryModel category = em.find(CategoryModel.class, id);
             if (category == null) {
@@ -95,13 +95,12 @@ public class CategoryDAO {
             }
             em.remove(category);
             em.getTransaction().commit();
-        } catch (RuntimeException e){
+        } catch (RuntimeException e) {
             throw new RuntimeException(String.format(ErrorMessage.Category.ERR_GET_BY_ID_CATEGORY, id));
         } finally {
             em.close();
         }
 
     }
-
 
 }

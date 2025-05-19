@@ -1,5 +1,4 @@
-// Create a new class for the form dialog
-package org.example.view.component;
+package org.example.view.component.CategoryComponent;
 
 import net.miginfocom.swing.MigLayout;
 import org.example.controller.CategoryController;
@@ -12,11 +11,11 @@ import java.awt.*;
 public class CategoryFormDialog extends JDialog {
 
     private final CategoryController controller;
+    private Long categoryId;
     private final JTextField txtCategoryId;
     private final JTextField txtCategoryName;
     private final JButton btnSave;
     private final JButton btnCancel;
-    private Long categoryId;
     private final JTable parentTable;
     private final boolean isEdit;
 
@@ -24,11 +23,14 @@ public class CategoryFormDialog extends JDialog {
         this(parent, controller, parentTable, null);
     }
 
-    public CategoryFormDialog(JFrame parent, CategoryController controller, JTable parentTable, CategoryModel category) {
+    public CategoryFormDialog(JFrame parent, CategoryController controller, JTable parentTable,
+            CategoryModel category) {
         super(parent, true);
         this.controller = controller;
         this.parentTable = parentTable;
         this.isEdit = category != null;
+
+        controller.setCategoryTable(parentTable);
 
         txtCategoryId = new JTextField(20);
         txtCategoryName = new JTextField(20);
@@ -79,8 +81,7 @@ public class CategoryFormDialog extends JDialog {
             txtCategoryId.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             txtCategoryId.setBorder(BorderFactory.createCompoundBorder(
                     BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
-                    BorderFactory.createEmptyBorder(8, 10, 8, 10)
-            ));
+                    BorderFactory.createEmptyBorder(8, 10, 8, 10)));
             formPanel.add(txtCategoryId, "wrap");
         }
 
@@ -91,8 +92,7 @@ public class CategoryFormDialog extends JDialog {
         txtCategoryName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         txtCategoryName.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
-                BorderFactory.createEmptyBorder(8, 10, 8, 10)
-        ));
+                BorderFactory.createEmptyBorder(8, 10, 8, 10)));
         formPanel.add(txtCategoryName, "wrap");
 
         mainPanel.add(formPanel, BorderLayout.CENTER);
@@ -112,7 +112,7 @@ public class CategoryFormDialog extends JDialog {
     }
 
     private void initListeners() {
-        btnSave.addActionListener(e -> {
+        btnSave.addActionListener(actionEvent -> {
             String name = txtCategoryName.getText().trim();
             if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -121,16 +121,18 @@ public class CategoryFormDialog extends JDialog {
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-
             if (isEdit) {
                 controller.updateCategory(categoryId, name);
             } else {
                 controller.addCategory(name);
             }
+            SwingUtilities.invokeLater(() -> {
+                controller.loadCategories(parentTable);
+            });
             dispose();
         });
 
-        btnCancel.addActionListener(e -> dispose());
+        btnCancel.addActionListener(actionEvent -> dispose());
     }
 
     private void styleButton(JButton button, Color bgColor) {

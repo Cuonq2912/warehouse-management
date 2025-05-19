@@ -3,19 +3,22 @@ package org.example.controller;
 import org.example.domain.model.CategoryModel;
 import org.example.service.CategoryService;
 import org.example.service.impl.CategoryServiceImpl;
-import org.example.view.component.CategoryPanel;
+import org.example.view.component.CategoryComponent.CategoryPanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CategoryController {
 
     private final CategoryService categoryService;
     private JComponent viewComponent;
     private JTable categoryTable;
+
+    public void setCategoryTable(JTable categoryTable) {
+        this.categoryTable = categoryTable;
+    }
 
     public CategoryController() {
         this.categoryService = new CategoryServiceImpl();
@@ -54,7 +57,7 @@ public class CategoryController {
         List<CategoryModel> filteredCategories = categories.stream()
                 .filter(category ->
                         category.getName().toLowerCase().contains(searchTerm.toLowerCase()))
-                .collect(Collectors.toList());
+                .toList();
 
         for (CategoryModel category : filteredCategories) {
             model.addRow(new Object[]{
@@ -64,9 +67,7 @@ public class CategoryController {
                     category.getUpdatedAt()
             });
         }
-    }
-
-    public void addCategory(String name) {
+    }    public void addCategory(String name) {
         CategoryModel category = new CategoryModel();
         category.setName(name);
         category.setCreatedAt(LocalDate.now());
@@ -74,10 +75,12 @@ public class CategoryController {
 
         boolean success = categoryService.createCategory(category);
         if (success) {
-            JOptionPane.showMessageDialog(viewComponent, "Category added successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            loadCategories(categoryTable);
+            JOptionPane.showMessageDialog(viewComponent, "Thêm thể loại thành công", "Success", JOptionPane.INFORMATION_MESSAGE);
+            if (categoryTable != null) {
+                loadCategories(categoryTable);
+            }
         } else {
-            JOptionPane.showMessageDialog(viewComponent, "Failed to add category", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(viewComponent, "Thêm thể loại thất bại", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -89,27 +92,27 @@ public class CategoryController {
 
             boolean success = categoryService.updateCategory(id, category);
             if (success) {
-                JOptionPane.showMessageDialog(viewComponent, "Category updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(viewComponent, "Cập nhật thể loại thành công", "Success", JOptionPane.INFORMATION_MESSAGE);
                 loadCategories(categoryTable);
             } else {
-                JOptionPane.showMessageDialog(viewComponent, "Failed to update category", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(viewComponent, "Cập nhật thể loại thất bại", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
     public void deleteCategory(Long id) {
         int confirm = JOptionPane.showConfirmDialog(viewComponent,
-                "Are you sure you want to delete this category?",
+                "Xóa thể loại này cũng sẽ xóa tất cả sản phẩm có thể loại đó.\nBạn có chắc chắn muốn xóa không?",
                 "Confirm Deletion",
                 JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
             boolean success = categoryService.deleteCategory(id);
             if (success) {
-                JOptionPane.showMessageDialog(viewComponent, "Category deleted successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(viewComponent, "Xóa thể loại thành công", "Success", JOptionPane.INFORMATION_MESSAGE);
                 loadCategories(categoryTable);
             } else {
-                JOptionPane.showMessageDialog(viewComponent, "Failed to delete category", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(viewComponent, "Xóa thể loại thất bại", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
