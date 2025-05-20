@@ -12,6 +12,7 @@ public class CategoryFormDialog extends JDialog {
 
     private final CategoryController controller;
     private Long categoryId;
+
     private final JTextField txtCategoryId;
     private final JTextField txtCategoryName;
     private final JButton btnSave;

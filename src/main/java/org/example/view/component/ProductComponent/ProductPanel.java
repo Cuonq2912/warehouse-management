@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 public class ProductPanel extends JPanel {
     private final ProductController controller;
     private final JFrame parentFrame;
-
     @Getter
     private JTable tblProducts;
     private JTextField txtSearch;
@@ -146,6 +145,9 @@ public class ProductPanel extends JPanel {
         button.setForeground(Color.WHITE);
         button.setFocusPainted(false);
         button.setBorderPainted(false);
+        button.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        button.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
     }
 
     private void initListeners() {

@@ -103,17 +103,6 @@ public class SidebarMenu extends JPanel {
         return menuPanel;
     }
 
-    public void setActiveMenu(String menuText) {
-        if (lblSelectedMenu != null) {
-            menuPanels.get(lblSelectedMenu.getText()).setBackground(new Color(44, 62, 80));
-        }
-
-        if (menuPanels.containsKey(menuText)) {
-            lblSelectedMenu = (JLabel) menuPanels.get(menuText).getComponent(0);
-            menuPanels.get(menuText).setBackground(new Color(52, 73, 94));
-        }
-    }
-
     private void loadContent(String menuText) {
 
         MainDashboard dashboard = (MainDashboard) parentFrame;
@@ -160,7 +149,7 @@ public class SidebarMenu extends JPanel {
 
             case "Logout":
                 int confirm = JOptionPane.showConfirmDialog(parentFrame,
-                        "Are you sure you want to logout?",
+                        "Xác nhận đăng xuất tài khoản?",
                         "Confirm Logout",
                         JOptionPane.YES_NO_OPTION);
 

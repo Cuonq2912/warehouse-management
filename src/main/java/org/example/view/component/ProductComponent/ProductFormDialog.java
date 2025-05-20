@@ -53,7 +53,6 @@ public class ProductFormDialog extends JDialog {
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
         mainPanel.setBackground(Color.WHITE);
 
-        // Form panel
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new GridLayout(5, 2, 10, 20));
         formPanel.setBackground(Color.WHITE);
@@ -89,7 +88,6 @@ public class ProductFormDialog extends JDialog {
         formPanel.add(lblCategory);
         formPanel.add(cmbCategory);
 
-        // Button panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
         buttonPanel.setBackground(Color.WHITE);
 
@@ -102,15 +100,11 @@ public class ProductFormDialog extends JDialog {
         buttonPanel.add(btnSave);
         buttonPanel.add(btnCancel);
 
-        // Main panel layout
         mainPanel.add(new JLabel("Enter Product Details"), BorderLayout.NORTH);
         mainPanel.add(formPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
-
-        // Add to dialog
         getContentPane().add(mainPanel);
 
-        // Event listeners
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -188,10 +182,9 @@ public class ProductFormDialog extends JDialog {
 
     private void saveProduct() {
         try {
-            // Validation
             String name = txtName.getText().trim();
             if (name.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Product name cannot be empty", "Validation Error",
+                JOptionPane.showMessageDialog(this, "Tên sản phẩm không được để trống!", "Validation Error",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -200,12 +193,12 @@ public class ProductFormDialog extends JDialog {
             try {
                 price = Double.parseDouble(txtPrice.getText().trim());
                 if (price < 0) {
-                    JOptionPane.showMessageDialog(this, "Price cannot be negative", "Validation Error",
+                    JOptionPane.showMessageDialog(this, "Giá sản phẩm không được phép âm!", "Validation Error",
                             JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Please enter a valid price", "Validation Error",
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập giá của sản phẩm!", "Validation Error",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -214,12 +207,12 @@ public class ProductFormDialog extends JDialog {
             try {
                 remainingQty = Long.parseLong(txtRemainingQuantity.getText().trim());
                 if (remainingQty < 0) {
-                    JOptionPane.showMessageDialog(this, "Remaining quantity cannot be negative", "Validation Error",
+                    JOptionPane.showMessageDialog(this, "Số lượng tồn kho không được phép âm", "Validation Error",
                             JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Please enter a valid remaining quantity", "Validation Error",
+                JOptionPane.showMessageDialog(this, "Vui lòng nhập số lượng tồn kho hợp lệ!", "Validation Error",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -228,19 +221,19 @@ public class ProductFormDialog extends JDialog {
             try {
                 soldQty = Long.parseLong(txtSoldQuantity.getText().trim());
                 if (soldQty < 0) {
-                    JOptionPane.showMessageDialog(this, "Sold quantity cannot be negative", "Validation Error",
+                    JOptionPane.showMessageDialog(this, "Số lượng đã bán không được phép âm!", "Validation Error",
                             JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "Please enter a valid sold quantity", "Validation Error",
+                JOptionPane.showMessageDialog(this, "Nhập số lượng đã bán hợp lệ", "Validation Error",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
             CategoryModel selectedCategory = (CategoryModel) cmbCategory.getSelectedItem();
             if (selectedCategory == null) {
-                JOptionPane.showMessageDialog(this, "Please select a category", "Validation Error",
+                JOptionPane.showMessageDialog(this, "Vui lòng chọn thể loại!", "Validation Error",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -259,15 +252,15 @@ public class ProductFormDialog extends JDialog {
             boolean success = productController.saveProduct(productModel);
 
             if (success) {
-                JOptionPane.showMessageDialog(this, "Product saved successfully", "Success",
+                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công!", "Success",
                         JOptionPane.INFORMATION_MESSAGE);
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Failed to save product", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thất bại", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error",
+            JOptionPane.showMessageDialog(this, "Có lỗi xảy ra: " + e.getMessage(), "Error",
                     JOptionPane.ERROR_MESSAGE);
         }
     }

@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import lombok.Setter;
 import org.example.domain.model.CategoryModel;
 import org.example.service.CategoryService;
 import org.example.service.impl.CategoryServiceImpl;
@@ -14,11 +15,8 @@ public class CategoryController {
 
     private final CategoryService categoryService;
     private JComponent viewComponent;
+    @Setter
     private JTable categoryTable;
-
-    public void setCategoryTable(JTable categoryTable) {
-        this.categoryTable = categoryTable;
-    }
 
     public CategoryController() {
         this.categoryService = new CategoryServiceImpl();
@@ -67,7 +65,9 @@ public class CategoryController {
                     category.getUpdatedAt()
             });
         }
-    }    public void addCategory(String name) {
+    }
+
+    public void addCategory(String name) {
         CategoryModel category = new CategoryModel();
         category.setName(name);
         category.setCreatedAt(LocalDate.now());
