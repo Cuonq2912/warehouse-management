@@ -40,9 +40,9 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryModel getCategoryById(Long id) {
         CategoryModel categoryModel = new CategoryModel();
-        if(categoryModel.equals(id)){
-            throw new ResourceClosedException(ErrorMessage.Category.ERR_GET_BY_ID_CATEGORY);
-        }
+//        if(categoryModel.equals(id)){
+//            throw new ResourceClosedException(ErrorMessage.Category.ERR_GET_BY_ID_CATEGORY);
+//        }
         try {
             categoryModel = categoryDAO.getCategoryById(id);
         } catch (RuntimeException e) {

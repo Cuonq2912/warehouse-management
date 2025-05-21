@@ -27,7 +27,6 @@ public class CategoryDAO {
         } finally {
             em.close();
         }
-
     }
 
     public void update(Long id, CategoryModel categoryModel) {
