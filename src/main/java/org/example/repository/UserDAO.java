@@ -55,6 +55,24 @@ public class UserDAO {
         } 
     }
     
+    public UserModel getUserById(Long id){
+        EntityManager en= getEntityManager();
+        
+        try{
+            en.getTransaction().begin();
+            UserModel userModel= en.find(UserModel.class, id);
+            en.getTransaction().commit();
+            if(userModel==null){
+                throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id));
+            }
+            return userModel;
+            
+        } catch(RuntimeException e){
+                throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id));
+        }finally{
+            en.close();
+        }
+    }
     
     
 }
