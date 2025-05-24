@@ -1,7 +1,10 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
+import java.util.ArrayList;
+import java.util.List;
 import org.example.constant.ErrorMessage;
+import org.example.domain.model.CategoryModel;
 import org.example.domain.model.UserModel;
 import org.example.utils.HibernateUtils;
 import org.hibernate.Hibernate;
@@ -74,6 +77,34 @@ public class UserDAO {
         }
     }
     
+    public List<UserModel> getAllUsser(){
+        EntityManager en = getEntityManager();
+        List<UserModel> userModel= new ArrayList<>();
+        try{
+               en.getTransaction().begin();
+            userModel = en.createQuery("SELECT c FROM UserModel c", UserModel.class)
+                    .getResultList();
+            en.getTransaction().commit();
+        }catch(RuntimeException e){
+            throw new RuntimeException(ErrorMessage.User.ERR_NOT_FOUND);
+        }
+           return userModel;
+    }
     
+       public void delete(Long id) {
+        EntityManager en = getEntityManager();
+        try {
+            en.getTransaction().begin();
+            UserModel userModel = en.find(UserModel.class, id);
+            if (userModel == null) {
+                throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id));
+            }
+            en.remove(userModel);
+            en.getTransaction().commit();
+        } catch (RuntimeException e) {
+            throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id));
+        } finally {
+            en.close();
+        }
+    }
 }
-
