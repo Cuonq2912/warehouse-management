@@ -1,4 +1,4 @@
-package org.example.repository;
+ package org.example.repository;
 
 import jakarta.persistence.EntityManager;
 import org.example.constant.ErrorMessage;
