@@ -21,6 +21,8 @@ public class ErrorMessage {
         public static final String ERR_UPDATE_USER= " Lỗi cập nhật người dùng";
         public static final String ERR_GET_BY_ID_USER= " Không có người dùng có id hợp lệ";
         public static final String ERR_NOT_FOUND= " Lỗi lấy ra người dùng";
-       
+        public static final String ERR_CHECK_EMAIL="lỗi email";
+        public static final String ERR_CHECK_USERNAME="lỗi người dùng";
+
     }
 }

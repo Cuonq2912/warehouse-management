@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
+import org.example.view.component.UserComponent.UserPanel;
 
 public class SidebarMenu extends JPanel {
 
@@ -60,6 +61,10 @@ public class SidebarMenu extends JPanel {
         return new ProductPanel(parentFrame);
     }
 
+    
+    private JPanel createUserPanel(){
+        return new UserPanel(parentFrame);
+    }
     private JPanel createMenuItemPanel(String menuText) {
         JPanel menuPanel = new JPanel();
         menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.X_AXIS));
@@ -144,8 +149,8 @@ public class SidebarMenu extends JPanel {
                 break;
 
             case "USERS":
-                JPanel usersPanel = createPlaceholderPanel("User Management");
-                dashboard.updateContent(usersPanel);
+                JPanel userJPanel= createUserPanel();
+                dashboard.updateContent(userJPanel);
                 break;
 
             case "IMPORT PRODUCTS":

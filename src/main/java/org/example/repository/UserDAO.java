@@ -1,99 +1,73 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
-import java.util.ArrayList;
 import java.util.List;
 import org.example.constant.ErrorMessage;
-import org.example.domain.model.CategoryModel;
 import org.example.domain.model.UserModel;
 import org.example.utils.HibernateUtils;
-import org.hibernate.Hibernate;
 
 public class UserDAO {
 
-    private EntityManager getEntityManager(){
+    private EntityManager getEntityManager() {
         return HibernateUtils.getEntityManager();
     }
-    
-    public void create(UserModel userModel){
-        EntityManager en=  getEntityManager();
-        try{
+
+    public void create(UserModel userModel) {
+        try (EntityManager en = getEntityManager()) {
             en.getTransaction().begin();
             en.persist(userModel);
             en.getTransaction().commit();
-        }catch (Exception e){
-            throw new RuntimeException(ErrorMessage.User.ERR_CREATE_USER);
-        } finally{
-            en.close();
-        } 
+        } catch (Exception e) {
+            throw new RuntimeException(ErrorMessage.User.ERR_CREATE_USER, e);
+        }
     }
-    
-    public void update(Long id, UserModel userModel){
-        EntityManager en=  getEntityManager();
-        try{
+
+    public void update(Long id, UserModel userModel) {
+        try (EntityManager en = getEntityManager()) {
             en.getTransaction().begin();
-            UserModel um= en.find(UserModel.class,id);
-           if (um == null) {
+            UserModel existingUser = en.find(UserModel.class, id);
+            if (existingUser == null) {
                 throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id));
             }
-            um.setUsername(userModel.getUsername());
-            um.setAddress(userModel.getAddress());
-            um.setEmail(userModel.getEmail());
-            um.setFullName(userModel.getFullName());
-            um.setCreatedAt(userModel.getCreatedAt());
-            um.setPhoneNumber(userModel.getPhoneNumber());
-            um.setPassword(userModel.getPassword());
-            um.setUpdatedAt(userModel.getUpdatedAt());
-            um.setStatus(userModel.getStatus());
-            en.merge(um);
+            existingUser.setUsername(userModel.getUsername());
+            existingUser.setAddress(userModel.getAddress());
+            existingUser.setEmail(userModel.getEmail());
+            existingUser.setFullName(userModel.getFullName());
+            existingUser.setCreatedAt(userModel.getCreatedAt());
+            existingUser.setPhoneNumber(userModel.getPhoneNumber());
+            existingUser.setPassword(userModel.getPassword());
+            existingUser.setUpdatedAt(userModel.getUpdatedAt());
+            existingUser.setStatus(userModel.getStatus());
+            en.merge(existingUser);
             en.getTransaction().commit();
-        } catch (RuntimeException e) {
-            if (en.getTransaction().isActive()) {
-                en.getTransaction().rollback();
-            }
-            e.printStackTrace();
-            throw new RuntimeException(String.format(ErrorMessage.User.ERR_UPDATE_USER, id));
-        } finally {
-            en.close();
-        } 
+        } catch (Exception e) {
+            throw new RuntimeException(String.format(ErrorMessage.User.ERR_UPDATE_USER, id), e);
+        }
     }
-    
-    public UserModel getUserById(Long id){
-        EntityManager en= getEntityManager();
-        
-        try{
-            en.getTransaction().begin();
-            UserModel userModel= en.find(UserModel.class, id);
-            en.getTransaction().commit();
-            if(userModel==null){
+
+    public UserModel getUserById(Long id) {
+        try (EntityManager en = getEntityManager()) {
+            UserModel userModel = en.find(UserModel.class, id);
+            if (userModel == null) {
                 throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id));
             }
             return userModel;
-            
-        } catch(RuntimeException e){
-                throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id));
-        }finally{
-            en.close();
+        } catch (Exception e) {
+            throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id), e);
         }
     }
-    
-    public List<UserModel> getAllUsser(){
-        EntityManager en = getEntityManager();
-        List<UserModel> userModel= new ArrayList<>();
-        try{
-               en.getTransaction().begin();
-            userModel = en.createQuery("SELECT c FROM UserModel c", UserModel.class)
+
+    public List<UserModel> getAllUser() {
+        try (EntityManager en = getEntityManager()) {
+            return en.createQuery("SELECT u FROM UserModel u", UserModel.class)
                     .getResultList();
-            en.getTransaction().commit();
-        }catch(RuntimeException e){
-            throw new RuntimeException(ErrorMessage.User.ERR_NOT_FOUND);
+        } catch (Exception e) {
+            throw new RuntimeException(ErrorMessage.User.ERR_NOT_FOUND, e);
         }
-           return userModel;
     }
-    
-       public void delete(Long id) {
-        EntityManager en = getEntityManager();
-        try {
+
+    public void delete(Long id) {
+        try (EntityManager en = getEntityManager()) {
             en.getTransaction().begin();
             UserModel userModel = en.find(UserModel.class, id);
             if (userModel == null) {
@@ -101,10 +75,30 @@ public class UserDAO {
             }
             en.remove(userModel);
             en.getTransaction().commit();
-        } catch (RuntimeException e) {
-            throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id));
-        } finally {
-            en.close();
+        } catch (Exception e) {
+            throw new RuntimeException(String.format(ErrorMessage.User.ERR_GET_BY_ID_USER, id), e);
+        }
+    }
+
+    public boolean existsByEmail(String email) {
+        try (EntityManager en = getEntityManager()) {
+            Long count = en.createQuery("SELECT COUNT(u) FROM UserModel u WHERE u.email = :email", Long.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+            return count > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(String.format(ErrorMessage.User.ERR_CHECK_EMAIL, email), e);
+        }
+    }
+
+    public boolean existsByUsername(String username) {
+        try (EntityManager en = getEntityManager()) {
+            Long count = en.createQuery("SELECT COUNT(u) FROM UserModel u WHERE u.username = :username", Long.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+            return count > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(String.format(ErrorMessage.User.ERR_CHECK_USERNAME, username), e);
         }
     }
 }
