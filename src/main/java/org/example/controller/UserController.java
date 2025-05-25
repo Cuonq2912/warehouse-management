@@ -12,12 +12,12 @@ import org.example.domain.model.Status;
 import org.example.domain.model.UserModel;
 import org.example.service.UserService;
 import org.example.service.impl.UserServiceImpl;
+import org.example.utils.PasswordEncoder;
 import org.example.view.component.UserComponent.UserPanel;
 
 
 public class UserController {
-
-     private final UserService userService;
+ private final UserService userService;
     private JComponent viewComponent;
     private JTable userTable;
 
@@ -126,11 +126,10 @@ public class UserController {
 
     public void updateUser(Long id, String username, String password, String fullName, String email, String phone, String address, Role role, Status status) {
         UserModel existing = userService.getUserById(id);
-       if (existing == null) {
-    JOptionPane.showMessageDialog(viewComponent, "Người dùng không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-    return;
-}
-
+        if (existing == null) {
+            JOptionPane.showMessageDialog(viewComponent, "Người dùng không tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         if (!email.equals(existing.getEmail()) && userService.existsByEmail(email)) {
             JOptionPane.showMessageDialog(viewComponent, "Email đã tồn tại!", "Lỗi", JOptionPane.ERROR_MESSAGE);
@@ -180,14 +179,12 @@ public class UserController {
     public UserModel getUserById(Long id) {
         return userService.getUserById(id);
     }
+    
+    public boolean existsByUsername(String username) {
+         return userService.existsByUsername(username);
+    }
 
-    private static class PasswordEncoder {
-
-        private static String encode(String password) {
-            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        }
-
-        public PasswordEncoder() {
-        }
+    public boolean existsByEmail(String email) {
+         return userService.existsByEmail(email);
     }
 }

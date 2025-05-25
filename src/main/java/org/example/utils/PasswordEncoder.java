@@ -1,6 +1,8 @@
 package org.example.utils;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.mindrot.jbcrypt.BCrypt;
 
 /*
@@ -14,16 +16,17 @@ import org.mindrot.jbcrypt.BCrypt;
  */
 public class PasswordEncoder {
     
-     private static final int LOG_ROUNDS = 12;
-
-    private PasswordEncoder() {
-    }
-
-    public static String encode(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt(LOG_ROUNDS));
-    }
-
-    public static boolean matches(String rawPassword, String hashedPassword) {
-        return BCrypt.checkpw(rawPassword, hashedPassword);
+     public static String encode(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashed = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashed) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Không thể mã hóa mật khẩu", e);
+        }
     }
 }

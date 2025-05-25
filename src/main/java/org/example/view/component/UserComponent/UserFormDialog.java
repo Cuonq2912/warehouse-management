@@ -17,10 +17,12 @@ import org.example.domain.model.UserModel;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.util.regex.Pattern;
+import org.example.utils.PasswordEncoder;
 
 public class UserFormDialog extends JDialog {
 
-    private final UserController controller;
+   private final UserController controller;
     private Long userId;
     private final JTextField txtUsername;
     private final JPasswordField txtPassword;
@@ -58,7 +60,7 @@ public class UserFormDialog extends JDialog {
         if (isEdit) {
             userId = user.getId();
             txtUsername.setText(user.getUsername());
-            txtPassword.setText(user.getPassword());
+            txtPassword.setText(""); // Không hiển thị mật khẩu đã mã hóa
             txtFullName.setText(user.getFullName());
             txtEmail.setText(user.getEmail());
             txtPhoneNumber.setText(user.getPhoneNumber());
@@ -129,18 +131,49 @@ public class UserFormDialog extends JDialog {
             Role role = (Role) comboRole.getSelectedItem();
             Status status = (Status) comboStatus.getSelectedItem();
 
-            if (username.isEmpty() || password.isEmpty() || fullName.isEmpty() ||
-                    email.isEmpty() || phone.isEmpty() || address.isEmpty()) {
-                JOptionPane.showMessageDialog(this,
-                        "Please fill in all required fields",
-                        "Validation Error", JOptionPane.ERROR_MESSAGE);
+            // Validate empty
+            if (username.isEmpty() || (!isEdit && password.isEmpty()) || fullName.isEmpty() ||
+                email.isEmpty() || phone.isEmpty() || address.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please fill in all required fields", "Validation Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
+            // Validate email format
+            if (!Pattern.matches("^[\\w-.]+@[\\w-]+\\.[a-zA-Z]{2,}$", email)) {
+                JOptionPane.showMessageDialog(this, "Invalid email format", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Validate phone format
+            if (!Pattern.matches("^(0[1-9][0-9]{8,9})$", phone)) {
+                JOptionPane.showMessageDialog(this, "Invalid phone number format", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Check trùng username / email nếu tạo mới hoặc sửa username/email
+            if (!isEdit || !username.equals(controller.getUserById(userId).getUsername())) {
+                if (controller.existsByUsername(username)) {
+                    JOptionPane.showMessageDialog(this, "Username already exists", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            if (!isEdit || !email.equals(controller.getUserById(userId).getEmail())) {
+                if (controller.existsByEmail(email)) {
+                    JOptionPane.showMessageDialog(this, "Email already exists", "Validation Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+            // Mã hóa mật khẩu nếu tạo mới hoặc nhập lại
+            String encodedPassword = isEdit && password.isEmpty()
+                    ? controller.getUserById(userId).getPassword()
+                    : PasswordEncoder.encode(password);
+
             if (isEdit) {
-                controller.updateUser(userId, username, password, fullName, email, phone, address, role, status);
+                controller.updateUser(userId, username, encodedPassword, fullName, email, phone, address, role, status);
             } else {
-                controller.addUser(username, password, fullName, email, phone, address, role, status);
+                controller.addUser(username, encodedPassword, fullName, email, phone, address, role, status);
             }
 
             SwingUtilities.invokeLater(() -> controller.loadUsers(parentTable));
@@ -171,4 +204,3 @@ public class UserFormDialog extends JDialog {
         button.setBorder(BorderFactory.createEmptyBorder(8, 20, 8, 20));
     }
 }
-
