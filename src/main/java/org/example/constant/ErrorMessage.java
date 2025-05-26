@@ -24,10 +24,11 @@ public class ErrorMessage {
         public static final String ERR_CHECK_EMAIL="lỗi email";
         public static final String ERR_CHECK_USERNAME="lỗi người dùng";
     }
-    
-    public static final String ERR_CREATE_SUP="lỗi thêm khuyến mãi";
-    public static final String ERR_UPDATE_SUP_="lỗi cập nhật khuyến mãi";
-    public static final String ERR_GET_BY_ID_SUP="lỗi khuyến mãi theo id khuyến mãi";
-    public static final String ERR_NOT_FOUND= " Lỗi lấy ra khuyến mãi";
-    
+    public class Import{
+    public static final String ERR_CREATE_IMP="lỗi nhập khẩu";
+    public static final String ERR_UPDATE_IMP_="lỗi cập nhật nhập khẩu";
+    public static final String ERR_GET_BY_ID_IMP="Lỗi lấy ra id nhập khẩu";
+    public static final String ERR_NOT_FOUND= " Lỗi lấy ra nhập khẩu";
+    }
+ 
 }
