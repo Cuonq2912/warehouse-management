@@ -14,6 +14,10 @@ public class CustomerFormDialog extends JDialog {
     private Long customerId;
     private final JTextField txtCustomerId;
     private final JTextField txtCustomerName;
+    private final JTextField txtEmail;
+    private final JTextField txtPhoneNumber;
+    private final JTextField txtAddress;
+    private final JTextField txtPoint;
     private final JButton btnSave;
     private final JButton btnCancel;
     private final JTable parentTable;
@@ -34,6 +38,10 @@ public class CustomerFormDialog extends JDialog {
 
         txtCustomerId = new JTextField(20);
         txtCustomerName = new JTextField(20);
+        txtEmail = new JTextField(20);
+        txtPhoneNumber = new JTextField(20);
+        txtAddress = new JTextField(20);
+        txtPoint = new JTextField(20);
         btnSave = new JButton(isEdit ? "Update" : "Save");
         btnCancel = new JButton("Cancel");
 
@@ -41,6 +49,9 @@ public class CustomerFormDialog extends JDialog {
             customerId = customer.getId();
             txtCustomerId.setText(String.valueOf(customer.getId()));
             txtCustomerName.setText(customer.getName());
+            txtEmail.setText(customer.getEmail());
+            txtPhoneNumber.setText(customer.getPhoneNumber());
+            txtAddress.setText(customer.getAddress());
         }
 
         initComponents();
@@ -49,7 +60,7 @@ public class CustomerFormDialog extends JDialog {
 
     private void initComponents() {
         setTitle(isEdit ? "Edit Customer" : "Add New Customer");
-        setSize(400, 300);
+        setSize(400, 500);
         setLocationRelativeTo(getOwner());
         setResizable(false);
 
@@ -69,31 +80,18 @@ public class CustomerFormDialog extends JDialog {
         mainPanel.add(headerPanel, BorderLayout.NORTH);
 
         JPanel formPanel = new JPanel();
-        formPanel.setLayout(new MigLayout("fillx, insets 0", "[right]10[grow,fill]", "[]15[]"));
+        formPanel.setLayout(new MigLayout("fillx, insets 0", "[right]10[grow,fill]", "[]15[]15[]15[]15[]15[]15[]15[]"));
         formPanel.setBackground(Color.WHITE);
 
         if (isEdit) {
-            JLabel lblCustomerId = new JLabel("Customer ID:");
-            lblCustomerId.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-            formPanel.add(lblCustomerId, "");
-
-            txtCustomerId.setEditable(false);
-            txtCustomerId.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-            txtCustomerId.setBorder(BorderFactory.createCompoundBorder(
-                    BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
-                    BorderFactory.createEmptyBorder(8, 10, 8, 10)));
-            formPanel.add(txtCustomerId, "wrap");
+            addLabelAndField(formPanel, "Customer ID:", txtCustomerId, false);
         }
 
-        JLabel lblCustomerName = new JLabel("Customer Name:");
-        lblCustomerName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        formPanel.add(lblCustomerName, "");
-
-        txtCustomerName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        txtCustomerName.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
-                BorderFactory.createEmptyBorder(8, 10, 8, 10)));
-        formPanel.add(txtCustomerName, "wrap");
+        addLabelAndField(formPanel, "Customer Name:", txtCustomerName, true);
+        addLabelAndField(formPanel, "Email:", txtEmail, true);
+        addLabelAndField(formPanel, "Phone Number:", txtPhoneNumber, true);
+        addLabelAndField(formPanel, "Address:", txtAddress, true);
+        addLabelAndField(formPanel, "Point:", txtPoint, true);
 
         mainPanel.add(formPanel, BorderLayout.CENTER);
 
@@ -111,24 +109,59 @@ public class CustomerFormDialog extends JDialog {
         setContentPane(mainPanel);
     }
 
+    private void addLabelAndField(JPanel panel, String label, JTextField textField, boolean editable) {
+        JLabel jLabel = new JLabel(label);
+        jLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        panel.add(jLabel, "");
+
+        textField.setEditable(editable);
+        textField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        textField.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
+                BorderFactory.createEmptyBorder(8, 10, 8, 10)));
+        panel.add(textField, "wrap");
+    }
+
     private void initListeners() {
         btnSave.addActionListener(actionEvent -> {
             String name = txtCustomerName.getText().trim();
-            if (name.isEmpty()) {
+            String email = txtEmail.getText().trim();
+            String phone = txtPhoneNumber.getText().trim();
+            String address = txtAddress.getText().trim();
+            String pointStr = txtPoint.getText().trim();
+
+            if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || address.isEmpty() || pointStr.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
-                        "Please enter a customer name",
-                        "Error",
+                        "Vui lòng nhập đầy đủ thông tin khách hàng.",
+                        "Lỗi",
                         JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (isEdit) {
-                controller.updateCustomer(customerId, name);
-            } else {
-                controller.addCustomer(name);
+
+            double point;
+            try {
+                point = Double.parseDouble(pointStr);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this,
+                        "Point phải là một số.",
+                        "Lỗi",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
             }
-            SwingUtilities.invokeLater(() -> {
-                controller.loadCustomers(parentTable);
-            });
+
+            CustomerModel customer = new CustomerModel();
+            customer.setName(name);
+            customer.setEmail(email);
+            customer.setPhoneNumber(phone);
+            customer.setAddress(address);
+
+            if (isEdit) {
+                controller.updateCustomer(customerId, customer);
+            } else {
+                controller.addCustomer(customer);
+            }
+
+            SwingUtilities.invokeLater(() -> controller.loadCustomers(parentTable));
             dispose();
         });
 
