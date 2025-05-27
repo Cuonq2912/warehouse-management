@@ -18,7 +18,17 @@ public class CustomerDAO {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(customerModel);
+
+            String sql = "INSERT INTO customers (name, email, address, phoneNumber) VALUES (?, ?, ?, ?)";
+            System.out.println(customerModel.getName()  );
+
+            em.createNativeQuery(sql)
+                    .setParameter(1, customerModel.getName())
+                    .setParameter(2, customerModel.getEmail())
+                    .setParameter(3, customerModel.getAddress())
+                    .setParameter(4, customerModel.getPhoneNumber())
+                    .executeUpdate();
+
             em.getTransaction().commit();
         } catch (Exception e) {
             if (em.getTransaction().isActive()) em.getTransaction().rollback();

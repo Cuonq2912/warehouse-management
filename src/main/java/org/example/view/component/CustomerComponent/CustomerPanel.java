@@ -88,7 +88,7 @@ public class CustomerPanel extends JPanel {
                 BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
                 BorderFactory.createEmptyBorder(15, 15, 15, 15)));
 
-        String[] columns = { "ID", "Name", "Created At", "Updated At" };
+        String[] columns = { "ID", "Name", "Email", "Phone Number", "Address", "Point" };
         DefaultTableModel model = new DefaultTableModel(columns, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {

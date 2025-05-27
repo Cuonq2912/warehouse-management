@@ -7,7 +7,6 @@ import org.example.view.component.CustomerComponent.CustomerPanel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.time.LocalDate;
 import java.util.List;
 
 public class CustomerController {
@@ -38,6 +37,9 @@ public class CustomerController {
             model.addRow(new Object[]{
                     customer.getId(),
                     customer.getName(),
+                    customer.getEmail(),
+                    customer.getPhoneNumber(),
+                    customer.getAddress(),
             });
         }
     }
@@ -61,14 +63,14 @@ public class CustomerController {
             model.addRow(new Object[]{
                     customer.getId(),
                     customer.getName(),
+                    customer.getEmail(),
+                    customer.getPhoneNumber(),
+                    customer.getAddress(),
             });
         }
     }
 
-    public void addCustomer(String name) {
-        CustomerModel customer = new CustomerModel();
-        customer.setName(name);
-
+    public void addCustomer(CustomerModel customer) {
         boolean success = customerService.createCustomer(customer);
         if (success) {
             JOptionPane.showMessageDialog(viewComponent, "Thêm khách hàng thành công", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -80,10 +82,13 @@ public class CustomerController {
         }
     }
 
-    public void updateCustomer(Long id, String name) {
+    public void updateCustomer(Long id, CustomerModel updatedCustomer) {
         CustomerModel customer = customerService.getCustomerById(id);
         if (customer != null) {
-            customer.setName(name);
+            customer.setName(updatedCustomer.getName());
+            customer.setEmail(updatedCustomer.getEmail());
+            customer.setPhoneNumber(updatedCustomer.getPhoneNumber());
+            customer.setAddress(updatedCustomer.getAddress());
 
             boolean success = customerService.updateCustomer(id, customer);
             if (success) {
