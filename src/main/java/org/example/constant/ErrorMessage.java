@@ -30,5 +30,12 @@ public class ErrorMessage {
     public static final String ERR_GET_BY_ID_IMP="Lỗi lấy ra id nhập khẩu";
     public static final String ERR_NOT_FOUND= " Lỗi lấy ra nhập khẩu";
     }
+    
+    public class Supplier{
+        public static final String ERR_CREATE_SUP = "Lỗi thêm khuyến mãi ";
+        public static final String ERR_UPDATE_SUP = "Lỗi cập nhật khuyến mãi";
+        public static final String ERR_GET_BY_ID_SUP = "Lỗi lấy khuyến mãi theo id = %d";
+        public static final String ERR_NOT_FOUND = "Lỗi lấy khuyến mãi";
+    }
  
 }
