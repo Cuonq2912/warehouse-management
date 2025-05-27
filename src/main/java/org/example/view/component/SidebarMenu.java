@@ -2,6 +2,7 @@ package org.example.view.component;
 
 import org.example.view.MainDashboard;
 import org.example.view.component.CategoryComponent.CategoryPanel;
+import org.example.view.component.CustomerComponent.CustomerPanel;
 import org.example.view.component.ProductComponent.ProductPanel;
 
 import javax.swing.*;
@@ -56,6 +57,10 @@ public class SidebarMenu extends JPanel {
 
     private JPanel createCategoryPanel() {
         return new CategoryPanel(parentFrame);
+    }
+
+    private JPanel createCustomerPanel() {
+        return new CustomerPanel(parentFrame);
     }
 
     private JPanel createProductPanel() {
@@ -149,8 +154,8 @@ public class SidebarMenu extends JPanel {
                 break;
 
             case "CUSTOMERS":
-                JPanel customersPanel = createPlaceholderPanel("Customer Management");
-                dashboard.updateContent(customersPanel);
+                JPanel customerPanel = createCustomerPanel();
+                dashboard.updateContent(customerPanel);
                 break;
 
             case "USERS":

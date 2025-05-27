@@ -17,11 +17,11 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/btlJava?createDatabaseIfNotExist=true" />
             <property name="hibernate.connection.username" value="root" />
-            <property name="hibernate.connection.password" value="123456" />
+            <property name="hibernate.connection.password" value="dat123" />
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
-            <property name="hibernate.show_sql" value="true" />
+<!--            <property name="hibernate.show_sql" value="true" />-->
             <property name="hibernate.format_sql" value="true"/>
         </properties>
     </persistence-unit>

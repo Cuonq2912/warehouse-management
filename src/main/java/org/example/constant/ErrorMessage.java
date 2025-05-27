@@ -9,6 +9,14 @@ public class ErrorMessage {
         public static final String ERR_NOT_FOUND = "Lỗi lấy danh mục";
     }
 
+    public static class Customer {
+        public static final String ERR_CREATE_CUSTOMER = "Lỗi thêm khách hàng";
+        public static final String ERR_UPDATE_CUSTOMER = "Lỗi cập nhật khách hàng theo id = %d";
+        public static final String ERR_GET_BY_ID_CUSTOMER = "Lỗi lấy khách hàng theo id = %d";
+        public static final String ERR_NOT_FOUND = "Lỗi lấy danh sách khách hàng";
+        public static final String ERR_DELETE_CUSTOMER = "Lỗi xóa khách hàng theo id = %d";
+    }
+
     public class Product{
         public static final String ERR_CREATE_PRODUCT = "Lỗi thêm sản phẩm";
         public static final String ERR_UPDATE_PRODUCT = "Lỗi cập nhật sản phẩm";
