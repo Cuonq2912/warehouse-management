@@ -1,7 +1,4 @@
 package org.example.repository;
 
-
-public class SupplierDAO{
-
-
+public class OrdertDAO {
 }

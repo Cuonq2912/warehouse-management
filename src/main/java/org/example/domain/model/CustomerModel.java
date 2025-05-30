@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,11 +16,12 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Table(name = "customers")
 public class CustomerModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false, unique = true)
     String name;
 
     @Column(nullable = false)
@@ -28,12 +30,10 @@ public class CustomerModel {
     @Column(nullable = false)
     String address;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     String phoneNumber;
 
-    @Column(nullable = false)
-    Long points;
+    @OneToMany(mappedBy = "customerModel", cascade = CascadeType.REMOVE)
+    List<ExportProductModel> exportProductModels = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customerModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<ExportProductModel> exportProductModels;
 }

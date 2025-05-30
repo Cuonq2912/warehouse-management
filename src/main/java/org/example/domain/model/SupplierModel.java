@@ -3,7 +3,9 @@ package org.example.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.processing.Pattern;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,16 +27,13 @@ public class SupplierModel {
     @Column(nullable = false)
     String address;
 
-    @Column(nullable = false)
-    String phone;
+    @Column(nullable = false, unique = true)
+    String phoneNumber;
 
     @Column(nullable = false)
     String email;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    Status status;
+    @OneToMany(mappedBy = "supplierModel", cascade = CascadeType.REMOVE)
+    List<ImportProductModel> importProduct = new ArrayList<>();
 
-    @OneToMany(mappedBy = "supplierModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<ImportProductModel> importProduct;
 }

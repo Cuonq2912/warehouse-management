@@ -12,37 +12,28 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "products")
-public class ProductModel {
+@Table(name = "shipments")
+public class ShipmentModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(nullable = false, unique = true)
-    String name;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    ShipmentStatus shipmentStatus;
 
     @Column(nullable = false)
-    Double price;
+    String shipmentVehicle;
 
-    @Column(nullable = false)
-    Long remainingQuantity;
-
-    @Column(nullable = false)
-    Long soldQuantity;
-
-    @Column(name = "create_at", nullable = false)
+    @Column(name = "delivered_at", nullable = false, updatable = false)
     @CreationTimestamp
-    LocalDate createdAt;
+    LocalDate deliveredAt;
 
-    @ManyToOne
-    @JoinColumn
-    CategoryModel categoryModel;
-
-    @OneToMany(mappedBy = "productModel", cascade = CascadeType.REMOVE)
-    List<OrderDetailModel> orderDetailModels  = new ArrayList<>();
-
+    @OneToMany(mappedBy = "shipmentModel", cascade = CascadeType.REMOVE)
+    List<OrderModel> orderModels = new ArrayList<>();
 }

@@ -1,176 +1,128 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+import org.example.constant.ErrorMessage;
 import org.example.domain.model.UserModel;
+import org.example.utils.HibernateUtils;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Date;
 
-public class UserDAO extends BaseDAO<UserModel> {
+public class UserDAO {
 
-    public List<UserModel> findByUsername(String username) {
+    private EntityManager getEntityManager() {
+        return HibernateUtils.getEntityManager();
+    }
+
+    public void createUser(UserModel userModel) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.username LIKE :username",
-                    UserModel.class);
-            query.setParameter("username", "%" + username + "%");
-            List<UserModel> users = query.getResultList();
-            if (users.isEmpty()) {
-                throw new RuntimeException("User not found with username: " + username);
-            }
-            return users;
-        } catch (RuntimeException e) {
+            em.getTransaction().begin();
+            em.persist(userModel);
+            em.getTransaction().commit();
+        } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            throw new RuntimeException("Error finding user by username ", e);
+            e.printStackTrace();
+            throw new RuntimeException("Failed to create user: " + e.getMessage());
         } finally {
             em.close();
         }
     }
 
-    public List<UserModel> findByEmail(String email) {
+    public UserModel getUserById(Long id) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<UserModel> query = em.createQuery(("SELECT u FROM UserModel u WHERE u.email LIKE :email"),
-                    UserModel.class);
-            query.setParameter("email", "%" + email + "%");
-            List<UserModel> users = query.getResultList();
-            if (users.isEmpty()) {
-                throw new RuntimeException("User not found with email: " + email);
-            }
-            return users;
-        } catch (RuntimeException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Error finding user by email ", e);
+            return em.find(UserModel.class, id);
         } finally {
             em.close();
         }
     }
 
-    public List<UserModel> findByPhone(String phone) {
+    public UserModel getUserByUsername(String username) {
         EntityManager em = getEntityManager();
         try {
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.phoneNumber LIKE :phone",
-                    UserModel.class);
-            query.setParameter("phone", "%" + phone + "%");
-            List<UserModel> users = query.getResultList();
-            if (users.isEmpty()) {
-                throw new RuntimeException("User not found with phone: " + phone);
-            }
-            return users;
-        } catch (RuntimeException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Error finding user by phone ", e);
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<UserModel> findByRole(String role) {
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.role = :role",
-                    UserModel.class);
-            query.setParameter("role", role);
-            List<UserModel> users = query.getResultList();
-            if (users.isEmpty()) {
-                throw new RuntimeException("User not found with role: " + role);
-            }
-            return users;
-        } catch (RuntimeException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Error finding users by role ", e);
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<UserModel> findByStatus(String status) {
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.status = :status",
-                    UserModel.class);
-            query.setParameter("status", status);
-            List<UserModel> users = query.getResultList();
-            if (users.isEmpty()) {
-                throw new RuntimeException("User not found with status: " + status);
-            }
-            return users;
-        } catch (RuntimeException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Error finding users by status ", e);
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<UserModel> findByCreateAt(Date createAt) {
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.createAt = :createAt",
-                    UserModel.class);
-            query.setParameter("createAt", createAt);
-            List<UserModel> users = query.getResultList();
-            if (users.isEmpty()) {
-                throw new RuntimeException("User not found with createAt: " + createAt);
-            }
-            return users;
-        } catch (RuntimeException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Error finding users by createAt ", e);
-        } finally {
-            em.close();
-        }
-    }
-
-    public List<UserModel> findByUpdateAt(Date updateAt) {
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.updateAt = :createAt",
-                    UserModel.class);
-            query.setParameter("updateAt", updateAt);
-            List<UserModel> users = query.getResultList();
-            if (users.isEmpty()) {
-                throw new RuntimeException("User not found with updateAt: " + updateAt);
-            }
-            return users;
-        } catch (RuntimeException e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-            throw new RuntimeException("Error finding users by updateAt ", e);
-        } finally {
-            em.close();
-        }
-    }
-
-
-    public UserModel findToAuthController(String username) {
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u WHERE u.username = : username",
-                    UserModel.class);
+            TypedQuery<UserModel> query = em.createQuery(
+                    "SELECT u FROM UserModel u WHERE u.username = :username", UserModel.class);
             query.setParameter("username", username);
-            UserModel user = query.getSingleResult();
-            return user;
-        } catch (RuntimeException e) {
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public UserModel getUserByEmail(String email) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<UserModel> query = em.createQuery(
+                    "SELECT u FROM UserModel u WHERE u.email = :email", UserModel.class);
+            query.setParameter("email", email);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<UserModel> getAllUsers() {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<UserModel> query = em.createQuery("SELECT u FROM UserModel u", UserModel.class);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void updateUser(UserModel userModel) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge(userModel);
+            em.getTransaction().commit();
+        } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-            throw new RuntimeException("Erroe finding user to login ", e);
+            e.printStackTrace();
+            throw new RuntimeException("Failed to update user: " + e.getMessage());
+        } finally {
+            em.close();
+        }
+    }
+
+    public void deleteUser(Long id) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            UserModel user = em.find(UserModel.class, id);
+            if (user != null) {
+                em.remove(user);
+            }
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+            throw new RuntimeException("Failed to delete user: " + e.getMessage());
+        } finally {
+            em.close();
         }
     }
 }
-
