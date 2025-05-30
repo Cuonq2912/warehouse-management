@@ -1,8 +1,11 @@
 package org.example;
 
-import org.example.view.MainDashboard;
 
 import javax.swing.*;
+
+import org.example.utils.DatabaseUtil;
+import org.example.view.Login;
+
 
 public class WarehouseManagementSystem {
     public static void main(String[] args) {
@@ -17,8 +20,13 @@ public class WarehouseManagementSystem {
             System.exit(1);
         }
 
+        DatabaseUtil.regenerateDatabase();
+
         SwingUtilities.invokeLater(() -> {
-            new MainDashboard().setVisible(true);
+            new Login().setVisible(true);
         });
+
     }
+   
+    
 }

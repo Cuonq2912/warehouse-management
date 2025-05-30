@@ -32,31 +32,31 @@ public class    UserModel {
     @Column(nullable = false)
     String password;
 
-    @Column(nullable = false)
+    @Column()
     String fullName;
 
     @Column(nullable = false, unique = true)
     String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     String phoneNumber;
 
-    @Column(nullable = false)
+    @Column()
     String address;
 
-    @Column(nullable = false)
+    @Column()
     @Enumerated(EnumType.STRING)
     Role role;
 
-    @Column(nullable = false)
+    @Column()
     @Enumerated(EnumType.STRING)
     Status status;
 
-    @Column(name = "create_at", nullable = false, updatable = false)
+    @Column(name = "create_at", updatable = false)
     @CreationTimestamp
     LocalDate createdAt;
 
-    @Column(name = "update_at", nullable = false, updatable = false)
+    @Column(name = "update_at", updatable = false)
     @UpdateTimestamp
     LocalDate updatedAt;
 
