@@ -20,7 +20,8 @@ public class WarehouseManagementSystem {
             System.exit(1);
         }
 
-        DatabaseUtil.regenerateDatabase();
+        // clone về thì uncomment dòng 24 để tạo db
+        // DatabaseUtil.regenerateDatabase();
 
         SwingUtilities.invokeLater(() -> {
             new Login().setVisible(true);

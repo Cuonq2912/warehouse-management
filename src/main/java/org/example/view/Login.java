@@ -1,6 +1,7 @@
 package org.example.view;
 
 import org.example.controller.LoginController;
+import org.example.utils.IconUtil;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -29,6 +30,9 @@ public class Login extends JFrame {
         setSize(1200, 800);
         setMinimumSize(new Dimension(620, 780));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Set application icon
+        IconUtil.setFrameIcon(this);
         setLocationRelativeTo(null);
 
         contentPane = new JPanel() {
@@ -47,8 +51,10 @@ public class Login extends JFrame {
 
         contentPane.setLayout(new BorderLayout());
         setContentPane(contentPane);
+
         JPanel wrapperPanel = new JPanel(new GridBagLayout());
         wrapperPanel.setOpaque(false);
+
         JPanel loginPanel = new JPanel(new GridBagLayout());
         loginPanel.setBackground(new Color(255, 255, 255, 250));
         loginPanel.setBorder(BorderFactory.createCompoundBorder(
@@ -162,6 +168,7 @@ public class Login extends JFrame {
                 login();
             }
         });
+
         lblRegister.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -184,7 +191,6 @@ public class Login extends JFrame {
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
 
-        // Use controller to handle login
         loginController.handleLogin(username, password, this);
     }
 
