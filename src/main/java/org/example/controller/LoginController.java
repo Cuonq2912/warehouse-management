@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.constant.ErrorMessage;
 import org.example.domain.model.UserModel;
 import org.example.repository.UserDAO;
 import org.example.view.MainDashboard;
@@ -32,7 +33,7 @@ public class LoginController {
     public void handleLogin(String username, String password, JFrame parentFrame) {
         if (username == null || username.trim().isEmpty()) {
             JOptionPane.showMessageDialog(parentFrame,
-                    "Please enter username",
+                    ErrorMessage.User.ERR_USERNAME_IS_EMPTY,
                     "Validation Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
@@ -40,7 +41,7 @@ public class LoginController {
 
         if (password == null || password.trim().isEmpty()) {
             JOptionPane.showMessageDialog(parentFrame,
-                    "Please enter password",
+                    ErrorMessage.User.ERR_PASSWORD_IS_EMPTY,
                     "Validation Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
@@ -49,13 +50,12 @@ public class LoginController {
         UserModel user = authenticateUser(username.trim(), password);
         if (user == null) {
             JOptionPane.showMessageDialog(parentFrame,
-                    "Username does not exist or incorrect password",
+                    ErrorMessage.User.ERR_USERNAME_OR_PASSWORD_INCOMPATIBLE,
                     "Login Error",
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        // Successful login - navigate to main dashboard
         try {
             MainDashboard dashboard = new MainDashboard();
             dashboard.setVisible(true);
@@ -75,13 +75,4 @@ public class LoginController {
         parentFrame.dispose();
     }
 
-    public boolean isUsernameExists(String username) {
-        try {
-            UserModel user = userDAO.getUserByUsername(username);
-            return user != null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }

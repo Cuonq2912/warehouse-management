@@ -1,5 +1,6 @@
 package org.example.view;
 
+import org.example.utils.IconUtil;
 import org.example.view.component.SidebarMenu;
 
 import javax.swing.*;

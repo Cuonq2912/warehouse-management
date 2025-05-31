@@ -2,6 +2,7 @@ package org.example.view;
 
 import lombok.Getter;
 import org.example.controller.RegisterController;
+import org.example.utils.IconUtil;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,6 +44,9 @@ public class Register extends JFrame {
         setSize(1200, 800);
         setMinimumSize(new Dimension(800, 600));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Set application icon
+        IconUtil.setFrameIcon(this);
         setLocationRelativeTo(null);
 
         contentPanel = new JPanel() {
@@ -199,7 +203,6 @@ public class Register extends JFrame {
     }
 
     private void setupEventHandlers() {
-        // Register button click handler
         btnRegister.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -207,7 +210,6 @@ public class Register extends JFrame {
             }
         });
 
-        // Login link click handler
         labelLogin.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

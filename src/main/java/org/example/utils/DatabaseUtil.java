@@ -7,12 +7,11 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 
 public class DatabaseUtil {
+
     public static void regenerateDatabase() {
         try {
-            // Drop existing database
             dropDatabase();
             
-            // Recreate with JPA
             EntityManagerFactory emf = Persistence.createEntityManagerFactory("warehouse");
             emf.close();
             
