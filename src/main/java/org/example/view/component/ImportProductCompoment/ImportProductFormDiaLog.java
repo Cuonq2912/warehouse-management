@@ -116,10 +116,10 @@ public class ImportProductFormDiaLog extends JDialog {
 
         boolean success;
         if (existing == null) {
-            // Thêm mới
+           
             success = controller.saveImportProductWithDetail(imp, selectedProduct, quantity, price);
         } else {
-            // Sửa (tuỳ chọn có thể tạo hàm update)
+            
             success = controller.saveImportProductWithDetail(imp, selectedProduct, quantity, price);
         }
 

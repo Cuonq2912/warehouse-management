@@ -132,7 +132,7 @@ public class ImportProductController {
         }
     }
 
-    // ✅ Các phương thức load dữ liệu cho Form Dialog
+   
     public List<UserModel> getAllUsers() {
         return importProductService.getAllUsers();
     }
@@ -144,8 +144,8 @@ public class ImportProductController {
     public List<SupplierModel> getAllSuppliers(){
         return importProductService.getAllSuppliers();
     }
-    // ✅ Lưu phiếu nhập và chi tiết sản phẩm nhập
-public boolean saveImportProductWithDetail(ImportProductModel imp, ProductModel product, int quantity, double price) {
-    return importProductService.saveImportProductWithDetail(imp, product, quantity, price);
-}
+    
+//public boolean saveImportProductWithDetail(ImportProductModel imp, ProductModel product, int quantity, double price) {
+//    return importProductService.saveImportProductWithDetail(imp, product, quantity, price);
+//}
 }
