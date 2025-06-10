@@ -41,8 +41,6 @@ public class ValidateUtil {
         return password != null && password.equals(confirmPassword);
     }
 
-
-
     public static boolean isUsernameExists(String username) {
         try {
             UserModel user = userDAO.getUserByUsername(username);
@@ -132,5 +130,73 @@ public class ValidateUtil {
         return ValidationResult.success();
     }
 
+    // Import/Export Product Validation Methods
+    public static ValidationResult validateQuantity(String quantityText) {
+        if (isEmpty(quantityText)) {
+            return ValidationResult.error(ErrorMessage.ImportProduct.ERR_QUANTITY_EMPTY);
+        }
+
+        try {
+            long quantity = Long.parseLong(quantityText.trim());
+            if (quantity <= 0) {
+                return ValidationResult.error(ErrorMessage.ImportProduct.ERR_QUANTITY_MUST_BE_POSITIVE);
+            }
+        } catch (NumberFormatException e) {
+            return ValidationResult.error(ErrorMessage.ImportProduct.ERR_QUANTITY_INVALID);
+        }
+
+        return ValidationResult.success();
+    }
+
+    public static ValidationResult validatePrice(String priceText) {
+        if (isEmpty(priceText)) {
+            return ValidationResult.error(ErrorMessage.ImportProduct.ERR_PRICE_EMPTY);
+        }
+
+        try {
+            double price = Double.parseDouble(priceText.trim());
+            if (price <= 0) {
+                return ValidationResult.error(ErrorMessage.ImportProduct.ERR_PRICE_MUST_BE_POSITIVE);
+            }
+        } catch (NumberFormatException e) {
+            return ValidationResult.error(ErrorMessage.ImportProduct.ERR_PRICE_INVALID);
+        }
+
+        return ValidationResult.success();
+    }
+
+    public static ValidationResult validateExportQuantity(String quantityText) {
+        if (isEmpty(quantityText)) {
+            return ValidationResult.error(ErrorMessage.ExportProduct.ERR_QUANTITY_EMPTY);
+        }
+
+        try {
+            long quantity = Long.parseLong(quantityText.trim());
+            if (quantity <= 0) {
+                return ValidationResult.error(ErrorMessage.ExportProduct.ERR_QUANTITY_MUST_BE_POSITIVE);
+            }
+        } catch (NumberFormatException e) {
+            return ValidationResult.error(ErrorMessage.ExportProduct.ERR_QUANTITY_INVALID);
+        }
+
+        return ValidationResult.success();
+    }
+
+    public static ValidationResult validateExportPrice(String priceText) {
+        if (isEmpty(priceText)) {
+            return ValidationResult.error(ErrorMessage.ExportProduct.ERR_PRICE_EMPTY);
+        }
+
+        try {
+            double price = Double.parseDouble(priceText.trim());
+            if (price <= 0) {
+                return ValidationResult.error(ErrorMessage.ExportProduct.ERR_PRICE_MUST_BE_POSITIVE);
+            }
+        } catch (NumberFormatException e) {
+            return ValidationResult.error(ErrorMessage.ExportProduct.ERR_PRICE_INVALID);
+        }
+
+        return ValidationResult.success();
+    }
 
 }

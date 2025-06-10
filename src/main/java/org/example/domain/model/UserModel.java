@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 @Entity
 @Getter
 @Setter
@@ -20,7 +19,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
 @Table(name = "users")
-public class    UserModel {
+public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,21 +50,22 @@ public class    UserModel {
     @Column()
     @Enumerated(EnumType.STRING)
     Status status;
-
     @Column(name = "create_at", updatable = false)
     @CreationTimestamp
     LocalDate createdAt;
 
-    @Column(name = "update_at", updatable = false)
+    @Column(name = "update_at")
     @UpdateTimestamp
     LocalDate updatedAt;
-
     @OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL)
+    @Builder.Default
     List<ImportProductModel> importProductModels = new ArrayList<>();
 
     @OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL)
+    @Builder.Default
     List<ExportProductModel> exportProductModels = new ArrayList<>();
 
     @OneToMany(mappedBy = "userModel", cascade = CascadeType.ALL)
+    @Builder.Default
     List<OrderModel> orderModels = new ArrayList<>();
 }

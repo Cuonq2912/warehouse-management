@@ -32,7 +32,7 @@ public class ImportProductModel {
     @ManyToOne
     @JoinColumn()
     SupplierModel supplierModel;
-
     @OneToMany(mappedBy = "importProductModel", cascade = CascadeType.ALL)
+    @Builder.Default
     List<ImportDetailModel> importDetails = new ArrayList<>();
 }
