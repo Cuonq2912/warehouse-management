@@ -3,7 +3,6 @@ package org.example.domain.model;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.hibernate.annotations.processing.Pattern;
 
 import java.util.ArrayList;
 import java.util.List;

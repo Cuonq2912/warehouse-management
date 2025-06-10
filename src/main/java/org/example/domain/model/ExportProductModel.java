@@ -32,8 +32,8 @@ public class ExportProductModel {
     @ManyToOne
     @JoinColumn()
     CustomerModel customerModel;
-
     @OneToMany(mappedBy = "exportProductModel", cascade = CascadeType.ALL)
+    @Builder.Default
     List<ExportDetailModel> exportDetailModel = new ArrayList<>();
 
 }

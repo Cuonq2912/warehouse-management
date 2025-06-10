@@ -3,6 +3,7 @@ package org.example.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+
 import org.example.constant.ErrorMessage;
 import org.example.domain.model.UserModel;
 import org.example.utils.HibernateUtils;
@@ -123,6 +124,28 @@ public class UserDAO {
             throw new RuntimeException("Failed to delete user: " + e.getMessage());
         } finally {
             em.close();
+        }
+    }
+
+    public boolean existsByEmail(String email) {
+        try (EntityManager en = getEntityManager()) {
+            Long count = en.createQuery("SELECT COUNT(u) FROM UserModel u WHERE u.email = :email", Long.class)
+                    .setParameter("email", email)
+                    .getSingleResult();
+            return count > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(String.format(ErrorMessage.User.ERR_CHECK_EMAIL, email), e);
+        }
+    }
+
+    public boolean existsByUsername(String username) {
+        try (EntityManager en = getEntityManager()) {
+            Long count = en.createQuery("SELECT COUNT(u) FROM UserModel u WHERE u.username = :username", Long.class)
+                    .setParameter("username", username)
+                    .getSingleResult();
+            return count > 0;
+        } catch (Exception e) {
+            throw new RuntimeException(String.format(ErrorMessage.User.ERR_CHECK_USERNAME, username), e);
         }
     }
 }

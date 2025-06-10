@@ -3,6 +3,7 @@ package org.example.controller;
 import org.example.constant.ErrorMessage;
 import org.example.domain.model.UserModel;
 import org.example.repository.UserDAO;
+import org.example.utils.SessionManager;
 import org.example.view.MainDashboard;
 import org.example.view.Register;
 
@@ -46,7 +47,6 @@ public class LoginController {
                     JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         UserModel user = authenticateUser(username.trim(), password);
         if (user == null) {
             JOptionPane.showMessageDialog(parentFrame,
@@ -57,6 +57,8 @@ public class LoginController {
         }
 
         try {
+            SessionManager.getInstance().setCurrentUser(user);
+
             MainDashboard dashboard = new MainDashboard();
             dashboard.setVisible(true);
             parentFrame.dispose();
