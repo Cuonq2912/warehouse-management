@@ -8,6 +8,7 @@ import java.util.Map;
 
 public class DashboardServiceImpl implements DashboardService {
 
+    private final UserDAO userDAO = new UserDAO();
     private final ProductDAO productDAO = new ProductDAO();
     private final CustomerDAO customerDAO = new CustomerDAO();
     private final SupplierDAO supplierDAO = new SupplierDAO();
@@ -18,6 +19,12 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public Map<String, Long> getEntityCounts() {
         Map<String, Long> counts = new LinkedHashMap<>();
+
+        try {
+            counts.put("Users", (long) userDAO.getAllUsers().size());
+        } catch (Exception e) {
+            counts.put("Users", 0L);
+        }
 
         try {
             counts.put("Products", (long) productDAO.getAllProducts().size());

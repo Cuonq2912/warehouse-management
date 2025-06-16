@@ -250,13 +250,9 @@ public class ProductFormDialog extends JDialog {
             productModel.setCategoryModel(selectedCategory);
 
             boolean success = productController.saveProduct(productModel);
-
-            if (success) {
-                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thành công!", "Success",
-                        JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Thêm sản phẩm thất bại", "Error", JOptionPane.ERROR_MESSAGE);
+            dispose();
+            if (!success) {
+                JOptionPane.showMessageDialog(this, "Nhập vào chưa hợp lệ: ", "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         } catch (Exception e) {

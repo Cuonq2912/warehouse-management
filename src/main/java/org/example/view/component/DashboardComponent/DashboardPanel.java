@@ -13,7 +13,7 @@ import java.util.Map;
 public class DashboardPanel extends JPanel {
 
     private final DashboardService dashboardService;
-    private JPanel chartPanel;
+    private JPanel statsPanel;
     private JButton refreshButton;
 
     public DashboardPanel() {
@@ -27,17 +27,17 @@ public class DashboardPanel extends JPanel {
         setBorder(new EmptyBorder(20, 20, 20, 20));
         setBackground(new Color(245, 245, 247));
 
+        // Header panel
         JPanel headerPanel = createHeaderPanel();
         add(headerPanel, BorderLayout.NORTH);
 
-        chartPanel = new JPanel();
-        chartPanel.setLayout(new BorderLayout());
-        chartPanel.setBackground(Color.WHITE);
-        chartPanel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(204, 204, 204), 1, true),
-                new EmptyBorder(20, 20, 20, 20)));
-        add(chartPanel, BorderLayout.CENTER);
+        // Stats panel
+        statsPanel = new JPanel();
+        statsPanel.setLayout(new GridLayout(2, 4, 15, 15));
+        statsPanel.setBackground(new Color(245, 245, 247));
+        add(statsPanel, BorderLayout.CENTER);
 
+        // Welcome panel at bottom
         JPanel welcomePanel = createWelcomePanel();
         add(welcomePanel, BorderLayout.SOUTH);
     }
@@ -52,6 +52,7 @@ public class DashboardPanel extends JPanel {
         titleLabel.setForeground(new Color(51, 51, 51));
         headerPanel.add(titleLabel, BorderLayout.WEST);
 
+        // Refresh button
         refreshButton = new JButton("Refresh");
         styleButton(refreshButton, new Color(52, 152, 219));
         refreshButton.addActionListener(new ActionListener() {
@@ -89,146 +90,66 @@ public class DashboardPanel extends JPanel {
     }
 
     private void loadStats() {
-        chartPanel.removeAll();
+        statsPanel.removeAll();
 
         Map<String, Long> entityCounts = dashboardService.getEntityCounts();
         Color[] colors = {
-                new Color(52, 152, 219), // Blue
-                new Color(46, 204, 113), // Green
-                new Color(155, 89, 182), // Purple
-                new Color(241, 196, 15), // Yellow
-                new Color(231, 76, 60), // Red
-                new Color(230, 126, 34), // Orange
-                new Color(149, 165, 166) // Gray
+                new Color(52, 152, 219),  // Blue
+                new Color(46, 204, 113),  // Green
+                new Color(155, 89, 182),  // Purple
+                new Color(241, 196, 15),  // Yellow
+                new Color(231, 76, 60),   // Red
+                new Color(230, 126, 34),  // Orange
+                new Color(149, 165, 166)  // Gray
         };
 
-        JPanel chartMainPanel = createBarChart(entityCounts, colors);
-        chartPanel.add(chartMainPanel, BorderLayout.CENTER);
-
-        chartPanel.revalidate();
-        chartPanel.repaint();
-    }
-
-    private JPanel createBarChart(Map<String, Long> data, Color[] colors) {
-        JPanel chartContainer = new JPanel();
-        chartContainer.setLayout(new BorderLayout());
-        chartContainer.setBackground(Color.WHITE);
-
-        JLabel chartTitle = new JLabel("Warehouse Data Overview", JLabel.CENTER);
-        chartTitle.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        chartTitle.setForeground(new Color(51, 51, 51));
-        chartTitle.setBorder(new EmptyBorder(0, 0, 20, 0));
-        chartContainer.add(chartTitle, BorderLayout.NORTH);
-
-        JPanel chartArea = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                drawBarChart(g, data, colors);
-            }
-        };
-        chartArea.setBackground(Color.WHITE);
-        chartArea.setPreferredSize(new Dimension(600, 300));
-        chartContainer.add(chartArea, BorderLayout.CENTER);
-
-        JPanel legendPanel = createLegend(data, colors);
-        chartContainer.add(legendPanel, BorderLayout.SOUTH);
-
-        return chartContainer;
-    }
-
-    private void drawBarChart(Graphics g, Map<String, Long> data, Color[] colors) {
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-        if (data.isEmpty())
-            return;
-
-        int width = getWidth();
-        int height = getHeight();
-        int margin = 40;
-        int chartWidth = width - 2 * margin;
-        int chartHeight = height - 2 * margin;
-
-        long maxValue = data.values().stream().mapToLong(Long::longValue).max().orElse(1);
-        if (maxValue == 0)
-            maxValue = 1;
-
-        int barCount = data.size();
-        int barWidth = chartWidth / (barCount * 2); 
-        int barSpacing = barWidth;
-
-        g2d.setColor(new Color(200, 200, 200));
-        for (int i = 0; i <= 5; i++) {
-            long value = (maxValue * i) / 5;
-            int y = margin + chartHeight - (chartHeight * i) / 5;
-            g2d.drawLine(margin, y, margin + chartWidth, y);
-
-            g2d.setColor(new Color(127, 140, 141));
-            g2d.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-            g2d.drawString(String.valueOf(value), 5, y + 5);
-            g2d.setColor(new Color(200, 200, 200));
-        }
-
-        int x = margin + barSpacing / 2;
         int colorIndex = 0;
-        for (Map.Entry<String, Long> entry : data.entrySet()) {
-            String label = entry.getKey();
-            long value = entry.getValue();
-
-            int barHeight = (int) ((double) value / maxValue * chartHeight);
-            int barY = margin + chartHeight - barHeight;
-
-            g2d.setColor(colors[colorIndex % colors.length]);
-            g2d.fillRect(x, barY, barWidth, barHeight);
-
-            g2d.setColor(new Color(220, 220, 220));
-            g2d.drawRect(x, barY, barWidth, barHeight);
-
-            g2d.setColor(new Color(51, 51, 51));
-            g2d.setFont(new Font("Segoe UI", Font.BOLD, 12));
-            String valueStr = String.valueOf(value);
-            FontMetrics fm = g2d.getFontMetrics();
-            int textWidth = fm.stringWidth(valueStr);
-            g2d.drawString(valueStr, x + (barWidth - textWidth) / 2, barY - 5);
-
-            g2d.setFont(new Font("Segoe UI", Font.PLAIN, 11));
-            fm = g2d.getFontMetrics();
-            textWidth = fm.stringWidth(label);
-            g2d.drawString(label, x + (barWidth - textWidth) / 2, margin + chartHeight + 15);
-
-            x += barWidth + barSpacing;
-            colorIndex++;
-        }
-    }
-
-    private JPanel createLegend(Map<String, Long> data, Color[] colors) {
-        JPanel legendPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        legendPanel.setBackground(Color.WHITE);
-        legendPanel.setBorder(new EmptyBorder(10, 0, 0, 0));
-
-        int colorIndex = 0;
-        for (String key : data.keySet()) {
-            JPanel legendItem = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
-            legendItem.setBackground(Color.WHITE);
-
-            JPanel colorSquare = new JPanel();
-            colorSquare.setBackground(colors[colorIndex % colors.length]);
-            colorSquare.setPreferredSize(new Dimension(15, 15));
-            colorSquare.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220)));
-
-            JLabel label = new JLabel(key);
-            label.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-            label.setForeground(new Color(51, 51, 51));
-
-            legendItem.add(colorSquare);
-            legendItem.add(label);
-            legendPanel.add(legendItem);
-
+        for (Map.Entry<String, Long> entry : entityCounts.entrySet()) {
+            JPanel card = createStatsCard(entry.getKey(), entry.getValue(), colors[colorIndex % colors.length]);
+            statsPanel.add(card);
             colorIndex++;
         }
 
-        return legendPanel;
+        statsPanel.revalidate();
+        statsPanel.repaint();
+    }
+
+    private JPanel createStatsCard(String title, Long count, Color color) {
+        JPanel card = new JPanel();
+        card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
+        card.setBackground(Color.WHITE);
+        card.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true),
+                new EmptyBorder(20, 15, 20, 15)));
+
+        // Title
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        titleLabel.setForeground(new Color(127, 140, 141));
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Count
+        JLabel countLabel = new JLabel(count.toString());
+        countLabel.setFont(new Font("Segoe UI", Font.BOLD, 32));
+        countLabel.setForeground(color);
+        countLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Icon panel
+        JPanel iconPanel = new JPanel();
+        iconPanel.setBackground(color);
+        iconPanel.setPreferredSize(new Dimension(40, 4));
+        iconPanel.setMaximumSize(new Dimension(40, 4));
+        iconPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        card.add(Box.createVerticalGlue());
+        card.add(titleLabel);
+        card.add(Box.createVerticalStrut(10));
+        card.add(countLabel);
+        card.add(Box.createVerticalStrut(10));
+        card.add(iconPanel);
+        card.add(Box.createVerticalGlue());
+
+        return card;
     }
 
     private void styleButton(JButton button, Color bgColor) {
@@ -243,9 +164,9 @@ public class DashboardPanel extends JPanel {
 
     private void refreshStats() {
         loadStats();
-        JOptionPane.showMessageDialog(this,
-                "Dashboard refreshed successfully!",
-                "Refresh",
-                JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, 
+            "Dashboard refreshed successfully!", 
+            "Refresh", 
+            JOptionPane.INFORMATION_MESSAGE);
     }
 }
