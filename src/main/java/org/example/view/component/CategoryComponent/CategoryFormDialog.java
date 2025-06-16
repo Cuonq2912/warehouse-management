@@ -117,7 +117,7 @@ public class CategoryFormDialog extends JDialog {
             String name = txtCategoryName.getText().trim();
             if (name.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
-                        "Please enter a category name",
+                        "Tên thể loại không được để trống!",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                 return;
