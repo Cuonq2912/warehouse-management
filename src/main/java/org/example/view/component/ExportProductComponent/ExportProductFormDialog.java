@@ -273,7 +273,6 @@ public class ExportProductFormDialog extends JDialog {
                     && !exportProductModel.getExportDetailModel().isEmpty()) {
                 ExportDetailModel firstDetail = exportProductModel.getExportDetailModel().get(0);
 
-                // Set product
                 ProductModel detailProduct = firstDetail.getProductModel();
                 for (int i = 0; i < cmbProduct.getItemCount(); i++) {
                     ProductModel product = cmbProduct.getItemAt(i);
@@ -291,7 +290,6 @@ public class ExportProductFormDialog extends JDialog {
 
     private void saveExportProduct(java.awt.event.ActionEvent e) {
         try {
-            // Sử dụng ValidateUtil để validate form
             ValidateUtil.ValidationResult validationResult = exportProductController.validateExportProductForm(
                     (CustomerModel) cmbCustomer.getSelectedItem(),
                     (ProductModel) cmbProduct.getSelectedItem(),
@@ -301,12 +299,12 @@ public class ExportProductFormDialog extends JDialog {
             if (!validationResult.isValid()) {
                 exportProductController.showErrorMessage(this, validationResult.getErrorMessage());
                 return;
-            } // Parse validated data
+            }
+
             long quantity = Long.parseLong(txtQuantity.getText().trim());
 
             ProductModel selectedProduct = (ProductModel) cmbProduct.getSelectedItem();
 
-            // Validate stock availability
             ValidateUtil.ValidationResult stockValidation = exportProductController
                     .validateStockAvailability(selectedProduct, quantity);
             if (!stockValidation.isValid()) {
@@ -345,7 +343,6 @@ public class ExportProductFormDialog extends JDialog {
                         : ErrorMessage.ExportProduct.ERR_UPDATE_FAILED;
                 exportProductController.showErrorDialog(this, errorMessage);
             }
-
         } catch (Exception ex) {
             String errorMessage = String.format(ErrorMessage.ExportProduct.ERR_SAVE_FAILED, ex.getMessage());
             exportProductController.showErrorDialog(this, errorMessage);

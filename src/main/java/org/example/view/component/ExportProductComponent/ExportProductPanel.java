@@ -209,8 +209,7 @@ public class ExportProductPanel extends JPanel {
         List<ExportProductModel> exportProducts = exportProductController.getAllExportProducts();
 
         for (ExportProductModel exportProduct : exportProducts) {
-            // Get the first export detail for product info (assuming one product per
-            // export)
+
             if (exportProduct.getExportDetailModel() != null && !exportProduct.getExportDetailModel().isEmpty()) {
                 ExportDetailModel firstDetail = exportProduct.getExportDetailModel().get(0);
 
@@ -249,8 +248,6 @@ public class ExportProductPanel extends JPanel {
         }
 
         for (ExportProductModel exportProduct : exportProducts) {
-            // Get the first export detail for product info (assuming one product per
-            // export)
             if (exportProduct.getExportDetailModel() != null && !exportProduct.getExportDetailModel().isEmpty()) {
                 ExportDetailModel firstDetail = exportProduct.getExportDetailModel().get(0);
 
