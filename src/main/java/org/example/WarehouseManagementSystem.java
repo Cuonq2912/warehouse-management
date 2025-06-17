@@ -1,11 +1,9 @@
 package org.example;
 
-
 import javax.swing.*;
 
 import org.example.utils.DatabaseUtil;
 import org.example.view.Login;
-
 
 public class WarehouseManagementSystem {
     public static void main(String[] args) {
@@ -28,6 +26,5 @@ public class WarehouseManagementSystem {
         });
 
     }
-   
-    
+
 }

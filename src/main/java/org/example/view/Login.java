@@ -1,5 +1,6 @@
 package org.example.view;
 
+import org.example.controller.ForgotPasswordController;
 import org.example.controller.LoginController;
 import org.example.utils.IconUtil;
 
@@ -19,9 +20,11 @@ public class Login extends JFrame {
     private JLabel lblRegister;
     private JButton btnLogin;
     private LoginController loginController;
+    private ForgotPasswordController forgotPasswordController;
 
     public Login() {
         this.loginController = new LoginController();
+        this.forgotPasswordController = new ForgotPasswordController();
         initComponents();
     }
 
@@ -183,6 +186,23 @@ public class Login extends JFrame {
             @Override
             public void mouseExited(MouseEvent e) {
                 lblRegister.setText("Register");
+            }
+        });
+
+        lblForgotPassword.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                forgotPasswordController.showForgotPasswordDialog(Login.this);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                lblForgotPassword.setText("<html><u>Quên mật khẩu?</u></html>");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                lblForgotPassword.setText("Quên mật khẩu?");
             }
         });
     }

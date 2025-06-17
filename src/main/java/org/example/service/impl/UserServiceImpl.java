@@ -16,7 +16,7 @@ import org.example.service.UserService;
 public class UserServiceImpl implements UserService {
 
     private final UserDAO userDAO = new UserDAO();
-    
+
     @Override
     public boolean createUser(UserModel userModel) {
         try {
@@ -72,20 +72,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean existsByEmail(String email) {
-  try {
+        try {
             return userDAO.existsByEmail(email);
         } catch (RuntimeException e) {
             e.printStackTrace();
             return false;
-        }    }
+        }
+    }
 
     @Override
     public boolean existsByUsername(String username) {
-  try {
+        try {
             return userDAO.existsByUsername(username);
         } catch (RuntimeException e) {
             e.printStackTrace();
             return false;
-        }  }
-    
+        }
+    }
+
+    @Override
+    public UserModel findByEmail(String email) {
+        try {
+            return userDAO.findByEmail(email);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

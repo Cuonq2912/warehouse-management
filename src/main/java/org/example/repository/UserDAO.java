@@ -148,4 +148,8 @@ public class UserDAO {
             throw new RuntimeException(String.format(ErrorMessage.User.ERR_CHECK_USERNAME, username), e);
         }
     }
+
+    public UserModel findByEmail(String email) {
+        return getUserByEmail(email);
+    }
 }
